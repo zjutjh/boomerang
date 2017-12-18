@@ -1,5 +1,9 @@
 # Boomerang
 
+![Boomerang](http://www.ekimmigration.com/uploads/allimg/140930/4-140930105311110.jpg)  
+> Boomerang译为回力标，回力标是古代的打猎工具。将回力标掷出后，将会飞回来，回到原持有者手中。  
+> 我们希望所有丢失的物品能回到失主的手中。
+
 本项目为精弘网络开发部-失物招领项目
 
 采取前后端分离的架构
