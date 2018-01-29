@@ -1,6 +1,6 @@
-<?php
 
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Schema;<?php
+
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -23,11 +23,10 @@ class CreateTypesTable extends Migration
 
     /**
      * Reverse the migrations.
+    {    public function down()
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('types');
-    }
+
 }
+
