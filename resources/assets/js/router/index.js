@@ -8,8 +8,12 @@ import searchresult from '../pages/main/searchresult.vue'
 import detail from '../pages/main/detail.vue'
 import mine from '../pages/personal/mine.vue'
 import mydetail from '../pages/personal/mydetail.vue'
-import edit from '../pages/edit.vue'
-
+import edit from '../pages/main/edit.vue'
+import superadmin1 from '../pages/admin/superadmin1.vue'
+import superadmin2 from '../pages/admin/superadmin2.vue'
+import admin from '../pages/admin/admin.vue'
+import admindetail from '../pages/admin/admindetail.vue'
+import adminedit from '../pages/admin/adminedit.vue'
 
 Vue.use(Router)
 
@@ -60,5 +64,26 @@ export default new Router({
         path: '/pages/main',
         name: 'edit',
         component: edit,
+    },{
+        path: '/pages/admin',
+        name: 'superadmin1',
+        component: superadmin1,
+    },{
+        path: '/pages/admin',
+        name: 'superadmin2',
+        component: superadmin2,
+    },{
+        path: '/pages/admin',
+        name: 'admin',
+        component: admin,
+    },{
+        path: '/pages/admin',
+        name: 'admindetail',
+        component: admindetail,
+        children: [
+            {
+                path: '/pages/admin',
+                component: adminedit,
+            }]
     }]
 })
