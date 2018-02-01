@@ -62,6 +62,7 @@
                 <th>物品名称</th>
                 <th>物品详情</th>
                 <th>丢失地点</th>
+                <th>类别</th>
                 <th>图片</th>
                 <th>联系电话</th>
                 <th>联系QQ</th>
@@ -89,7 +90,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td colspan="11">There are no data.</td>
+                        <td colspan="12">There are no data.</td>
                     </tr>
                 @endif
                 </tbody>
