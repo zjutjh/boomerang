@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('index');
 });
+
+
+
+
+
+
+Route::any('autoLogin',['use' => 'LoginController@autoLogin']);

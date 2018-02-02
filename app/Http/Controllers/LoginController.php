@@ -36,7 +36,6 @@ class LoginController extends Controller
             $user = new User;
             $user->openid = $openid;
             $user->student_id = $data->data->uno;
-//            $user->password = '1234567';
             $user->save();
         }
 
