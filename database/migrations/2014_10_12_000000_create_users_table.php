@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('openid')->unique()->comment('微信自动登录');
             $table->tinyInteger('user_type')->default(1)->comment('用户权限设置 默认普通用户 （1：普通用户 2：普通管理员 3 超级管理员）');
             $table->tinyInteger('user_group')->default(1)->comment('用户组');
-            $table->json('ext')->comment('拓展字段');
+//            $table->json('ext')->comment('拓展字段');
             $table->rememberToken()->comment('登录');
             $table->timestamps();
         });
