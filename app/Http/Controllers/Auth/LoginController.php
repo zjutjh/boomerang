@@ -1,30 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function RJM($code,$error,$data)
-    {
-        $json = [
-            'code' => $code,
-            'error' => $error,
-            'data' => $data
-        ];
-
-        return response()->json($json);
-    }
 
     public function autoLogin(Request $request)
     {
         $openid = $request->get('openid');//请求得到用户openid
         if (!$openid) {
-            return $this->RJM(-1,null,'用户认证失败');//没get到就认证失败
+            return $this->apiReponse(-1,null,'用户认证失败');//没get到就认证失败
         }
+
 
         //查看数据库是否存在用户
         if (!$user = User::where('openid',$openid)->first()) {
@@ -35,12 +28,20 @@ class LoginController extends Controller
 
             $user = new User;
             $user->openid = $openid;
-            $user->student_id = $data->data->uno;
+            $user->uno = $data->data->uno;
+            $user->name = $data->data->name;
             $user->save();
         }
+        if (!$token = Auth::login($user)) {
+            return $this->apiReponse(-401, 'user error', null);
+        }
 
-        return $this->RJM(1,'登陆成功',
-            ['user' => $user]
+
+
+
+        return $this->apiReponse(200,'登陆成功',
+            ['user' => $user,
+                'token' => $token]
         );
 
     }
