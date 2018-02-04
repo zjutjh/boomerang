@@ -141,6 +141,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
