@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use Searchable;
-    protected $primaryKey='item_id';
+    //protected $primaryKey='item_id';
 
    /**
      * Get the indexable data array for the model.
