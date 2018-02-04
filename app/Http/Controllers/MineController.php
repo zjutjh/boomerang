@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class MineController extends Controller
 {
-    public function Mine(Request $request)
+    public function mine(Request $request)
     {
         $uid = $request->get('id');
         $items = Item::where('uid','=',$uid)

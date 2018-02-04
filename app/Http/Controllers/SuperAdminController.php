@@ -8,19 +8,22 @@ use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
 {
-    public function Super()
+    public function superAdmin(Request $request)
     {
+        $page = $request->get('page');//获取当前页面
         $user = User::whereIn('user_type',[2,3])
             ->get();
 
         $itemLost = Item::latest()
             ->where('lost_type',1)
             ->select('uid','title','description','lost_place','lost_type','type_id','images','phone','qq','status')
+            ->skip($page)
             ->take(10)
             ->get();
         $itemFind = Item::latest()
             ->where('lost_type',0)
             ->select('uid','title','description','lost_place','lost_type','type_id','images','phone','qq','status')
+            ->skip($page)
             ->take(10)
             ->get();
 

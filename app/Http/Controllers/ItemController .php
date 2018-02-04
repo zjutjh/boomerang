@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class ItemController extends Controller
 {
-    public function LostList()
+    public function lostList(Request $request)
     {
         //从items表里取数据
+        $page = $request->get('page');
         $items = Item::latest()
             ->where('lost_type',1)
             ->select('uid','title','description','lost_place','lost_type','type_id','images','phone','qq','status')
             ->take(10)
+            ->skip($page)
             ->get();
 
 
@@ -21,10 +23,11 @@ class ItemController extends Controller
             ['items' => $items]);
     }
 
-    public function FoundList(Request $request)
+    public function loundList(Request $request)
     {
-        $page = $request->get('page');
+
         //从items表里取数据
+        $page = $request->get('page');
         $items = Item::latest()
             ->where('lost_type',0)
             ->select('uid','title','description','lost_place','lost_type','type_id','images','phone','qq','status')
