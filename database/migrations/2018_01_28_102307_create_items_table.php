@@ -26,7 +26,7 @@ class CreateItemsTable extends Migration
             $table->string('phone')->nullable()->comment('联系电话');
             $table->string('qq')->nullable()->comment('联系qq');
             $table->tinyInteger('status')->default(0)->comment('状态, 是否确认寻回，0 为未寻回 1表示寻回');
-            $table->string('deleted')->comment('是否软删除');
+            $table->tinyInteger('deleted')->default(0)->comment('是否软删除 1为软删除 ');
             $table->string('views')->comment('浏览次数');
             $table->timestamps();
 
