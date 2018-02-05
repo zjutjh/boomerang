@@ -75,15 +75,15 @@
                     @foreach($items as $key => $item)
                         <tr>
                             <td>{{ ++$key }}</td>
-                            <td>{{ $item->u_id }}</td>
-                            <td>{{ $item->item_name }}</td>
-                            <td>{{ $item->item_des }}</td>
-                            <td>{{ $item->item_lost_place }}</td>
+                            <td>{{ $item->uid }}</td>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->description }}</td>
+                            <td>{{ $item->lost_place }}</td>
                             <td>{{ $item->type_id }}</td>
-                            <td>{{ $item->img_url }}</td>
-                            <td>{{ $item->contact_phone }}</td>
-                            <td>{{ $item->contact_qq }}</td>
-                            <td>{{ $item->view_count }}</td>
+                            <td>{{ $item->images }}</td>
+                            <td>{{ $item->phone }}</td>
+                            <td>{{ $item->qq }}</td>
+                            <td>{{ $item->views }}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $item->updated_at }}</td>
                         </tr>
