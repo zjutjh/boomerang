@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Item;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class MydetailController extends Controller
 {
@@ -11,9 +11,8 @@ class MydetailController extends Controller
     {
         $uid = $request->get('uid');
         $id = $request->get('id');
-        $item=DB::table('item')
-            ->whereRaw('uid = ? and id = ?', [$uid,$id])
-            ->get();
-        dd($item);
+        $item=Item::whereRaw('uid = ? and id = ?', [$uid,$id])
+            ->first();
+        return $this->apiReponse(200,null,['item'=>$item]);
     }
 }
