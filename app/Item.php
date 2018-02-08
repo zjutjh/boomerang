@@ -21,7 +21,7 @@ class Item extends Model
             ->first();
         return $type;
     }
-    public function getLostTypeAttribute($value)
+    /*public function getLostTypeAttribute($value)
     {
         if ($value==0)
         {
@@ -31,7 +31,8 @@ class Item extends Model
         {
             return '寻物启事';
         }
-    }
+    }*/
+
     /**
      * Get the indexable data array for the model.
      *
