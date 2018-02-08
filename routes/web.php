@@ -18,7 +18,7 @@ Route::get('items-lists', ['as'=>'items-lists','uses'=>'ItemSearchController@ind
 Route::post('create-item', ['as'=>'create-item','uses'=>'ItemSearchController@create']);
 
 Route::post('api/auto_login', 'Auth\LoginController@autoLogin');
-Route::post('admin/login', '');
+//Route::post('admin/login', '');
 Route::group(['middleware' => ['api.auth']], function () {
     Route::get('api/detail/{id}',['uses'=>'DetailController@getDetail']);
     Route::get('api/mine/detail/{uid}/{id}',['uses'=>'MydetailController@Mydetail']);
