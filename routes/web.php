@@ -18,19 +18,18 @@ Route::get('/', function () {
 
 
 
-//Route::group(['middleware' => 'web'], function () {
-//
-//});
+
+
 
 
 
 
 Route::any('api/auto_login', 'Auth\LoginController@autoLogin');
 Route::any('api/new/lists','NewController@latest');
-Route::any('api/lost/lists','ItemController@LostList');
-Route::any('api/find/lists','ItemController@FoundList');
-Route::any('api/mine/lists','MineController@Mine');
-Route::any('admin/index','SuperAdminController@Super');
+Route::any('api/lost/lists','ItemController@lostList');
+Route::any('api/find/lists','ItemController@foundList');
+Route::any('api/mine/lists','MineController@mine');
+Route::any('admin/index','SuperadminController@super');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

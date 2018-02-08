@@ -23,7 +23,7 @@ class ItemController extends Controller
             ['items' => $items]);
     }
 
-    public function loundList(Request $request)
+    public function foundList(Request $request)
     {
 
         //从items表里取数据
