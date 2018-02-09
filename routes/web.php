@@ -34,7 +34,7 @@ Route::group(['middleware' => ['api.auth']], function () {
 
 Route::any('git/pull',  function (Request $request) {
     Artisan::call('git:pull', [
-        'ref' => $request->input('ref')
+        'ref' => $request->get('ref')
     ]);
 });
 
