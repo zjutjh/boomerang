@@ -15,7 +15,7 @@ class LoginController extends Controller
     {
         $openid = $request->get('openid');//请求得到用户openid
         if (!$openid) {
-            return $this->apiReponse(-1,null,'用户认证失败');//没get到就认证失败
+            return $this->apiReponse(-1,'用户认证失败',null);//没get到就认证失败
         }
 
 
@@ -33,7 +33,7 @@ class LoginController extends Controller
             $user->save();
         }
         if (!$token = Auth::login($user)) {
-            return $this->apiReponse(-401, 'user error', null);
+            return $this->apiReponse(-401, '生成token失败', null);
         }
 
         return $this->apiReponse(200,'登陆成功',
