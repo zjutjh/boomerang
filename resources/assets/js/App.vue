@@ -1,8 +1,11 @@
 <template>
     <div id="app">
-        <h1>demoa1</h1>
-        {{ message }}
+        <transition name="fade">
+            <router-view></router-view>
+        </transition>
+
     </div>
+
 </template>
 
 <script>
