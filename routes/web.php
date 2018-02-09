@@ -32,7 +32,7 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::get('admin/index','SuperAdminController@Super');
 });
 
-Route::any('/git/pull',  function (Request $request) {
+Route::any('git/pull',  function (Request $request) {
     Artisan::call('git:pull', [
         'ref' => $request->input('ref')
     ]);
