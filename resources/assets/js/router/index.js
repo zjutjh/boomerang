@@ -23,43 +23,18 @@ export default new Router({
         path: '/pages/main/tofind',
         name: 'tofind',
         component: tofind,
-        children: [
-            {
-                path: '/pages/main',
-                component: detail,
-            }]
     }, {
         path: '/pages/main/found',
         name: 'found',
         component: found,
-        children: [
-            {
-                path: '/pages/main/detail',
-                component: detail,
-            }]
     }, {
         path: '/pages/main/search',
         name: 'search',
         component: search,
-        children: [
-            {
-                path: '/pages/main/searchresult',
-                component: searchresult,
-                children: [
-                    {
-                        path: '/pages/main/detail',
-                        component: detail,
-                    }]
-            }]
     },{
         path: '/pages/personal/mine',
         name: 'mine',
         component: mine,
-        children: [
-            {
-                path: '/pages/personal/mydetail',
-                component: mydetail,
-            }]
     },{
         path: '/pages/main/edit',
         name: 'edit',
@@ -80,10 +55,6 @@ export default new Router({
         path: '/pages/admin/admindetail',
         name: 'admindetail',
         component: admindetail,
-        children: [
-            {
-                path: '/pages/admin/adminedit',
-                component: adminedit,
-            }]
+
     }]
 })
