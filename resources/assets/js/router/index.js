@@ -29,7 +29,7 @@ export default new Router({
                 component: detail,
             }]
     }, {
-        path: '/pages/main',
+        path: '/pages/mains',
         name: 'found',
         component: found,
         children: [

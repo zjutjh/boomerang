@@ -10,8 +10,10 @@
 
 <script>
     export default {
-        data: {
-            message:'hellooooo!'
+        data() {
+            return {
+
+            }
         },
         name: "App"
     }
