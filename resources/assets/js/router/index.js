@@ -20,7 +20,7 @@ Vue.use(Router)
 export default new Router({
 
     routes: [{
-        path: '/pages/main',
+        path: '/pages/main/tofind',
         name: 'tofind',
         component: tofind,
         children: [
@@ -29,60 +29,60 @@ export default new Router({
                 component: detail,
             }]
     }, {
-        path: '/pages/mains',
+        path: '/pages/main/found',
         name: 'found',
         component: found,
         children: [
             {
-                path: '/pages/main',
+                path: '/pages/main/detail',
                 component: detail,
             }]
     }, {
-        path: '/pages/main',
+        path: '/pages/main/search',
         name: 'search',
         component: search,
         children: [
             {
-                path: '/pages/main',
+                path: '/pages/main/searchresult',
                 component: searchresult,
                 children: [
                     {
-                        path: '/pages/main',
+                        path: '/pages/main/detail',
                         component: detail,
                     }]
             }]
     },{
-        path: '/pages/personal',
+        path: '/pages/personal/mine',
         name: 'mine',
         component: mine,
         children: [
             {
-                path: '/pages/personal',
+                path: '/pages/personal/mydetail',
                 component: mydetail,
             }]
     },{
-        path: '/pages/main',
+        path: '/pages/main/edit',
         name: 'edit',
         component: edit,
     },{
-        path: '/pages/admin',
+        path: '/pages/admin/superadmin1',
         name: 'superadmin1',
         component: superadmin1,
     },{
-        path: '/pages/admin',
+        path: '/pages/admin/superadmin2',
         name: 'superadmin2',
         component: superadmin2,
     },{
-        path: '/pages/admin',
+        path: '/pages/admin/admin',
         name: 'admin',
         component: admin,
     },{
-        path: '/pages/admin',
+        path: '/pages/admin/admindetail',
         name: 'admindetail',
         component: admindetail,
         children: [
             {
-                path: '/pages/admin',
+                path: '/pages/admin/adminedit',
                 component: adminedit,
             }]
     }]

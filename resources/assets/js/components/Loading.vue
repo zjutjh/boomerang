@@ -8,7 +8,7 @@
 <script>
     export default {
         name: "loading",
-        props: ['loding']
+        props: ['loading']
     }
 </script>
 
