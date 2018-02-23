@@ -21,5 +21,6 @@
 </script>
 
 <style scoped>
-
+    @import "../css/main.css";
+    @import "../css/color-dark.css";
 </style>

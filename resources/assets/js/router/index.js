@@ -13,9 +13,11 @@ import superadmin1 from '../pages/admin/superadmin1.vue'
 import superadmin2 from '../pages/admin/superadmin2.vue'
 import admin from '../pages/admin/admin.vue'
 import admindetail from '../pages/admin/admindetail.vue'
-import adminedit from '../pages/admin/adminedit.vue'
+//import adminedit from '../pages/admin/adminedit.vue'
+import adminlogin from '../pages/admin/adminlogin.vue'
 
 Vue.use(Router)
+
 
 export default new Router({
 
@@ -56,5 +58,9 @@ export default new Router({
         name: 'admindetail',
         component: admindetail,
 
+    },{
+        path: '/pages/admin/adminlogin',
+        name: 'adminlogin',
+        component: adminlogin,
     }]
 })
