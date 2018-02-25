@@ -1,6 +1,6 @@
 export default {
     install(Vue) {
-        Vue.prototype.message = (msg, _time) => {
+        Vue.prototype.message = (msg, icon, _time) => {
             let time = _time || 1000;
             const body = document.body
             const obj = document.getElementById('message')
@@ -8,15 +8,14 @@ export default {
                 return false;
             }
             let ele = document.createElement("div")
-            ele.innerHTML = msg;
-            ele.setAttribute('id', 'message')
+            const template = `
+                 <div class="message">
+                 <div class="message-icon"><i class="${icon}"></i></div>
+                 <div class="message-title">${msg}</div>
+</div>
+            `
+            ele.innerHTML = template;
             body.appendChild(ele)
-            ele.style.position = "fixed"
-            ele.style.left = "50%"
-            ele.style.top = "50%"
-            ele.style.transform = "translate3d(-50%,-50%, 0)"
-            ele.style.WebKitTranform = "translate3d(-50%,-50%, 0)"
-            ele.style.fontSize = "0.24rem"
             setTimeout(function () {
                     body.removeChild(ele);
                     body.removeEventListener('click', preventDefault)

@@ -6,7 +6,12 @@ import Vr from 'vue-resource'
 import './config/rem'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import './common/common.css'
+import jhconfirm from './components/confirm'
+import message from './components/message'
 Vue.use(Vr);
+Vue.use(jhconfirm)
+Vue.use(message)
 
 // Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name=csrf-token]').getAttribute('content'); 开发注释
 

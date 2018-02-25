@@ -23,4 +23,8 @@
 <style scoped>
     @import "../css/main.css";
     @import "../css/color-dark.css";
+
+    #app {
+        background: #f0eff5;
+    }
 </style>
