@@ -1,6 +1,6 @@
 <template>
     <div class="login-wrap">
-        <div class="ms-title">后台登陆</div>
+        <div class="ms-title">Boomerang!</div>
         <div class="ms-login">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="demo-ruleForm">
                 <el-form-item prop="username">
@@ -42,7 +42,7 @@
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
                         localStorage.setItem('ms_username',self.ruleForm.username);
-                        self.$router.push('/pages/admin/superadmin1');
+                        self.$router.push('/pages/admin/home');
                     } else {
                         console.log('error submit!!');
                         return false;

@@ -15,7 +15,6 @@ import admin from '../pages/admin/admin.vue'
 import admindetail from '../pages/admin/admindetail.vue'
 //import adminedit from '../pages/admin/adminedit.vue'
 import adminlogin from '../pages/admin/adminlogin.vue'
-import test from '../test/upload'
 
 Vue.use(Router)
 
@@ -63,8 +62,5 @@ export default new Router({
         path: '/pages/admin/adminlogin',
         name: 'adminlogin',
         component: adminlogin,
-    }, {
-        path: '/test',
-        component: test
     }]
 })
