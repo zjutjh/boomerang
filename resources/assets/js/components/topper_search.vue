@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import {api_url} from "../../config/env";
+    import {api_url} from "../config/env";
     export default {
         name: "topper_search",
         methods:{
