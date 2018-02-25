@@ -1,13 +1,14 @@
 <template>
     <div>
-        <button @click=""></button>
+        <topper_search></topper_search>
     </div>
 </template>
 
 <script>
-    import loding from '../../components/Loading'
-    import state from '../../components/state.mixin'
+    import loding from '../../components/Loading';
+    import state from '../../components/state.mixin';
     import {api_url} from "../../config/env";
+    import topper_search from "../../components/topper_search";
 
     export default {
         name: 'index',
@@ -16,7 +17,8 @@
            items: [],
         }),
         components: {
-          loding
+          loding,
+            topper_search
         },
         beforeCreate() {
 
