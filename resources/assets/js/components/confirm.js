@@ -26,22 +26,21 @@ export default {
 
             const confirm_ele = document.getElementById("confirm-btn-confirm");
             const cancel_ele = document.getElementById("confirm-cancel");
-            confirm_ele.addEventListener('click', successCallback(success))
+            confirm_ele.addEventListener('click', successCallback)
             cancel_ele.addEventListener('click', cancel)
-            function successCallback(callback) {
-                function eventCallback() {
-                    callback()
+            function successCallback() {
+                    success()
                     document.body.removeChild(ele)
                     document.body.removeChild(modal)
-                    document.removeEventListener('click', eventCallback)
-                }
-                return eventCallback;
+                    document.removeEventListener('click', successCallback)
+
+
             }
 
             function cancel() {
                 document.body.removeChild(ele)
                 document.body.removeChild(modal)
-                //document.removeEventListener('click', eventCallback)
+                document.removeEventListener('click', successCallback)
             }
 
 

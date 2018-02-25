@@ -22,12 +22,16 @@
                 <label for="" class="item-label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点:</label>
                 <input type="text" class="item-content" v-model="data.place" placeholder="如：广b二楼通道">
             </div>
+            <div class="form-item input" v-show="showId">
+                <label for="" class="item-label">丢失校园卡学号:</label>
+                <input type="text" class="item-content" v-model="data.stuid" placeholder="如：2016xxxxxxxx">
+            </div>
 
             <div class="form-item select select-2">
                 <label for="" class="item-label">联系方式:</label>
                 <input @click="selectClick1" v-model="select2[data.contact_type]" type="text" class="item-content"
                        readonly="readonly">
-                <input type="text" class="item-content-2">
+                <input type="text" class="item-content-2" v-model="data.contact">
                 <span class="select-suffix" @click="selectClick1"><i class="el-icon-arrow-down suffix-caret"
                                                                      :class="{ 'is_reverse' : isReverse_2}"></i></span>
                 <div class="select-dropdown-wrap" v-show="isReverse_2">
@@ -66,7 +70,7 @@
                 >
                     <button class="upload-button" @click="selectImg">上传图片</button>
                 </el-upload>
-                <button class="release">点击发布</button>
+                <button class="release" @click="release">点击发布</button>
             </div>
         </div>
 
@@ -93,11 +97,13 @@
                     place: '',
                     contact_type: 0,
                     contact: '',
-                    description: ''
+                    description: '',
+                    stuid: ''
                 },
                 select: [
                     '失物招领',
-                    '寻物启事'
+                    '寻物启事',
+                    '校园卡招领'
                 ],
                 select2: [
                     '电话号码',
@@ -106,7 +112,8 @@
                 isReverse_1: false,
                 isReverse_2: false,
                 img: [],
-                accept: 'image/*'
+                accept: 'image/*',
+                showId: false
 
             };
         },
@@ -126,6 +133,11 @@
             },
             selectChange(index) {
                 console.log(index);
+                if (index == 2) {
+                    this.showId = true
+                } else {
+                    this.showId = false
+                }
                 this.data.type = this.select[index];
                 this.isReverse_1 = false;
             },
@@ -144,20 +156,29 @@
                 this.img.push(file)
                 console.log(this.img)
             },
-            getSrc(raw) {
-                console.log(raw)
-                return raw.url.split('').slice(4).join('')
-            },
             deleteImg(index) {
-                // this.message('test', 'el-icon-check')
+                // this.message('test', 'el-icon-check', 1000)
 
                 this.jhconfirm({
                     title: '你确定移除这张图片嘛？',
                     success: () => {
                         this.img.splice(index, 1)
+                        this.message('移除成功', 'el-icon-check')
 
                     }
                 })
+            },
+            release() {
+                if (!this.data.name || !this.data.place || !this.data.contact || !this.data.description) {
+                        this.message('不能为空', 'el-icon-warning')
+                }
+                if ( this.data.type === '校园卡招领') {
+                    if (!this.data.stuid)
+                        this.message('不能为空', 'el-icon-warning');
+                    if (!/[0-9]{12}/.test(this.data.stuid)) {
+                        this.message('学号格式不正确', 'el-icon-warning', 100000)
+                    }
+                }
 
 
             }
@@ -251,7 +272,7 @@
 
     .select .select-suffix {
         position: absolute;
-        left: 10.4994rem;
+        left: 10.7rem;
         top: .2rem;
 
     }

@@ -10,7 +10,7 @@ export default {
             let ele = document.createElement("div")
             const template = `
                  <div class="message">
-                 <div class="message-icon"><i class="${icon}"></i></div>
+                 <div class="message-icon"><i class="${icon} icon-class"></i></div>
                  <div class="message-title">${msg}</div>
 </div>
             `

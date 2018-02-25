@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Larvuent</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
