@@ -1,6 +1,8 @@
 <template>
-    <div>
+    <div class="Box">
         <topper_search></topper_search>
+        <menu></menu>
+
     </div>
 </template>
 
@@ -9,6 +11,7 @@
     import state from '../../components/state.mixin';
     import {api_url} from "../../config/env";
     import topper_search from "../../components/topper_search";
+    import menu from "../../components/menu";
 
     export default {
         name: 'index',
@@ -18,7 +21,8 @@
         }),
         components: {
           loding,
-            topper_search
+            topper_search,
+            menu
         },
         beforeCreate() {
 
@@ -34,7 +38,7 @@
             async login() {
                 const data = {
                     "openid": "xxxx"
-                }
+                };
                 await this.$http.post(api_url + '/api/auto_login', data).then(res => {
                     if (res.code > 0) {
                         this.setState(res.data);
@@ -47,7 +51,7 @@
             async get_items() {
                 const header = {
                     'Authorization': "bearer " + this.getToken()
-                }
+                };
                 await this.$http.get(api_url + "/api/new/lists", {headers:header}).then(res => {
                     if (res.code > 0) {
                         this.items = res.data;
@@ -67,6 +71,10 @@
 </script>
 
 <style lang="css" scoped>
-
+.Box{
+    width: 500px;
+    height: auto;
+    color: rgb(241,239,245);
+}
 
 </style>
