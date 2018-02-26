@@ -33,10 +33,11 @@
 .confirm .confirm-btns {
     background: #177441;
     width: 19.20rem;
+    border-radius: .5rem
 }
 .confirm .confirm-btns .confirm-btn-cancel {
     width: 50%;
-    height: 3.84rem;
+    height: 3.86rem;
     color: #fff;
     line-height: 3.84rem;
     text-align: center;
@@ -47,7 +48,7 @@
 
 .confirm .confirm-btns .confirm-btn-confirm {
     width: 50%;
-    height: 3.84rem;
+    height: 3.86rem;
     color: #fff;
     line-height: 3.84rem;
     text-align: center;
@@ -82,9 +83,15 @@
 }
 
 .message .message-icon {
-    padding: 0 1.85rem;
-    font-size: 8.1rem;
+    padding: .5rem 1.85rem;
+
     margin: 0 auto;
+}
+
+.message .message-icon .icon-class {
+    font-size: 8.1rem;
+    color: #fff;
+
 }
 
 .message .message-title {

@@ -22,12 +22,16 @@
                 <label for="" class="item-label">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点:</label>
                 <input type="text" class="item-content" v-model="data.place" placeholder="如：广b二楼通道">
             </div>
+            <div class="form-item input" v-show="showId">
+                <label for="" class="item-label">丢失校园卡学号:</label>
+                <input type="text" class="item-content" v-model="data.stuid" placeholder="如：2016xxxxxxxx">
+            </div>
 
             <div class="form-item select select-2">
                 <label for="" class="item-label">联系方式:</label>
                 <input @click="selectClick1" v-model="select2[data.contact_type]" type="text" class="item-content"
                        readonly="readonly">
-                <input type="text" class="item-content-2">
+                <input type="text" class="item-content-2" v-model="data.contact">
                 <span class="select-suffix" @click="selectClick1"><i class="el-icon-arrow-down suffix-caret"
                                                                      :class="{ 'is_reverse' : isReverse_2}"></i></span>
                 <div class="select-dropdown-wrap" v-show="isReverse_2">
@@ -66,7 +70,7 @@
                 >
                     <button class="upload-button" @click="selectImg">上传图片</button>
                 </el-upload>
-                <button class="release">点击发布</button>
+                <button class="release" @click="release">点击发布</button>
             </div>
         </div>
 
@@ -81,8 +85,13 @@
 </template>
 
 <script>
+
+    import state from '../components/state.mixin'
+    import {api_url} from "../config/env";
+
     export default {
         name: "upload",
+        mixins: [state],
         data() {
             return {
                 dialogImageUrl: '',
@@ -93,11 +102,14 @@
                     place: '',
                     contact_type: 0,
                     contact: '',
-                    description: ''
+                    description: '',
+                    stuid: '',
+                    lost_type: 0
                 },
                 select: [
                     '失物招领',
-                    '寻物启事'
+                    '寻物启事',
+                    '校园卡招领'
                 ],
                 select2: [
                     '电话号码',
@@ -106,7 +118,8 @@
                 isReverse_1: false,
                 isReverse_2: false,
                 img: [],
-                accept: 'image/*'
+                accept: 'image/*',
+                showId: false
 
             };
         },
@@ -126,6 +139,12 @@
             },
             selectChange(index) {
                 console.log(index);
+                this.data.lost_type = index
+                if (index == 2) {
+                    this.showId = true
+                } else {
+                    this.showId = false
+                }
                 this.data.type = this.select[index];
                 this.isReverse_1 = false;
             },
@@ -144,28 +163,117 @@
                 this.img.push(file)
                 console.log(this.img)
             },
-            getSrc(raw) {
-                console.log(raw)
-                return raw.url.split('').slice(4).join('')
-            },
             deleteImg(index) {
-                // this.message('test', 'el-icon-check')
+                // this.message('test', 'el-icon-check', 1000)
 
                 this.jhconfirm({
                     title: '你确定移除这张图片嘛？',
                     success: () => {
                         this.img.splice(index, 1)
+                        this.message('移除成功', 'el-icon-check')
+
+                    }
+                })
+            },
+            release() {
+                if (!this.data.name || !this.data.place || !this.data.contact || !this.data.description) {
+                    this.message('不能为空', 'el-icon-warning')
+                }
+                if (this.data.type === '校园卡招领') {
+                    if (!this.data.stuid)
+                        this.message('不能为空', 'el-icon-warning');
+                    if (!/[0-9]{12}/.test(this.data.stuid)) {
+                        this.message('学号格式不正确', 'el-icon-warning', 100000)
+                    }
+                }
+
+                this.message('正在发布中,请稍等', 'el-icon-loading')
+                const params = {
+                    'uid': this.getUser().id,
+                    'title': this.data.name,
+                    'description': this.data.description,
+                    'lost_place': this.data.place,
+                    'contact_uno': !this.data.stuid ? -1 : this.data.stuid,
+                    'phone': (this.data.contact_type === 0) ? this.data.contact : '',
+                    'qq': (this.data.contact_type === 1) ? this.data.contact : '',
+                    'lost_type': this.data.lost_type
+                }
+
+                const header = {
+                    'Authorization': "bearer " + this.getToken()
+                }
+
+                this.$http.post(api_url + '/api/create', params, {headera: header}).then(res => {
+                    if (res.code > 0) {
+
+                        this.message('正在上传图片,请稍等', 'el-icon-loading')
+
+                        this.uploadImg(res.item.id, 'el-icon-loading')
+
 
                     }
                 })
 
+
+            },
+            async uploadImg(item_id) {
+                await this.img.map(item => {
+                     this.transformFile(item, item_id);
+                })
+
+                this.message('发布完成', 'el-icon-check')
+
+
+            },
+            processHandle() {},
+            transformFile(file, item_id) {
+                const imgFile = file;
+                const id = item_id;
+                const img = new Image();
+
+                img.src = file.url;
+                img.onload =  () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    let tmp_img = canvas.toDataURL(imgFile.raw.type, 0.5);
+                    const binaryString = window.atob(tmp_img.split(',')[1]);
+                    const arrayBuffer = new ArrayBuffer(binaryString.length);
+                    const intArray = new Uint8Array(arrayBuffer);
+                    for (let i = 0, j = binaryString.length; i < j; i++) {
+                        intArray[i] = binaryString.charCodeAt(i);
+                    }
+                    const fileDate = [intArray];
+                    let blob;
+
+                    blob = new Blob(fileDate, {type: imgFile.raw.type});
+                    console.log(blob)
+                    const formData = new FormData();
+                    formData.append('item_id', id);
+                    formData.append('file', blob, imgFile.name);
+
+                    const header = {
+                        'Authorization': "bearer " + this.getToken()
+                    }
+
+                    this.$http.post('/create', formData, {headers: header}).then(res => {
+
+                    })
+
+
+                }
 
             }
         }
     }
 </script>
 
-<style >
+<style>
     .edit-wrap {
         width: 27.73rem;
         height: auto;
@@ -251,7 +359,7 @@
 
     .select .select-suffix {
         position: absolute;
-        left: 10.4994rem;
+        left: 10.7rem;
         top: .2rem;
 
     }
@@ -268,7 +376,6 @@
         cursor: pointer;
 
     }
-
 
     .select-dropdown-wrap {
         position: absolute;
@@ -334,7 +441,7 @@
         width: 4.61rem;
         height: 4.61rem;
         border-radius: .426rem;
-        margin-left:.9rem;
+        margin-left: .9rem;
         background: #e5e5e5;
         display: inline-block;
         position: relative;
@@ -373,7 +480,7 @@
         display: inline-block;
     }
 
-    .upload-wrap  .el-upload--text{
+    .upload-wrap .el-upload--text {
         height: auto;
         width: auto;
 
