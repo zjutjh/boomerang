@@ -3,7 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -47,5 +53,44 @@ class ItemController extends Controller
         return $this->apiReponse(200,null,
             ['items' => $items]);
 
+    }
+
+
+    public function createItem(Request $request) {
+        $params = $request->all();
+//        dd($params);
+        $item = Item::create($params);
+
+        return $this->apiReponse(200, null, ['item' => $item]);
+    }
+
+    public function uploadImg(Request $request) {
+        $user = Auth::user();
+        $item_id = $request->input('item_id');
+//        $file_name = $request->input('file_name');
+        $img = $_FILES['file'];
+//        dd($img);
+        $img_id = $user->uno . "-" . $item_id . "-" . md5_file($img['tmp_name']). $img['name'];
+        $img_url =  $user->uno . '/' . $img_id;
+//        dd($img);
+        Storage::put('public/'.$img_url, File::get($img['tmp_name']));
+        $item = Item::where('id', $item_id)->first();
+        if (is_array($item->images)) {
+//            array_push($item->images, 'storage/'.$img_url);
+           // $item->images  = 'storage/'.$img_url;
+            $temp = $item->images;
+            $temp [] = 'storage/'.$img_url;
+            $item->images = $temp;
+//            dd($item->images);
+        } else {
+            $item->images = array(
+                'storage/'.$img_url
+            );
+        }
+
+//        array_push($item->images, 'storage/'.$img_url);
+
+        $item->save();
+        return $this->apiReponse(200, '上传成功', null);
     }
 }

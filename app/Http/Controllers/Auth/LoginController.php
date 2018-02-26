@@ -40,7 +40,7 @@ class LoginController extends Controller
             return $this->apiReponse(-401, '生成token失败', null);
         }
 
-        return $this->apiReponse(200, 'so登陆成功',
+        return $this->apiReponse(200, '登陆成功',
             ['user' => $user,
                 'token' => $token]
         );

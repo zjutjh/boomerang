@@ -11,7 +11,14 @@ class Item extends Model
 
 
 
-    protected $primaryKey='item_id';
+    protected $primaryKey='id';
+
+    protected $fillable = ['uid', 'title', 'description', 'lost_place', 'lost_type','contact_uno', 'phone', 'qq', 'images'];
+
+    protected $casts = [
+        'images' => 'array'
+    ];
+
 
    /**
      * Get the indexable data array for the model.
@@ -25,6 +32,18 @@ class Item extends Model
 // Customize array...
 
         return $array;
+    }
+
+    public function getImagesAttribute($val)
+    {
+        $temp = json_decode($val, true);
+
+//        dd($temp);
+        foreach ($temp as $k => $v) {
+            $temp[$k] = asset($v);
+        }
+        return $temp;
+
     }
 
 
