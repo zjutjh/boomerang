@@ -9,12 +9,13 @@ import detail from '../pages/main/detail.vue'
 import mine from '../pages/personal/mine.vue'
 import mydetail from '../pages/personal/mydetail.vue'
 import edit from '../pages/main/edit.vue'
-import superadmin1 from '../pages/admin/superadmin1.vue'
-import superadmin2 from '../pages/admin/superadmin2.vue'
-import admin from '../pages/admin/admin.vue'
-import admindetail from '../pages/admin/admindetail.vue'
+//import admin from '../pages/admin/admin.vue'
+//import admindetail from '../pages/admin/admindetail.vue'
 //import adminedit from '../pages/admin/adminedit.vue'
 import adminlogin from '../pages/admin/adminlogin.vue'
+import Readme from '../pages/admin/Readme.vue'
+import Home from '../pages/admin/Home.vue'
+import BaseTable from '../pages/admin/BaseTable.vue'
 
 Vue.use(Router)
 
@@ -41,26 +42,28 @@ export default new Router({
         path: '/pages/main/edit',
         name: 'edit',
         component: edit,
-    },{
-        path: '/pages/admin/superadmin1',
-        name: 'superadmin1',
-        component: superadmin1,
-    },{
-        path: '/pages/admin/superadmin2',
-        name: 'superadmin2',
-        component: superadmin2,
-    },{
-        path: '/pages/admin/admin',
-        name: 'admin',
-        component: admin,
-    },{
-        path: '/pages/admin/admindetail',
-        name: 'admindetail',
-        component: admindetail,
-
-    },{
+    },
+    {
         path: '/pages/admin/adminlogin',
         name: 'adminlogin',
         component: adminlogin,
-    }]
+    },
+        {
+            path: '/pages/admin/readme',
+            name: 'Home',
+            compoment: Home,
+            children:[
+                {
+                    path: '/',
+                    name: 'Readme',
+                    compoment: Readme,
+                },
+                {
+                    path: 'basetable',
+                    name: 'BaseTable',
+                    compoment: BaseTable,
+                }
+            ]
+        },
+    ]
 })
