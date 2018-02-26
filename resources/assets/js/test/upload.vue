@@ -85,8 +85,13 @@
 </template>
 
 <script>
+
+    import state from '../components/state.mixin'
+    import {api_url} from "../config/env";
+
     export default {
         name: "upload",
+        mixins: [state],
         data() {
             return {
                 dialogImageUrl: '',
@@ -98,7 +103,8 @@
                     contact_type: 0,
                     contact: '',
                     description: '',
-                    stuid: ''
+                    stuid: '',
+                    lost_type: 0
                 },
                 select: [
                     '失物招领',
@@ -133,6 +139,7 @@
             },
             selectChange(index) {
                 console.log(index);
+                this.data.lost_type = index
                 if (index == 2) {
                     this.showId = true
                 } else {
@@ -170,9 +177,9 @@
             },
             release() {
                 if (!this.data.name || !this.data.place || !this.data.contact || !this.data.description) {
-                        this.message('不能为空', 'el-icon-warning')
+                    this.message('不能为空', 'el-icon-warning')
                 }
-                if ( this.data.type === '校园卡招领') {
+                if (this.data.type === '校园卡招领') {
                     if (!this.data.stuid)
                         this.message('不能为空', 'el-icon-warning');
                     if (!/[0-9]{12}/.test(this.data.stuid)) {
@@ -180,13 +187,93 @@
                     }
                 }
 
+                this.message('正在发布中,请稍等', 'el-icon-loading')
+                const params = {
+                    'uid': this.getUser().id,
+                    'title': this.data.name,
+                    'description': this.data.description,
+                    'lost_place': this.data.place,
+                    'contact_uno': !this.data.stuid ? -1 : this.data.stuid,
+                    'phone': (this.data.contact_type === 0) ? this.data.contact : '',
+                    'qq': (this.data.contact_type === 1) ? this.data.contact : '',
+                    'lost_type': this.data.lost_type
+                }
+
+                const header = {
+                    'Authorization': "bearer " + this.getToken()
+                }
+
+                this.$http.post(api_url + '/api/create', params, {headera: header}).then(res => {
+                    if (res.code > 0) {
+
+                        this.message('正在上传图片,请稍等', 'el-icon-loading')
+
+                        this.uploadImg(res.item.id, 'el-icon-loading')
+
+
+                    }
+                })
+
+
+            },
+            async uploadImg(item_id) {
+                await this.img.map(item => {
+                     this.transformFile(item, item_id);
+                })
+
+                this.message('发布完成', 'el-icon-check')
+
+
+            },
+            processHandle() {},
+            transformFile(file, item_id) {
+                const imgFile = file;
+                const id = item_id;
+                const img = new Image();
+
+                img.src = file.url;
+                img.onload =  () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    let tmp_img = canvas.toDataURL(imgFile.raw.type, 0.5);
+                    const binaryString = window.atob(tmp_img.split(',')[1]);
+                    const arrayBuffer = new ArrayBuffer(binaryString.length);
+                    const intArray = new Uint8Array(arrayBuffer);
+                    for (let i = 0, j = binaryString.length; i < j; i++) {
+                        intArray[i] = binaryString.charCodeAt(i);
+                    }
+                    const fileDate = [intArray];
+                    let blob;
+
+                    blob = new Blob(fileDate, {type: imgFile.raw.type});
+                    console.log(blob)
+                    const formData = new FormData();
+                    formData.append('item_id', id);
+                    formData.append('file', blob, imgFile.name);
+
+                    const header = {
+                        'Authorization': "bearer " + this.getToken()
+                    }
+
+                    this.$http.post('/create', formData, {headers: header}).then(res => {
+
+                    })
+
+
+                }
 
             }
         }
     }
 </script>
 
-<style >
+<style>
     .edit-wrap {
         width: 27.73rem;
         height: auto;
@@ -290,7 +377,6 @@
 
     }
 
-
     .select-dropdown-wrap {
         position: absolute;
         width: 6.402rem;
@@ -355,7 +441,7 @@
         width: 4.61rem;
         height: 4.61rem;
         border-radius: .426rem;
-        margin-left:.9rem;
+        margin-left: .9rem;
         background: #e5e5e5;
         display: inline-block;
         position: relative;
@@ -394,7 +480,7 @@
         display: inline-block;
     }
 
-    .upload-wrap  .el-upload--text{
+    .upload-wrap .el-upload--text {
         height: auto;
         width: auto;
 
