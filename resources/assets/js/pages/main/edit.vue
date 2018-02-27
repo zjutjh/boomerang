@@ -86,8 +86,8 @@
 
 <script>
 
-    import state from '../components/state.mixin'
-    import {api_url} from "../config/env";
+    import state from '../../components/state.mixin'
+    import {api_url} from "../../config/env";
 
     export default {
         name: "upload",

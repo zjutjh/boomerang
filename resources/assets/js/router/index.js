@@ -44,26 +44,27 @@ export default new Router({
         component: edit,
     },
     {
-        path: '/pages/admin/adminlogin',
-        name: 'adminlogin',
+        path: '/',
         component: adminlogin,
+        redirect: '/adminlogin'
     },
-        {
-            path: '/pages/admin/readme',
-            name: 'Home',
-            compoment: Home,
-            children:[
-                {
-                    path: '/',
-                    name: 'Readme',
-                    compoment: Readme,
-                },
-                {
-                    path: 'basetable',
-                    name: 'BaseTable',
-                    compoment: BaseTable,
-                }
-            ]
-        },
+    {
+        path: '/readme',
+        compoment: Home,
+        children:[
+            {
+                path: '/',
+                compoment: Readme,
+            },
+            {
+                path: '/basetable',
+                compoment: BaseTable,
+            },
+        ]
+    },
+    {
+        path: '/adminlogin',
+        component: BaseTable,
+    },
     ]
 })

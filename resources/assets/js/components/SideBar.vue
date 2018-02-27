@@ -44,7 +44,7 @@
                             }
                         ]
                     },
-                    {
+                    /*{
                         icon: 'el-icon-date',
                         index: '3',
                         title: '表单',
@@ -76,7 +76,7 @@
                         icon: 'el-icon-upload2',
                         index: 'drag',
                         title: '拖拽'
-                    }
+                    }*/
                 ]
             }
         },
