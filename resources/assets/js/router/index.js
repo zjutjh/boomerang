@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import tofind from '../pages/main/tofindlist.vue'
+import tofindlist from '../pages/main/tofindlist'
 import found from '../pages/main/foundlist.vue'
 import search from '../pages/main/search.vue'
 import searchresult from '../pages/main/searchresult.vue'
@@ -23,9 +23,9 @@ Vue.use(Router)
 export default new Router({
 
     routes: [{
-        path: '/pages/main/tofind',
-        name: 'tofind',
-        component: tofind,
+        path: '/pages/main/tofindlist',
+        name: 'tofindlist',
+        component: tofindlist,
     }, {
         path: '/pages/main/found',
         name: 'found',
@@ -64,7 +64,7 @@ export default new Router({
     },
     {
         path: '/adminlogin',
-        component: BaseTable,
+        component:adminlogin,
     },
     ]
 })

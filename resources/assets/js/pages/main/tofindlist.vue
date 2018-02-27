@@ -72,9 +72,11 @@
 
 <style lang="css" scoped>
 .Box{
-    width: 500px;
-    height: auto;
+    width: 100%;
+    height: 100%;
     color: rgb(241,239,245);
+    margin: 0;
+    padding: 0;
 }
 
 </style>
