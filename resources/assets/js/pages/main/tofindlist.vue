@@ -1,8 +1,10 @@
 <template>
     <div class="Box">
-        <topper_search></topper_search>
-        <menu></menu>
+        <topper_search>
 
+        </topper_search>
+        <menu></menu>
+       <tabber></tabber>
     </div>
 </template>
 
@@ -12,6 +14,7 @@
     import {api_url} from "../../config/env";
     import topper_search from "../../components/topper_search";
     import menu from "../../components/menu";
+    import tabber from "../../components/tabber";
 
     export default {
         name: 'index',
@@ -22,7 +25,8 @@
         components: {
           loding,
             topper_search,
-            menu
+            menu,
+            tabber
         },
         beforeCreate() {
 

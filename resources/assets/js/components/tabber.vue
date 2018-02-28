@@ -3,29 +3,25 @@
         <ul>
             <li @click="find">
                 <router-link :to="{name:'foundlist'}">
-                    ![](..assets/js/images/lost.png)
-                    ![](../assets/js/images/lost-hover.png)
+                    <img :src="found" alt="" @mouseover="found=found_hover" @mouseout="found_hover=found1" />
                     <p :class="{bottomBarColorActive:isColor}">寻物</p>
                 </router-link>
             </li>
             <li @click="lost">
                 <router-link :to="{name:'tofindlist'}">
-                    ![](../assets/js/images/found.png)
-                    ![](../assets/js/images/found-hover.png)
+                    <img :src="lost" alt="" @mouseover="lost=lost_hover" @mouseout="lost_hover=lost1"/>
                     <p :class="{bottomBarColorActive:isColor2}">招领</p>
                 </router-link>
             </li>
             <li @click="search">
                 <router-link :to="{name:'searchresult'}">
-                    ![](..assets/js/images/search.png)
-                    ![](../assets/js/images/search-hover.png)
+                    <img :src="search" alt="" @mouseover="search=search_hover" @mouseout="search_hover=search1"/>
                     <p :class="{bottomBarColorActive:isColor3}">搜索</p>
                 </router-link>
             </li>
             <li @click="mine">
                 <router-link :to="{name:'mine'}">
-                    ![](../assets/js/images/mine.png)
-                    ![](../assets/js/images/mine-hover.png)
+                    <img :src="mine" alt="" @mouseover="mine=mine_hover" @mouseout="mine_hover=mine1"/>
                     <p :class="{bottomBarColorActive:isColor4}">我的</p>
                 </router-link>
             </li>
@@ -38,10 +34,22 @@
         name: "tabber",
        data(){
             return{
+                lost1:'../images/lost.png',
+                lost:'../images/lost.png',
+                lost_hover:'../images/lost-hover.png',
+                found1:'../images/found.png',
+                found:'../images/found.png',
+                found_hover:'../images/found-hover.png',
+                search1:'../images/search.png',
+                search:'../images/search.png',
+                search_hover:'../images/search-hover.png',
+                mine1:'../images/mine.png',
+                mine:'../images/mine.png',
+                mine_hover:'../images/mine-hover.png',
                 isColor:true,
                 isColor2:false,
                 isColor3:false,
-                isColor4:false
+                isColor4:false,
             }
         },
         methods:{
@@ -75,24 +83,24 @@
 
 <style scoped>
     .bottomBar {
-        height: 100px;
-        width: 100%;
-        border: 1px solid #ccc;
+        height: 75px;
+        width: 800px;
+        border: none;
         bottom: 0;
-        background: rgba(255,255,255,0.90);
+        background: rgb(50,177,108);
         position: fixed;
         align-content: flex-end;
     }
     .bottomBar ul {
         display: flex;
         width: 100%;
-        justify-content:space-around;
+        justify-content: center;
     }
     .bottomBar ul li {
-        /*width: 20%;*/
+        *width: 20%;
     }
     .bottomBar ul li img {
-        margin: 8px 0;
+        margin: 4px 0;
     }
     .bottomBar ul li p {
         font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
