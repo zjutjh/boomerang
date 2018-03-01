@@ -28,14 +28,15 @@
 
 <style scoped>
     .nav-head{
-        width:500px;
+        width:800px;
         height:55px;
-        margin:0;
-        padding:0;
+        margin:auto;
+        display: flex;
+        display: -webkit-flex;
 
     }
     #search{
-        width: 375px;
+        width: 600px;
         border: none;
         height: 55px;
         margin: 0;
@@ -45,10 +46,11 @@
         font-weight: bold;
         font-size: 16px;
         color: green;
-        width: 125px;
+        width: 200px;
         height: 55px;
         border: none;
         margin: 0;
         padding: 0;
+        background-color: white;
     }
 </style>

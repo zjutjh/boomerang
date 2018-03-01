@@ -1,5 +1,5 @@
 <template>
-    <!--<div class="background"  v-for="msg in msgs" :key="msg.id">
+    <div class="background"  v-for="msg in msgs" :key="msg.id">
        <ul>
            <li>{{msg.type}}</li>
            <li>{{msg.item}}</li>
@@ -7,7 +7,7 @@
            <li>{{msg.place}}</li>
        </ul>
         <img :src="msg.image" alt="实物图片">
-    </div>-->
+    </div>
 </template>
 
 <script>
