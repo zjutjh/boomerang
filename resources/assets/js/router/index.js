@@ -64,7 +64,7 @@ export default new Router({
     },
     {
         path: '/adminlogin',
-        component: BaseTable,
+        component: adminlogin,
     },
     ]
 })
