@@ -34,17 +34,17 @@ class Item extends Model
         return $array;
     }
 
-    public function getImagesAttribute($val)
-    {
-        $temp = json_decode($val, true);
-
-//        dd($temp);
-        foreach ($temp as $k => $v) {
-            $temp[$k] = asset($v);
-        }
-        return $temp;
-
-    }
+//    public function getImagesAttribute($val)
+//    {
+//        $temp = json_decode($val, true);
+//
+////        dd($temp);
+//        foreach ($temp as $k => $v) {
+//            $temp[$k] = asset($v);
+//        }
+//        return $temp;
+//
+//    }
 
 
 }

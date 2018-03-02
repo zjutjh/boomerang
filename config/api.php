@@ -11,6 +11,7 @@ return [
       'user' => [
           'center' => 'http://user.jh.zjut.edu.cn/api.php',
           'wejh'   => 'https://server.wejh.imcr.me/api/thirdParty/login'
-      ]
+      ],
+      'send' => 'https://server.wejh.imcr.me/api/notification/boomerang'
   ]
 ];

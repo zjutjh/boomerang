@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Jobs\SendMsg;
 use App\User;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -19,7 +22,7 @@ class ItemController extends Controller
         $page = $request->get('page');
         $items = Item::latest()
             ->where('lost_type',1)
-            ->select('uid','title','description','lost_place','lost_type','type_id','images','phone','qq','status')
+            ->select('uid','title','description','lost_place','lost_type','images','phone','qq','status')
             ->take(10)
             ->skip($page)
             ->get();
@@ -58,6 +61,29 @@ class ItemController extends Controller
 
     public function createItem(Request $request) {
         $params = $request->all();
+
+        if ($params['contact_uno'] != -1) {
+            if (!$user = User::where('uno', $params['contact_uno'])->first()) {
+            }
+
+//            dd(json_encode);
+            $user_j = Auth::user();
+            $data = array(
+                'openid' => $user->openid,
+                'data'   => array(
+                    'first' => '亲爱的'. mb_substr($user->name, 0, 1, "utf-8") . '同学你好，你的校园卡已被捡到，请认领',
+                    'keyword1' =>  mb_substr($user_j->name, 0, 1, "utf-8") . '同学',
+                    'keyword2' => '电话 ' . $params['phone'] . ' QQ ' . $params['qq'],
+                    'remark'   => '感谢你的使用'
+                ),
+                'url'   => 'test'
+            );
+//            dd(json_encode($data));
+            SendMsg::dispatch($data);
+
+        }
+
+
 //        dd($params);
         $item = Item::create($params);
 
@@ -92,5 +118,21 @@ class ItemController extends Controller
 
         $item->save();
         return $this->apiReponse(200, '上传成功', null);
+    }
+
+
+    public function deleteImg(Request $request) {
+        $item_id = $request->input('item_id');
+        $img_id = $request->input('img_id');
+        $item = Item::where('id', $item_id)->first();
+        $tmp = $item->images;
+//        dd($tmp);
+        $tmp = array_splice($tmp, $img_id, 1);
+        $item->images = $tmp;
+        $item->save();
+
+        return $this->apiReponse( 200, '删除成功', null);
+
+
     }
 }

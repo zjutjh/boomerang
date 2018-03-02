@@ -41,7 +41,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function isSuperAdmin() {
-        if ($this->user_type == 2) {
+        if ($this->user_type == 3) {
             return true;
         }
         return false;
