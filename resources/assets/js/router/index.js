@@ -45,26 +45,25 @@ export default new Router({
     },
     {
         path: '/',
-        component: adminlogin,
         redirect: '/adminlogin'
     },
     {
         path: '/readme',
-        compoment: Home,
+        compoment: resolve => require(['../pages/admin/Home.vue'], resolve),
         children:[
             {
                 path: '/',
-                compoment: Readme,
+                compoment: resolve => require(['../pages/admin/Readme.vue'], resolve),
             },
             {
                 path: '/basetable',
-                compoment: BaseTable,
+                compoment: resolve => require(['../pages/admin/BaseTable.vue'], resolve),
             },
         ]
     },
     {
         path: '/adminlogin',
-        component: adminlogin,
+        component: resolve => require(['../pages/admin/adminlogin.vue'], resolve),
     },
     ]
 })
