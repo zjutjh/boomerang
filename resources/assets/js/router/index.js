@@ -44,26 +44,20 @@ export default new Router({
         component: edit,
     },
     {
-        path: '/',
-        redirect: '/adminlogin'
-    },
-    {
-        path: '/readme',
-        compoment: resolve => require(['../pages/admin/Home.vue'], resolve),
-        children:[
-            {
-                path: '/',
-                compoment: resolve => require(['../pages/admin/Readme.vue'], resolve),
-            },
-            {
-                path: '/basetable',
-                compoment: resolve => require(['../pages/admin/BaseTable.vue'], resolve),
-            },
-        ]
-    },
-    {
-        path: '/adminlogin',
+        path: '/adminlogin',//管理员登陆
         component: resolve => require(['../pages/admin/adminlogin.vue'], resolve),
+    },
+    {
+        path: '/home',//超管主页
+        compoment: resolve => require(['../pages/admin/Home.vue'], resolve),
+    },
+    {
+        path: '/sad',//超管看管理员们
+        compoment: resolve => require(['../pages/admin/sad.vue'], resolve),
+    },
+    {
+        path: '/admin',//普通管理页面
+        compoment: resolve => require(['../pages/admin/admin.vue'], resolve),
     },
     ]
 })

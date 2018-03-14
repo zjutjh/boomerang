@@ -3,24 +3,18 @@
         <v-head></v-head>
         <v-sidebar></v-sidebar>
         <div class="content">
-            <div>asd</div>
+            <v-basetable></v-basetable>
         </div>
     </div>
 </template>
 
 <script>
-    import loading from '../../components/Loading';
-    import state from '../../components/state.mixin';
-    import {api_url} from "../../config/env";
     import vHead from '../../components/Header.vue';
     import vSidebar from '../../components/SideBar.vue';
-
+    import vBasetable from '../../pages/admin/BaseTable.vue';
     export default {
         components:{
-            vHead, vSidebar
+            vHead, vSidebar, vBasetable
         }
     }
 </script>
-
-<style lang="css" scoped>
-</style>

@@ -35,11 +35,11 @@
                         title: '管理员列表',
                         subs: [
                             {
-                                index: 'basetable',
+                                index: 'sad',
                                 title: 'zxz1'
                             },
                             {
-                                index: 'basetable',
+                                index: 'sad',
                                 title: 'zxz2'
                             }
                         ]

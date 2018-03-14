@@ -42,7 +42,12 @@
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
                         localStorage.setItem('ms_username',self.ruleForm.username);
-                        self.$router.push('/readme');
+                        if(1){ //登陆认证
+                            self.$router.push('/home');
+                        }
+                        else {
+                            self.$router.push('/admin');
+                        }
                     } else {
                         console.log('error submit!!');
                         return false;
