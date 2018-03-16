@@ -1,30 +1,24 @@
 <template>
     <div class="bottomBar">
         <ul>
-            <li @click="find">
-                <router-link :to="{name:'foundlist'}">
-                    <img :src="found" alt="" @mouseover="found=found_hover" @mouseout="found_hover=found1" />
+            <router-link :to="{name:'foundlist'}" tag="li" exact>
+                <div>
+                    <i class="foundlist" @mouseover="found=found_hover" @mouseout="found_hover=found1"></i>
+                </div>
                     <p :class="{bottomBarColorActive:isColor}">寻物</p>
-                </router-link>
-            </li>
-            <li @click="lost">
-                <router-link :to="{name:'tofindlist'}">
-                    <img :src="lost" alt="" @mouseover="lost=lost_hover" @mouseout="lost_hover=lost1"/>
+            </router-link>
+            <router-link :to="{name:'tofindlist'}" tag="li">
+                <i class="lost" @mouseover="lost=lost_hover" @mouseout="lost_hover=lost1"></i>
                     <p :class="{bottomBarColorActive:isColor2}">招领</p>
-                </router-link>
-            </li>
-            <li @click="search">
-                <router-link :to="{name:'searchresult'}">
-                    <img :src="search" alt="" @mouseover="search=search_hover" @mouseout="search_hover=search1"/>
+            </router-link>
+            <router-link :to="{name:'searchresult'}" tag="li">
+                <i class="search" @mouseover="search=search_hover" @mouseout="search_hover=search1"></i>
                     <p :class="{bottomBarColorActive:isColor3}">搜索</p>
-                </router-link>
-            </li>
-            <li @click="mine">
-                <router-link :to="{name:'mine'}">
-                    <img :src="mine" alt="" @mouseover="mine=mine_hover" @mouseout="mine_hover=mine1"/>
+            </router-link>
+            <router-link :to="{name:'mine'}" tag="li">
+                <i class="mine" @mouseover="mine=mine_hover" @mouseout="mine_hover=mine1"></i>
                     <p :class="{bottomBarColorActive:isColor4}">我的</p>
-                </router-link>
-            </li>
+            </router-link>
         </ul>
     </div>
 </template>
@@ -90,17 +84,71 @@
         background: rgb(50,177,108);
         position: fixed;
         align-content: flex-end;
-    }
-    .bottomBar ul {
         display: flex;
+    }
+    .foudlist{
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 25px;
+        background-repeat: no-repeat; //属性设置是否及如何重复背景图像
+        background-position: center;   //背景位置居中
+        background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
+        background-image: url("../images/found.png");
+        display: block;  //变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素
+    }
+    .lost{
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 25px;
+        background-repeat: no-repeat; //属性设置是否及如何重复背景图像
+        background-position: center;   //背景位置居中
+        background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
+        background-image: url("../images/lost.png");
+        display: block;  //变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素
+    }
+    .search{
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 25px;
+        background-repeat: no-repeat; //属性设置是否及如何重复背景图像
+        background-position: center;   //背景位置居中
+        background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
+        background-image: url("../images/search.png");
+        display: block;  //变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素
+    }
+    .mine{
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 25px;
+        background-repeat: no-repeat; //属性设置是否及如何重复背景图像
+        background-position: center;   //背景位置居中
+        background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
+        background-image: url("../images/mine.png");
+        display: block;  //变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素
+    }
+    .bottomBar ul{
+        display: table;
         width: 100%;
-        justify-content: center;
+    }
+   .router-link-active
+   {
+       color: #D0021B;
+   }
+    div {
+            font-size: 14px;
+    i {
+        font-size: 30px;
+    }
+        }
+      }
     }
     .bottomBar ul li {
         *width: 20%;
-    }
-    .bottomBar ul li img {
-        margin: 4px 0;
+        text-align: center;
+        font-size: 16px;
+        display: table-cell;
+        padding: 8px 12px;
+        cursor: pointer;
     }
     .bottomBar ul li p {
         font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
