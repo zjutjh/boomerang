@@ -9,9 +9,9 @@ import detail from '../pages/main/detail.vue'
 import mine from '../pages/personal/mine.vue'
 import mydetail from '../pages/personal/mydetail.vue'
 import edit from '../pages/main/edit.vue'
-//import admin from '../pages/admin/admin.vue'
+import admin from '../pages/admin/admin.vue'
 //import admindetail from '../pages/admin/admindetail.vue'
-//import adminedit from '../pages/admin/adminedit.vue'
+import adminedit from '../pages/admin/adminedit.vue'
 import adminlogin from '../pages/admin/adminlogin.vue'
 import Readme from '../pages/admin/Readme.vue'
 import Home from '../pages/admin/Home.vue'
@@ -48,7 +48,7 @@ export default new Router({
         component: resolve => require(['../pages/admin/adminlogin.vue'], resolve),
     },
     {
-        path: '/home',//超管主页
+        path: '/home',//超管首页
         compoment: resolve => require(['../pages/admin/Home.vue'], resolve),
     },
     {

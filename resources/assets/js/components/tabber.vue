@@ -135,12 +135,11 @@
        color: #D0021B;
    }
     div {
-            font-size: 14px;
-    i {
-        font-size: 30px;
+        font-size: 14px;
+
     }
-        }
-      }
+    i{
+        font-size: 30px;
     }
     .bottomBar ul li {
         *width: 20%;

@@ -42,7 +42,7 @@
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
                         localStorage.setItem('ms_username',self.ruleForm.username);
-                        if(1){ //登陆认证
+                        if(1){ //登陆认证 是超管还是普通管理
                             self.$router.push('/home');
                         }
                         else {
