@@ -18,7 +18,7 @@
             <el-table-column prop="address" label="干了啥" :formatter="formatter">
             </el-table-column>
             <el-table-column label="咋办？" width="180">
-                <template scope="scope">
+                <template solt-scope="scope">
                     <el-button size="small"
                                @click="handleEdit(scope.$index, scope.row)">查看详情</el-button>
                     <el-button size="small" type="danger"

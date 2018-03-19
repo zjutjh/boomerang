@@ -94,7 +94,7 @@
         background-position: center;   //背景位置居中
         background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
         background-image: url("../images/found.png");
-        display: block;  //变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素
+        display: block;  /*变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素*/
     }
     .lost{
         width: 80px;
@@ -104,7 +104,7 @@
         background-position: center;   //背景位置居中
         background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
         background-image: url("../images/lost.png");
-        display: block;  //变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素
+        display: block;  /*变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素*/
     }
     .search{
         width: 80px;
@@ -114,7 +114,7 @@
         background-position: center;   //背景位置居中
         background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
         background-image: url("../images/search.png");
-        display: block;  //变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素
+        display: block;  /*变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素*/
     }
     .mine{
         width: 80px;
@@ -124,7 +124,7 @@
         background-position: center;   //背景位置居中
         background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
         background-image: url("../images/mine.png");
-        display: block;  //变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素
+        display: block;  /*变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素*/
     }
     .bottomBar ul{
         display: table;
