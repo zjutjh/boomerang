@@ -102,3 +102,24 @@
     line-height: 2.98rem;
     font-size: 1.5rem;
 }
+
+input {
+    margin: 0em;
+    background: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: start;
+    border: none;
+}
+
+input:hover {
+    outline: none;
+}

@@ -1,7 +1,7 @@
 <template>
     <div class="nav-head">
-        <input id="search" placeholder="  请输入关键词...">
-        <button id="_search" @click="Search()">搜索</button>
+        <input class="search" placeholder="请输入关键词..." v-model="search_text">
+        <label for="" class="search_icon" @click="Search">搜索</label>
     </div>
 </template>
 
@@ -9,9 +9,14 @@
     import {api_url} from "../config/env";
     export default {
         name: "topper_search",
+        data: () => ({
+            search_text: ''
+        }),
         methods:{
             async Search(){
-                const val=document.getElementById("search");
+                const params = {
+                    'search': this.search_text
+                }
                 await this.$http.post(api_url + '/api/topper', val).then(res => {
                     if (res.code > 0) {
                         this.vuex = res.data;
@@ -28,29 +33,42 @@
 
 <style scoped>
     .nav-head{
-        width:800px;
-        height:55px;
+        width: 100%;
+        height: 3.41rem;
         margin:auto;
-        display: flex;
-        display: -webkit-flex;
+        position: relative;
 
     }
-    #search{
-        width: 600px;
-        border: none;
-        height: 55px;
-        margin: 0;
-        padding: 0;
+
+
+    .search {
+        width: 100%;
+        height: 3.41rem;
+        padding-top: 1.024rem;
+        padding-bottom: 1.024rem;
+        padding-left: 1.92rem;
+        font-size: 1.28rem;
+        color: #c8c7cd;
+        background: #fff;
+        box-sizing: border-box;
     }
-    #_search{
+
+    .search_icon {
+        position: absolute;
+        right: 1.92rem;
+        top: .7rem;
+        font-size: 1.53rem;
         font-weight: bold;
-        font-size: 16px;
-        color: green;
-        width: 200px;
-        height: 55px;
-        border: none;
-        margin: 0;
-        padding: 0;
-        background-color: white;
+        color: #32b16c;
     }
+
+    input::placeholder {
+        color: #c8c7cd;
+    }
+
+    input::webkit-input-placeholder {
+        color: #c8c7cd;
+    }
+
+
 </style>

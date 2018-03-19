@@ -1,25 +1,29 @@
 <template>
-    <div class="bottomBar">
-        <ul>
-            <router-link :to="{name:'foundlist'}" tag="li" exact>
-                <div>
-                    <i class="foundlist" @mouseover="found=found_hover" @mouseout="found_hover=found1"></i>
-                </div>
-                    <p :class="{bottomBarColorActive:isColor}">寻物</p>
-            </router-link>
-            <router-link :to="{name:'tofindlist'}" tag="li">
-                <i class="lost" @mouseover="lost=lost_hover" @mouseout="lost_hover=lost1"></i>
-                    <p :class="{bottomBarColorActive:isColor2}">招领</p>
-            </router-link>
-            <router-link :to="{name:'searchresult'}" tag="li">
-                <i class="search" @mouseover="search=search_hover" @mouseout="search_hover=search1"></i>
-                    <p :class="{bottomBarColorActive:isColor3}">搜索</p>
-            </router-link>
-            <router-link :to="{name:'mine'}" tag="li">
-                <i class="mine" @mouseover="mine=mine_hover" @mouseout="mine_hover=mine1"></i>
-                    <p :class="{bottomBarColorActive:isColor4}">我的</p>
-            </router-link>
+    <div class="tabber-wrap">
+        <ul class="tabber-menu">
+            <li class="menu-item">
+                <img class="menu-item-img" src="../images/found.png" alt="">
+                <label for="" class="menu-title">寻物</label>
+            </li>
+            <li class="menu-item">
+                <img class="menu-item-img" src="../images/lost.png" alt="">
+                <label for="" class="menu-title">招领</label>
+            </li>
+
+            <li class="menu-add">
+                <img class="menu-add-icon" src="../images/add.png" alt="">
+            </li>
+            <li class="menu-item">
+                <img class="menu-item-img" src="../images/mine.png" alt="">
+                <label for="" class="menu-title">我的</label>
+            </li>
+            <li class="menu-item">
+                <img class="menu-item-img" src="../images/search.png" alt="">
+                <label for="" class="menu-title">搜索</label>
+            </li>
+
         </ul>
+
     </div>
 </template>
 
@@ -76,92 +80,71 @@
 </script>
 
 <style scoped>
-    .bottomBar {
-        height: 75px;
-        width: 800px;
-        border: none;
-        bottom: 0;
-        background: rgb(50,177,108);
-        position: fixed;
-        align-content: flex-end;
-        display: flex;
-    }
-    .foudlist{
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 25px;
-        background-repeat: no-repeat; //属性设置是否及如何重复背景图像
-        background-position: center;   //背景位置居中
-        background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
-        background-image: url("../images/found.png");
-        display: block;  /*变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素*/
-    }
-    .lost{
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 25px;
-        background-repeat: no-repeat; //属性设置是否及如何重复背景图像
-        background-position: center;   //背景位置居中
-        background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
-        background-image: url("../images/lost.png");
-        display: block;  /*变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素*/
-    }
-    .search{
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 25px;
-        background-repeat: no-repeat; //属性设置是否及如何重复背景图像
-        background-position: center;   //背景位置居中
-        background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
-        background-image: url("../images/search.png");
-        display: block;  /*变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素*/
-    }
-    .mine{
-        width: 80px;
-        height: 80px;
-        margin: 0 auto 25px;
-        background-repeat: no-repeat; //属性设置是否及如何重复背景图像
-        background-position: center;   //背景位置居中
-        background-size: cover;      /*background-size的cover特定值会保持图像本身的宽高比例，将图片缩放到正好完全覆盖定义背景的区域。*/
-        background-image: url("../images/mine.png");
-        display: block;  /*变成块状，这个属性一定要加，要不然不显示。因为<i>标签不是块级元素*/
-    }
-    .bottomBar ul{
-        display: table;
+    .tabber-wrap {
+        height: 4.694rem;
         width: 100%;
+        position: fixed;
+        bottom: 0;
+        background: #32b16c;
     }
-   .router-link-active
-   {
-       color: #D0021B;
-   }
-    div {
-        font-size: 14px;
+
+    .tabber-wrap  .tabber-menu {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
+
+    .tabber-wrap .tabber-menu .menu-item {
+        list-style: none;
+        float: left;
+        width: 2.475rem;
+        height: 100%;
+        margin: 0 2rem;
+        margin-bottom: .42rem;
 
     }
-    i{
-        font-size: 30px;
+
+
+
+    .tabber-menu .menu-add {
+        list-style: none;
+        position: absolute;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        border: .469rem solid #32b16c;
+        left: 50%;
+        top: -1.536rem;
+        transform: translateX(-50%);
+        background: #fff;
+
     }
-    .bottomBar ul li {
-        *width: 20%;
-        text-align: center;
-        font-size: 16px;
-        display: table-cell;
-        padding: 8px 12px;
-        cursor: pointer;
+
+    .menu-add .menu-add-img {
+
     }
-    .bottomBar ul li p {
-        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-        font-size: 20px;
-        color: #D2D7E8;
-        letter-spacing: 0;
-        line-height: 20px;
+
+    .menu-item:nth-child(n + 3) {
+        float: right!important;
     }
-    .mainContent {
-        height:-webkit-calc(100% - 100px);
-        height:-moz-calc(100% - 100px);
-        height:calc(100% - 100px);
+
+
+    .tabber-menu .menu-item-img {
+        display: block;
+        height: 2rem;
+        width: 2rem;
+        margin: 0 auto;
+        margin-top: .59rem;
     }
-    .bottomBarColorActive {
-        color: #4D81EE !important;
+
+    .menu-title {
+        font-size: 1.19rem;
+        color: #fff;
+
+    }
+    
+    img {
+        width: 100%;
+        height: 100%;
     }
 </style>

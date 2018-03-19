@@ -16,6 +16,7 @@ import adminlogin from '../pages/admin/adminlogin.vue'
 import Readme from '../pages/admin/Readme.vue'
 import BaseTable from '../pages/admin/BaseTable.vue'
 import home from '../pages/admin/Home'
+import test from '../components/showLIst'
 
 Vue.use(Router)
 
@@ -59,6 +60,9 @@ export default new Router({
     {
         path: '/admin',//普通管理页面
         compoment: resolve => require(['../pages/admin/admin.vue'], resolve),
-    },
+    }, {
+        path: '/test',
+        component: test
+        }
     ]
 })
