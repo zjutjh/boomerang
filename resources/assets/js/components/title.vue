@@ -1,14 +1,21 @@
 <template>
     <div class="title-wrap">
-        <div class="title">物品详情</div>
-        <button class="title-back">返回</button>
+        <div class="title">{{ title }}</div>
+        <button v-if="ifBack" class="title-back" @click="back">返回</button>
 
     </div>
 </template>
 
 <script>
+
     export default {
-        name: "title"
+        name: "title",
+        props: ['title', 'ifBack'],
+        methods: {
+            back() {
+                this.$router.go(-1);
+            }
+        }
     }
 </script>
 

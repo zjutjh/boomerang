@@ -1,32 +1,28 @@
 <template>
     <div class="detail-wrap">
-        <v-search></v-search>
-        <v-title></v-title>
+        <v-title :title="'物品详情'" :ifBack="true"></v-title>
         <div class="detail-main">
             <div class="detail-content">
-                <div class="content-item">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</div>
+                <div class="content-item">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别: {{ item.type.name}}</div>
                 <div class="content-item">物&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件:</div>
-                <div class="content-item">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间:</div>
-                <div class="content-item">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点:</div>
-                <div class="content-item">联系方式:</div>
-                <div class="content-item">其它描述:下啊士大夫过热i哦万股忒按撒旦撒啊散打
-                    阿斯顿A发的改变s</div>
-                <div class="content-img">
-                    <img src="" alt="">
-                </div>
-                <div class="content-img">
-                    <img src="" alt="">
+                <div class="content-item">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间: {{ item.time}}</div>
+                <div class="content-item">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点: {{ item.loas_place}}</div>
+                <div class="content-item">联系方式: qq {{ item.qq}} 电话 {{ item.phone}}</div>
+                <div class="content-item">其它描述: {{ item.description}}</div>
+                <div class="content-img" v-if="img in item.images">
+                    <img :src="origin_to_img_api(img)" alt="">
                 </div>
             </div>
-            
-            <div class="detail-change">
-                <div class="change-left"><img src="../../images/arrow-left.png" alt=""></div>
-                <div class="change-right"><img src="../../images/arrow-right.png" alt=""></div>
+
+            <div class="detail-change" v-if="edit">
+                <!--<div class="change-left"><img src="../../images/arrow-left.png" alt=""></div>-->
+                <!--<div class="change-right"><img src="../../images/arrow-right.png" alt=""></div>-->
+                <router-link :to="{ name: 'x', query: 'x'}" tag="div">
+                    <div class="edit">编辑</div>
+                </router-link>
             </div>
 
         </div>
-        <v-tabber></v-tabber>
-
 
 
     </div>
@@ -38,12 +34,56 @@
     import vTitle from '../../components/title'
     import vSearch from '../../components/topper_search'
     import vTabber from '../../components/tabber'
+    import state from "../../components/state.mixin";
+    import {api_url} from "../../config/env";
+
     export default {
         data: () => ({
+            item: {
+                type: {
+                    name: 'test'
+                },
+                time: 'test',
+                loas_place: 'test',
+                qq: 'test',
+                phone: 'test',
+                description: 'test',
+                images: []
+
+
+            }
 
         }),
+        props: ['edit'],
+        mounted() {
+            const loading = this.$loading();
+            const id = this.$route.query.item_id;
+            this.get_item_data(id);
+            loading.close();
+        },
+        mixins: [state],
         components: {
             vTitle, vSearch, vTabber
+        },
+        methods: {
+            async get_item_data(itemId) {
+                const header = {
+                    'Authorization': "bearer " + this.getToken()
+                };
+                const url = `${api_url}/api/detail/${itemId}`
+                await this.$http.get(url, {headers: header}).then(res => {
+                    if (res.code > 0) {
+                        this.item = res.data;
+                        return;
+                    }
+
+                    this.message(res.error, 2000);
+                })
+            },
+            origin_to_img_api: function (img_url) {
+                return api_url + '/' + img_url;
+
+            }
         }
     }
 
@@ -63,13 +103,12 @@
         content: "";
     }
 
-
     .detail-content {
         width: 24.3278rem;
         height: 28.5958rem;
         margin: 0 auto;
         margin-top: 1.36577rem;
-        overflow-y: hidden;
+        overflow-y: scroll;
     }
 
     .content-item {
@@ -121,6 +160,22 @@
 
         width: 2.56082rem;
 
+    }
+
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        background: none;
+    }
+
+    .edit {
+        width: 3rem;
+        margin: 0 auto;
+        font-size: 1.37943rem;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: .512164rem 1.23773rem;
+        background: #32b16c;
     }
 
 </style>

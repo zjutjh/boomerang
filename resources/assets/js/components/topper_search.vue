@@ -13,19 +13,13 @@
             search_text: ''
         }),
         methods:{
-            async Search(){
-                const params = {
-                    'search': this.search_text
-                }
-                await this.$http.post(api_url + '/api/topper', val).then(res => {
-                    if (res.code > 0) {
-                        this.vuex = res.data;
-                        return;
+            Search(){
+                this.$router.push({
+                    name: 'search',
+                    query: {
+                        searchText: this.searchText
                     }
-
-                    this.message(res.error, 2000);
-
-                });
+                })
             }
         }
     }

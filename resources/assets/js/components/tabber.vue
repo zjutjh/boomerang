@@ -1,26 +1,44 @@
 <template>
     <div class="tabber-wrap">
         <ul class="tabber-menu">
+
             <li class="menu-item">
-                <img class="menu-item-img" src="../images/found.png" alt="">
-                <label for="" class="menu-title">寻物</label>
-            </li>
-            <li class="menu-item">
-                <img class="menu-item-img" src="../images/lost.png" alt="">
-                <label for="" class="menu-title">招领</label>
+
+                <router-link :to="{ name: 'tofind'}" tag="div">
+                    <img class="menu-item-img" :src="lostHover ? lost[1] : lost[0]" alt="">
+                    <label for="" class="menu-title">寻物</label>
+                </router-link>
             </li>
 
-            <li class="menu-add">
-                <img class="menu-add-icon" src="../images/add.png" alt="">
-            </li>
+
             <li class="menu-item">
-                <img class="menu-item-img" src="../images/mine.png" alt="">
-                <label for="" class="menu-title">我的</label>
+                <router-link :to="{ name: 'found'}" tag="div">
+                    <img class="menu-item-img" :src="foundHover ? found[1] : found[0]" alt="">
+                    <label for="" class="menu-title">招领</label>
+                </router-link>
             </li>
+
+            <router-link :to="{ name: 'release'}" tag="div">
+                <li class="menu-add">
+                    <img class="menu-add-icon" src="../images/add.png" alt="">
+                </li>
+            </router-link>
+
             <li class="menu-item">
-                <img class="menu-item-img" src="../images/search.png" alt="">
-                <label for="" class="menu-title">搜索</label>
+                <router-link :to="{ name: 'mine'}" tag="div">
+                    <img class="menu-item-img" :src="mineHover ? mine[1] : mine[0]" alt="">
+                    <label for="" class="menu-title">我的</label>
+                </router-link>
             </li>
+
+
+            <li class="menu-item">
+                <router-link :to="{ name: 'search'}" tag="div">
+                    <img class="menu-item-img" :src="searchHover ? search[1] : search[0]" alt="">
+                    <label for="" class="menu-title">搜索</label>
+                </router-link>
+            </li>
+
 
         </ul>
 
@@ -28,52 +46,86 @@
 </template>
 
 <script>
+    import lost_img from '../images/lost.png'
+    import lost_hover from '../images/lost-hover.png'
+    import found_img from '../images/found.png'
+    import found_hover from '../images/found-hover.png'
+    import search_img from '../images/search.png'
+    import search_hover from '../images/search-hover.png'
+    import mine_img from '../images/mine.png'
+    import mine_hover from '../images/mine-hover.png'
     export default {
         name: "tabber",
-       data(){
-            return{
-                lost1:'../images/lost.png',
-                lost:'../images/lost.png',
-                lost_hover:'../images/lost-hover.png',
-                found1:'../images/found.png',
-                found:'../images/found.png',
-                found_hover:'../images/found-hover.png',
-                search1:'../images/search.png',
-                search:'../images/search.png',
-                search_hover:'../images/search-hover.png',
-                mine1:'../images/mine.png',
-                mine:'../images/mine.png',
-                mine_hover:'../images/mine-hover.png',
-                isColor:true,
-                isColor2:false,
-                isColor3:false,
-                isColor4:false,
+        data() {
+            return {
+                lost: [
+                    lost_img,
+                    lost_hover
+                ],
+                found: [
+                    found_img,
+                    found_hover
+                ],
+                search: [
+                    search_img,
+                    search_hover
+                ],
+                mine: [
+                    mine_img,
+                    mine_hover
+                ],
+                lostHover: true,
+                foundHover: false,
+                searchHover: false,
+                mineHover: false,
             }
         },
-        methods:{
-            toColor :function () {
-                this.isColor=true;
-                this.isColor2=false;
-                this.isColor3=false;
-                this.isColor4=false;
+        watch: {
+            '$route': function () {
+                this.lostHover = false
+                this.foundHover = false
+                this.searchHover = false
+                this.mineHover = false
+                if (this.$route.fullPath.indexOf('index') > -1) {
+                    this.lostHover = true
+                }
+                if (this.$route.fullPath.indexOf('found') > -1) {
+                    this.foundHover = true
+                }
+                if (this.$route.fullPath.indexOf('search') > -1) {
+                    this.searchHover = true
+                }
+                if (this.$route.fullPath.indexOf('mine') > -1) {
+                    this.mineHover = true
+                }
+
+
+            }
+        },
+        methods: {
+            toColor: function () {
+                this.isColor = true;
+                this.isColor2 = false;
+                this.isColor3 = false;
+                this.isColor4 = false;
             },
-            toColor2 :function () {
-                this.isColor=false;
-                this.isColor2=true;
-                this.isColor3=false;
-                this.isColor4=false;
+            toColor2: function () {
+                this.isColor = false;
+                this.isColor2 = true;
+                this.isColor3 = false;
+                this.isColor4 = false;
             },
-            toColor3 :function () {
-                this.isColor=false;
-                this.isColor2=false;
-                this.isColor3=true;
-                this.isColor4=false;
+            toColor3: function () {
+                this.isColor = false;
+                this.isColor2 = false;
+                this.isColor3 = true;
+                this.isColor4 = false;
             },
-            toColor4 :function () {
-                this.isColor=false;
-                this.isColor2=false;
-                this.isColor3=false;
-                this.isColor4=true;
+            toColor4: function () {
+                this.isColor = false;
+                this.isColor2 = false;
+                this.isColor3 = false;
+                this.isColor4 = true;
             },
         }
     }
@@ -88,7 +140,7 @@
         background: #32b16c;
     }
 
-    .tabber-wrap  .tabber-menu {
+    .tabber-wrap .tabber-menu {
         height: 100%;
         width: 100%;
         position: absolute;
@@ -103,8 +155,6 @@
         margin-bottom: .42rem;
 
     }
-
-
 
     .tabber-menu .menu-add {
         list-style: none;
@@ -125,9 +175,8 @@
     }
 
     .menu-item:nth-child(n + 3) {
-        float: right!important;
+        float: right !important;
     }
-
 
     .tabber-menu .menu-item-img {
         display: block;
@@ -142,7 +191,7 @@
         color: #fff;
 
     }
-    
+
     img {
         width: 100%;
         height: 100%;

@@ -1,20 +1,13 @@
 <template>
     <div class="Box">
-        <topper_search>
-
-        </topper_search>
-        <menu></menu>
-       <tabber></tabber>
+        <show-list :items="items"></show-list>
     </div>
 </template>
 
 <script>
-    import loding from '../../components/Loading';
     import state from '../../components/state.mixin';
     import {api_url} from "../../config/env";
-    import topper_search from "../../components/topper_search";
-    import menu from "../../components/menu";
-    import tabber from "../../components/tabber";
+    import showList from '../../components/showLIst'
 
     export default {
         name: 'index',
@@ -23,28 +16,27 @@
            items: [],
         }),
         components: {
-          loding,
-            topper_search,
-            menu,
-            tabber
+          showList
         },
         beforeCreate() {
 
         },
         mixins: [state],
         mounted() {
-            this.loading = true;
+            const loading = this.$loading( { fullsreen: true})
             this.login();
             this.get_items();
-            this.loading = false;
+            loading.close();
         },
         methods: {
             async login() {
                 const data = {
                     "openid": "xxxx"
                 };
-                await this.$http.post(api_url + '/api/auto_login', data).then(res => {
-                    if (res.code > 0) {
+                await this.$http.post(api_url + '/api/auto_login', {
+                    params: data
+                }).then(res => {
+                    if (res.data.code > 0) {
                         this.setState(res.data);
                         return;
                     }
@@ -81,6 +73,7 @@
     color: rgb(241,239,245);
     margin: 0;
     padding: 0;
+    padding-top: 1.53649rem;
 }
 
 </style>

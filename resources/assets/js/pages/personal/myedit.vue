@@ -1,5 +1,7 @@
 <template>
-    <div class="edit-wrap">
+    <div class="edit-wrap my-edit">
+        <title-item :title="'编辑'" :ifBack="true"></title-item>
+
         <div class="form clearfix select">
             <div class="form-item">
                 <label for="" class="item-label">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
@@ -57,9 +59,11 @@
                 <el-upload
                         class="upload-wrap"
                         action=""
+                        :on-preview="handlePreview"
                         :on-remove="handleRemove"
+                        :before-remove="beforeRemove"
                         multiple
-
+                        :on-exceed="handleExceed"
                         :auto-upload="false"
                         :accept="accept"
                         :limit="4"
@@ -68,13 +72,9 @@
                 >
                     <button class="upload-button" @click="selectImg">上传图片</button>
                 </el-upload>
-                <button class="release" @click="release">点击发布</button>
+                <button class="release" @click="release">完成编辑</button>
             </div>
         </div>
-
-        <el-dialog :visible.sync="dialogVisible">
-            <img width="100%" :src="dialogImageUrl" alt="">
-        </el-dialog>
 
 
     </div>
@@ -84,12 +84,18 @@
 
 <script>
 
+
+    import titleItem from '../../components/title'
     import state from '../../components/state.mixin'
     import {api_url} from "../../config/env";
+    import {Loading} from 'element-ui'
 
     export default {
         name: "upload",
         mixins: [state],
+        components: {
+            titleItem
+        },
         data() {
             return {
                 dialogImageUrl: '',
@@ -117,10 +123,20 @@
                 isReverse_2: false,
                 img: [],
                 accept: 'image/*',
-                showId: false
+                showId: false,
+                item: {}
 
             };
-        },
+        }, mounted() {
+            const loading = Loading.service()
+
+            const item_id = this.$route.query.item_id
+            this.getItem(item_id)
+
+            loading.close()
+
+        }
+        ,
         methods: {
             handleRemove(file, fileList) {
                 console.log(file, fileList);
@@ -158,7 +174,7 @@
                 //file.url = file.url.split('').slice(5).join('')
 
 
-                this.img.push(file)
+                this.uploadImg(file, this.item.id)
                 console.log(this.img)
             },
             deleteImg(index) {
@@ -202,31 +218,34 @@
                 const header = {
                     'Authorization': "bearer " + this.getToken()
                 }
-                this.$http.post(api_url, {
-                    data: params
-                }).then(res => {
-                    if (res.data.code > 0) {
+
+                this.$http.post(api_url + '/api/create', params, {headera: header}).then(res => {
+                    if (res.code > 0) {
 
                         this.message('正在上传图片,请稍等', 'el-icon-loading')
 
                         this.uploadImg(res.item.id, 'el-icon-loading')
 
+
                     }
-                }).catch(error => {
-                  console.log(error)
                 })
-
-
 
 
             },
-            async uploadImg(item_id) {
-                await this.img.map(item => {
-                    this.transformFile(item, item_id);
-                })
-
+            async uploadImg(file, item_id) {
+                this.transformFile(file, item_id)
                 this.message('发布完成', 'el-icon-check')
 
+
+            },
+            async getItem(itemId) {
+
+                const url = `${api_url}/api/`
+
+
+                const header = {
+                    'Authorization': "bearer " + this.getToken()
+                }
 
             },
             transformFile(file, item_id) {
@@ -235,7 +254,7 @@
                 const img = new Image();
 
                 img.src = file.url;
-                img.onload =  () => {
+                img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
 
@@ -264,23 +283,20 @@
                         'Authorization': "bearer " + this.getToken()
                     }
 
-                    this.$http.post('/create', {
-                        data: formData
-                    }).then(res => {
+                    this.$http.post('/create', formData, {headers: header}).then(res => {
 
-                    }).catch(error => {
-                        console.log(error)
                     })
-
-
                 }
-
             }
         }
     }
 </script>
 
 <style>
+
+    .my-edit {
+    }
+
     .edit-wrap {
         width: 27.73rem;
         height: auto;
