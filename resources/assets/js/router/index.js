@@ -17,8 +17,9 @@ import adminedit from '../pages/admin/adminedit.vue'
 import adminlogin from '../pages/admin/adminlogin.vue'
 import Readme from '../pages/admin/Readme.vue'
 import BaseTable from '../pages/admin/BaseTable.vue'
-import home from '../pages/admin/Home'
+import home from '../pages/admin/Home.vue'
 import test from '../pages/main/detail'
+import sad from '../pages/admin/sad.vue'
 
 Vue.use(Router)
 
@@ -65,12 +66,13 @@ export default new Router({
         },
         {
             path: '/home',//超管首页
-            // compoment: resolve => require(['../pages/admin/home.vue'], resolve),
+            compoment: resolve => require(['../pages/admin/home.vue'], resolve),
             component: home
         },
         {
             path: '/sad',//超管看管理员们
             compoment: resolve => require(['../pages/admin/sad.vue'], resolve),
+            component: sad
         },
         {
             path: '/admin',//普通管理页面

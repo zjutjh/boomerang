@@ -13,8 +13,12 @@
     import vSidebar from '../../components/SideBar.vue';
     import vBasetable from '../../pages/admin/BaseTable.vue';
     export default {
+        name: "sad",
         components:{
             vHead, vSidebar, vBasetable
         }
     }
 </script>
+<style scoped>
+
+</style>
