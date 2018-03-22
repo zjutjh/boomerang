@@ -32,6 +32,21 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+
+    public function isAdmin() {
+        if ($this->user_type > 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isSuperAdmin() {
+        if ($this->user_type == 3) {
+            return true;
+        }
+        return false;
+    }
+
 //    /**
 //     * The attributes that are mass assignable.
 //     *

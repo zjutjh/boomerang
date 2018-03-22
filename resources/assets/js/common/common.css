@@ -1,0 +1,125 @@
+.confirm {
+    height: 10.67rem;
+    width: 19.20rem;
+    border-radius: .5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    font-size: .682rem;
+    transition: .3s;
+    z-index: 2016;
+}
+
+.confirm .confirm-header {
+    padding-top: .768rem;
+    height: 1.79rem;
+    text-align: center;
+    font-size: 1.682rem;
+    line-height: 1.79rem;
+    color: #333;
+    font-weight: bold;
+}
+
+.confirm .confirm-title {
+    padding: .85rem 1.7rem;
+    font-size: 1.23rem;
+    color: #177441;
+    text-align: center;
+    line-height: 2.56rem;
+    height: 2.56rem;
+}
+.confirm .confirm-btns {
+    background: #177441;
+    width: 19.20rem;
+    border-radius: .5rem
+}
+.confirm .confirm-btns .confirm-btn-cancel {
+    width: 50%;
+    height: 3.86rem;
+    color: #fff;
+    line-height: 3.84rem;
+    text-align: center;
+    font-size: 2rem;
+    display: inline-block;
+
+}
+
+.confirm .confirm-btns .confirm-btn-confirm {
+    width: 50%;
+    height: 3.86rem;
+    color: #fff;
+    line-height: 3.84rem;
+    text-align: center;
+    font-size: 2rem;
+    display: inline-block;
+    float: right;
+
+}
+
+.v-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    background: #000;
+    z-index: 2015;
+}
+
+.message {
+    width: 11.096rem;
+    height: 12.80rem;
+    background: rgba(0, 0, 0, .5);
+    border-radius: .6rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
+
+.message .message-icon {
+    padding: .5rem 1.85rem;
+
+    margin: 0 auto;
+}
+
+.message .message-icon .icon-class {
+    font-size: 8.1rem;
+    color: #fff;
+
+}
+
+.message .message-title {
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    height: 2.98rem;
+    line-height: 2.98rem;
+    font-size: 1.5rem;
+}
+
+input {
+    margin: 0em;
+    background: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    text-align: start;
+    border: none;
+}
+
+input:hover {
+    outline: none;
+}

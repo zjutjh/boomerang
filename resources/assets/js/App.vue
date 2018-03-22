@@ -1,15 +1,30 @@
 <template>
     <div id="app">
-        <h1>demo</h1>
+        <transition name="fade">
+            <router-view></router-view>
+        </transition>
+
     </div>
+
 </template>
 
 <script>
     export default {
+        data() {
+            return {
+
+            }
+        },
         name: "App"
     }
+
 </script>
 
 <style scoped>
+    @import "../css/main.css";
+    @import "../css/color-dark.css";
 
+    #app {
+        background: #f0eff5;
+    }
 </style>

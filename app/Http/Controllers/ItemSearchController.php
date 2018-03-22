@@ -18,16 +18,20 @@ class ItemSearchController extends Controller
     /**
      * items列表
      */
-    public function index(Request $request)
+    public function search(Request $request)
     {
-        if($request->has('search')){
-            $items = Item::search($request->search)
-                ->paginate(6);
-        }else{
-            $items = Item::paginate(6);
-        }
-        return view('item-search',compact('items'));
-    }
+//        if($request->has('')){
+//            $items = Item::search($request->search)
+//                ->paginate(6);
+//        }else{
+//            $items = Item::paginate(6);
+//        }
+
+        $items = Item::search($request->get('request'))
+            ->paginate(10);
+
+        return $this->apiReponse(200,null,
+            ['items' => $items]);    }
 
 
     /**
