@@ -17,7 +17,7 @@
                 this.$router.push({
                     name: 'search',
                     query: {
-                        searchText: this.searchText
+                        searchText: this.search_text
                     }
                 })
             }

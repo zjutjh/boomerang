@@ -34,6 +34,7 @@ export default new Router({
             component: tofind
         }, {
             path: 'detail',
+            name: 'detail',
             component: detail
         }, {
             path: 'release',
@@ -45,9 +46,11 @@ export default new Router({
             component: mine
         }, {
             path: 'mydetail',
+            name: 'mydetail',
             component: mydetail
         }, {
             path: 'myedit',
+            name: 'myedit',
             component: myedit
         }, {
             path: 'found',

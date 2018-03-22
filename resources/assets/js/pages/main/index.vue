@@ -12,33 +12,19 @@
 <script>
     import vSearch from '../../components/topper_search'
     import vTabber from '../../components/tabber'
+    import state from '../../components/state.mixin'
+    import {api_url} from "../../config/env";
+
     export default {
         name: "index",
         components: {
             vSearch, vTabber
         },
         mounted() {
-            const loading = this.$loading( { fullsreen: true})
-            this.login();
-            this.$http.defaults.headers['Authorization'] = 'bearer ' + this.getToken()
-            loading.close();
+
         },
         methods: {
-            async login() {
-                const data = {
-                    "openid": "xxxx"
-                };
-                await this.$http.post(api_url + '/api/auto_login', {
-                    params: data
-                }).then(res => {
-                    if (res.data.code > 0) {
-                        this.setState(res.data);
-                        return;
-                    }
-                    this.message(res.error, 2000);
 
-                });
-            },
         }
     }
 </script>

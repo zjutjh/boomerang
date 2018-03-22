@@ -21,8 +21,8 @@ class ItemController extends Controller
         //从items表里取数据
         $page = $request->get('page');
         $items = Item::latest()
-            ->where('lost_type',1)
-            ->select('uid','title','description','lost_place','lost_type','images','phone','qq','status')
+            ->where('lost_type',0)
+            ->select('id', 'uid','title','description','lost_place','lost_type','images','phone','qq','status', 'created_at')
             ->take(10)
             ->skip($page)
             ->get();
@@ -38,8 +38,8 @@ class ItemController extends Controller
         //从items表里取数据
         $page = $request->get('page');
         $items = Item::latest()
-            ->where('lost_type',0)
-            ->select('uid','title','description','lost_place','lost_type','type_id','images','phone','qq','status')
+            ->where('lost_type',1)
+            ->select('id', 'uid','title','description','lost_place','lost_type','images','phone','qq','status', 'created_at')
             ->skip($page)
             ->take(10)
             ->get();
@@ -55,6 +55,14 @@ class ItemController extends Controller
 
         return $this->apiReponse(200,null,
             ['items' => $items]);
+
+    }
+
+    public function uploadItem(Request $request) {
+        $params = $request->all();
+        $item = Item::where('id', $params['id'])->update($params);
+        return $this->apiReponse(200, '更新成功', null);
+
 
     }
 
@@ -127,11 +135,12 @@ class ItemController extends Controller
         $item = Item::where('id', $item_id)->first();
         $tmp = $item->images;
 //        dd($tmp);
-        $tmp = array_splice($tmp, $img_id, 1);
+        $tmp = array_splice($tmp, $img_id + 1, 1);
+//        dd($tmp);
         $item->images = $tmp;
         $item->save();
 
-        return $this->apiReponse( 200, '删除成功', null);
+        return $this->apiReponse( 200, '删除成功', ['item' => $item]);
 
 
     }

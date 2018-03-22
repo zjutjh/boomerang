@@ -3,13 +3,13 @@
         <v-title :title="'物品详情'" :ifBack="true"></v-title>
         <div class="detail-main">
             <div class="detail-content">
-                <div class="content-item">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别: {{ item.type.name}}</div>
-                <div class="content-item">物&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件:</div>
-                <div class="content-item">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间: {{ item.time}}</div>
+                <div class="content-item">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别: {{ item.lost_type == 1 ? '寻物启事' : '失物招领'}}</div>
+                <div class="content-item">物&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件: {{ item.title}}</div>
+                <div class="content-item">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间: {{ item.created_at.substr(0, 10)}}</div>
                 <div class="content-item">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点: {{ item.loas_place}}</div>
-                <div class="content-item">联系方式: qq {{ item.qq}} 电话 {{ item.phone}}</div>
+                <div class="content-item">联系方式:  {{ item.qq ? `QQ ${item.qq}` : ''}} {{ item.phone ? `电话 ${item.phone}` : ''}}</div>
                 <div class="content-item">其它描述: {{ item.description}}</div>
-                <div class="content-img" v-if="img in item.images">
+                <div class="content-img" v-for="img in item.images">
                     <img :src="origin_to_img_api(img)" alt="">
                 </div>
             </div>
@@ -17,7 +17,7 @@
             <div class="detail-change" v-if="edit">
                 <!--<div class="change-left"><img src="../../images/arrow-left.png" alt=""></div>-->
                 <!--<div class="change-right"><img src="../../images/arrow-right.png" alt=""></div>-->
-                <router-link :to="{ name: 'x', query: 'x'}" tag="div">
+                <router-link :to="{ name: 'myedit', query: { item_id: item.id}}" tag="div">
                     <div class="edit">编辑</div>
                 </router-link>
             </div>
@@ -40,21 +40,10 @@
     export default {
         data: () => ({
             item: {
-                type: {
-                    name: 'test'
-                },
-                time: 'test',
-                loas_place: 'test',
-                qq: 'test',
-                phone: 'test',
-                description: 'test',
-                images: []
-
-
             }
 
         }),
-        props: ['edit'],
+        props: ['edit', 'isMine'],
         mounted() {
             const loading = this.$loading();
             const id = this.$route.query.item_id;
@@ -67,17 +56,16 @@
         },
         methods: {
             async get_item_data(itemId) {
-                const header = {
-                    'Authorization': "bearer " + this.getToken()
-                };
                 const url = `${api_url}/api/detail/${itemId}`
-                await this.$http.get(url, {headers: header}).then(res => {
-                    if (res.code > 0) {
-                        this.item = res.data;
+                await this.$http.get(url).then(res => {
+                    if (res.data.code > 0) {
+                        this.item = res.data.data.item;
                         return;
                     }
 
                     this.message(res.error, 2000);
+                }).catch(error => {
+                    console.log(error)
                 })
             },
             origin_to_img_api: function (img_url) {

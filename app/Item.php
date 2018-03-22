@@ -13,7 +13,10 @@ class Item extends Model
 
     protected $primaryKey='id';
 
-    protected $fillable = ['uid', 'title', 'description', 'lost_place', 'lost_type','contact_uno', 'phone', 'qq', 'images'];
+    protected $fillable = ['uid', 'title', 'description', 'lost_place', 'type', 'lost_type','contact_uno', 'phone', 'qq', 'images'];
+
+
+
 
     protected $casts = [
         'images' => 'array'
@@ -45,6 +48,13 @@ class Item extends Model
 //        return $temp;
 //
 //    }
+
+
+       public function getTypeAttribute()
+       {
+           $type = Type::where('id', $this->attributes['lost_type'])->first();
+           return $type;
+       }
 
 
 }

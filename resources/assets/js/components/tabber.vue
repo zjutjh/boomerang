@@ -5,7 +5,7 @@
             <li class="menu-item">
 
                 <router-link :to="{ name: 'tofind'}" tag="div">
-                    <img class="menu-item-img" :src="lostHover ? lost[1] : lost[0]" alt="">
+                    <img class="menu-item-img" :src="lostHover ? lost[0] : lost[1]" alt="">
                     <label for="" class="menu-title">寻物</label>
                 </router-link>
             </li>
@@ -13,7 +13,7 @@
 
             <li class="menu-item">
                 <router-link :to="{ name: 'found'}" tag="div">
-                    <img class="menu-item-img" :src="foundHover ? found[1] : found[0]" alt="">
+                    <img class="menu-item-img" :src="foundHover ? found[0] : found[1]" alt="">
                     <label for="" class="menu-title">招领</label>
                 </router-link>
             </li>
@@ -26,7 +26,7 @@
 
             <li class="menu-item">
                 <router-link :to="{ name: 'mine'}" tag="div">
-                    <img class="menu-item-img" :src="mineHover ? mine[1] : mine[0]" alt="">
+                    <img class="menu-item-img" :src="mineHover ? mine[0] : mine[1]" alt="">
                     <label for="" class="menu-title">我的</label>
                 </router-link>
             </li>
@@ -34,7 +34,7 @@
 
             <li class="menu-item">
                 <router-link :to="{ name: 'search'}" tag="div">
-                    <img class="menu-item-img" :src="searchHover ? search[1] : search[0]" alt="">
+                    <img class="menu-item-img" :src="searchHover ? search[0] : search[1]" alt="">
                     <label for="" class="menu-title">搜索</label>
                 </router-link>
             </li>

@@ -1,6 +1,6 @@
 <template>
     <div class="Box">
-        <show-list :items="items"></show-list>
+        <show-list :itemList="items"></show-list>
     </div>
 </template>
 
@@ -22,33 +22,16 @@
 
         },
         mixins: [state],
-        mounted() {
+        mounted: async function() {
             const loading = this.$loading( { fullsreen: true})
-            this.login();
-            this.get_items();
+            await this.get_items();
             loading.close();
         },
         methods: {
-            async login() {
-                const data = {
-                    "openid": "xxxx"
-                };
-                await this.$http.post(api_url + '/api/auto_login', data).then(res => {
-                    if (res.code > 0) {
-                        this.setState(res.data);
-                        return;
-                    }
-                    this.message(res.error, 2000);
-
-                });
-            },
             async get_items() {
-                const header = {
-                    'Authorization': "bearer " + this.getToken()
-                };
-                await this.$http.get(api_url + "/api//lists", {headers:header}).then(res => {
-                    if (res.code > 0) {
-                        this.items = res.data;
+                await this.$http.get(api_url + "/api/find/lists").then(res => {
+                    if (res.data.code > 0) {
+                        this.items = res.data.data.items;
                         return;
                     }
 

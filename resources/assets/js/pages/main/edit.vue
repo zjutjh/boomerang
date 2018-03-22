@@ -173,7 +173,7 @@
                     }
                 })
             },
-            release() {
+            async release() {
                 if (!this.data.name || !this.data.place || !this.data.contact || !this.data.description) {
                     this.message('不能为空', 'el-icon-warning')
                     return
@@ -199,17 +199,14 @@
                     'lost_type': this.data.lost_type
                 }
 
-                const header = {
-                    'Authorization': "bearer " + this.getToken()
-                }
-                this.$http.post(api_url, {
-                    data: params
-                }).then(res => {
+                this.$http.post(api_url + "/api/item/create",
+                    params
+                ).then(res => {
                     if (res.data.code > 0) {
 
                         this.message('正在上传图片,请稍等', 'el-icon-loading')
 
-                        this.uploadImg(res.item.id, 'el-icon-loading')
+                        this.uploadImg(res.data.data.item.id, 'el-icon-loading')
 
                     }
                 }).catch(error => {
@@ -221,18 +218,20 @@
 
             },
             async uploadImg(item_id) {
-                await this.img.map(item => {
-                    this.transformFile(item, item_id);
+                await this.img.map((item, index) => {
+                    console.log(item, index)
+                    this.transformFile(item, item_id, index);
                 })
 
-                this.message('发布完成', 'el-icon-check')
+                // this.message('发布完成', 'el-icon-check')
 
 
             },
-            transformFile(file, item_id) {
+            async transformFile(file, item_id, index) {
                 const imgFile = file;
                 const id = item_id;
                 const img = new Image();
+                console.log(img)
 
                 img.src = file.url;
                 img.onload =  () => {
@@ -260,13 +259,12 @@
                     formData.append('item_id', id);
                     formData.append('file', blob, imgFile.name);
 
-                    const header = {
-                        'Authorization': "bearer " + this.getToken()
-                    }
 
-                    this.$http.post('/create', {
-                        data: formData
-                    }).then(res => {
+                    this.$http.post(api_url + '/api/item/image/upload',
+                        formData
+                    ).then(res => {
+                        this.message('完成第' + (index + 1) + '张图片上传', 'el-icon-check')
+                        console.log(res)
 
                     }).catch(error => {
                         console.log(error)

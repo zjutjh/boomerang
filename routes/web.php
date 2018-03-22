@@ -28,7 +28,13 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::get('api/new/lists','NewController@latest');
     Route::get('api/lost/lists','ItemController@LostList');
     Route::get('api/find/lists','ItemController@FoundList');
-    Route::get('api/mine/lists','MineController@Mine');
+    Route::get('api/mine/lists/{uid}','MineController@Mine');
+    Route::get('api/search', 'ItemSearchController@search');
+    Route::post('api/item/create', 'ItemController@createItem');
+    Route::post('api/item/update', 'ItemController@uploadItem');
+    Route::post('api/item/image/upload', 'ItemController@uploadImg');
+    Route::post('api/item/image/delete', 'ItemController@deleteImg');
+
     Route::get('admin/index','SuperAdminController@Super');
 });
 

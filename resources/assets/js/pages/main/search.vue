@@ -2,7 +2,7 @@
     <div class="Box">
         <title-item :title="'搜索结果'" :ifBack="true"></title-item>
 
-        <show-list :items="items"></show-list>
+        <show-list :itemList="items"></show-list>
     </div>
 </template>
 
@@ -29,10 +29,15 @@
         mounted: async function() {
             const loading = Loading.service( { fullsreen: true})
             const search_text = this.$route.query.searchText
-            const header = {
-                'Authorization': "bearer " + this.getToken()
-            };
+            await this.$http.get(`${api_url}/api/search?request=${search_text}`).then(res => {
+                if (res.data.code > 0) {
+                    this.items = res.data.data.data.items
+                    return
+                }
+                this.message(this.data.data.error)
+            }).catch(error => {
 
+            })
 
 
             loading.close();

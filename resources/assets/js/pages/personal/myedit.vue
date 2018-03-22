@@ -50,7 +50,11 @@
 
             <div class="img-list">
                 <div class="img-item" v-for="(item, index) in img">
-                    <img :src="item.url" alt="">
+
+                    <img :src="item" alt="" v-if="!item.url">
+                    <img :src="item.url" alt="" v-else>
+
+
                     <span class="img-delete" @click="deleteImg(index)"><i class="el-icon-circle-close"></i></span>
                 </div>
             </div>
@@ -154,6 +158,7 @@
             selectChange(index) {
                 console.log(index);
                 this.data.lost_type = index
+                // this.item.lost_type = index
                 if (index == 2) {
                     this.showId = true
                 } else {
@@ -180,11 +185,27 @@
             deleteImg(index) {
                 // this.message('test', 'el-icon-check', 1000)
 
+
                 this.jhconfirm({
                     title: '你确定移除这张图片嘛？',
                     success: () => {
                         this.img.splice(index, 1)
-                        this.message('移除成功', 'el-icon-check')
+                        const params = {
+                            item_id: this.item.id,
+                            img_id: index
+                        }
+                        this.$http.post(`${api_url}/api/item/image/delete`, params).then(res => {
+                            if (res.data.code > 0) {
+                                this.img = []
+                                res.data.data.item.images.map(item => {
+                                    this.img.push(`${api_url}/${item}`)
+                                })
+                                this.message('移除成功', 'el-icon-check')
+
+                            }
+                        }).catch(error => {
+
+                        })
 
                     }
                 })
@@ -203,7 +224,6 @@
                     return
                 }
 
-                this.message('正在发布中,请稍等', 'el-icon-loading')
                 const params = {
                     'uid': this.getUser().id,
                     'title': this.data.name,
@@ -212,22 +232,23 @@
                     'contact_uno': !this.data.stuid ? -1 : this.data.stuid,
                     'phone': (this.data.contact_type === 0) ? this.data.contact : '',
                     'qq': (this.data.contact_type === 1) ? this.data.contact : '',
-                    'lost_type': this.data.lost_type
+                    'lost_type': this.data.lost_type,
+                    'id': this.item.id
                 }
 
-                const header = {
-                    'Authorization': "bearer " + this.getToken()
-                }
 
-                this.$http.post(api_url + '/api/create', params, {headera: header}).then(res => {
-                    if (res.code > 0) {
+                this.$http.post(api_url + '/api/item/update', params).then(res => {
+                    if (res.data.code > 0) {
 
-                        this.message('正在上传图片,请稍等', 'el-icon-loading')
+                        this.message(res.data.error, 'el-icon-check')
+                        this.getItem(this.item.id)
 
-                        this.uploadImg(res.item.id, 'el-icon-loading')
+                        // this.uploadImg(res.item.id, 'el-icon-loading')
 
 
                     }
+                }).catch(error => {
+
                 })
 
 
@@ -240,12 +261,41 @@
             },
             async getItem(itemId) {
 
-                const url = `${api_url}/api/`
+                const url = `${api_url}/api/detail/${itemId}`
+                await this.$http.get(url).then(res => {
+                    if (res.data.code > 0) {
+                        this.img = []
+                        const item = res.data.data.item
+                        this.data.name = item.title
+                        this.data.description = item.description
+                        this.data.place = item.lost_place
+                        this.data.stuid  = item.contact_uno
+                        this.data.contact = item.qq ? item.qq : item.phone
+                        this.data.contact_type = item.qq ? 1 : 0
+                        item.images.map(item => {
+                            this.img.push(`${api_url}/${item}`)
+                        })
+                        this.item = res.data.data.item
+                        return
+                    }
+                    this.message(res.data.error)
+                })
 
 
-                const header = {
-                    'Authorization': "bearer " + this.getToken()
-                }
+            },
+            getImgs(item_id) {
+                const url = `${api_url}/api/detail/${item_id}`
+                this.$http.get(url).then(res => {
+                    if (res.data.code > 0) {
+                        this.img = []
+                        const item = res.data.data.item
+                        item.images.map(item => {
+                            this.img.push(`${api_url}/${item}`)
+                        })
+                        return
+                    }
+                    this.message(res.data.error)
+                })
 
             },
             transformFile(file, item_id) {
@@ -279,12 +329,15 @@
                     formData.append('item_id', id);
                     formData.append('file', blob, imgFile.name);
 
-                    const header = {
-                        'Authorization': "bearer " + this.getToken()
-                    }
+                    this.$http.post(api_url + '/api/item/image/upload',
+                        formData
+                    ).then(res => {
+                        this.message('完成图片上传', 'el-icon-check')
+                        this.getImgs(this.item.id)
+                        console.log(res)
 
-                    this.$http.post('/create', formData, {headers: header}).then(res => {
-
+                    }).catch(error => {
+                        console.log(error)
                     })
                 }
             }
