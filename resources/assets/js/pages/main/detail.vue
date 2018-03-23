@@ -6,7 +6,7 @@
                 <div class="content-item">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别: {{ item.lost_type == 1 ? '寻物启事' : '失物招领'}}</div>
                 <div class="content-item">物&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;件: {{ item.title}}</div>
                 <div class="content-item">时&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;间: {{ item.created_at.substr(0, 10)}}</div>
-                <div class="content-item">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点: {{ item.loas_place}}</div>
+                <div class="content-item">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;点: {{ item.lost_place}}</div>
                 <div class="content-item">联系方式:  {{ item.qq ? `QQ ${item.qq}` : ''}} {{ item.phone ? `电话 ${item.phone}` : ''}}</div>
                 <div class="content-item">其它描述: {{ item.description}}</div>
                 <div class="content-img" v-for="img in item.images">
