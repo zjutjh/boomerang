@@ -102,7 +102,7 @@
     .list-title .title-content {
         margin: 0;
         margin-left: 1.02433rem;
-        margin-top: .7rem;
+        margin-top: .5rem;
         font-weight: bold;
         font-size: 1.28041rem;
         /*height: 2.45rem;*/

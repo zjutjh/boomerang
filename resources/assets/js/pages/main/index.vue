@@ -2,9 +2,7 @@
     <div class="main-wrap">
         <v-search></v-search>
         <transition name="main">
-            <keep-alive>
                 <router-view></router-view>
-            </keep-alive>
         </transition>
         <v-tabber></v-tabber>
     </div>

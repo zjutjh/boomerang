@@ -33,7 +33,7 @@
 
 
             <li class="menu-item">
-                <router-link :to="{ name: 'search'}" tag="div">
+                <router-link  tag="div">
                     <img class="menu-item-img" :src="searchHover ? search[0] : search[1]" alt="">
                     <label for="" class="menu-title">搜索</label>
                 </router-link>
