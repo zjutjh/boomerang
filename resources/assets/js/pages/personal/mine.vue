@@ -1,7 +1,7 @@
 <template>
     <div class="mine-wrap">
         <v-title :title="'我的发布'" :ifBack="false"></v-title>
-        <show-list :itemList="items" isMine="true" @changePage="changePage" :page="page" url="/api/mine/lists"></show-list>
+        <show-list :itemList="items" isMine="true" @changePage="changePage" :page="page" url="`/api/mine/lists/${this.getUser().id}`"></show-list>
     </div>
 </template>
 
