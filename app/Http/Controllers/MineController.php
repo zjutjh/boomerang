@@ -13,6 +13,7 @@ class MineController extends Controller
 
         $items = Item::where('uid','=',$uid)
             ->select('id','title','description','lost_place','lost_type','images','phone','qq','status','created_at','updated_at')
+            ->orderBy('id', 'desc')
             ->skip($page * 10)
             ->take(10)
             ->get();

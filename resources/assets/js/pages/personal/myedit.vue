@@ -128,7 +128,8 @@
                 img: [],
                 accept: 'image/*',
                 showId: false,
-                item: {}
+                item: {},
+                loading: {}
 
             };
         }, mounted() {
@@ -243,8 +244,14 @@
                 this.$http.post(api_url + '/api/item/update', params).then(res => {
                     if (res.data.code > 0) {
 
-                        this.message(res.data.error, 'el-icon-check')
-                        this.getItem(this.item.id)
+                        this.message('完成编辑', 'el-icon-check')
+                        // this.getItem(this.item.id)
+                        this.$router.push({
+                            name: 'detail',
+                            query: {
+                                item_id: this.item.id
+                            }
+                        })
 
                         // this.uploadImg(res.item.id, 'el-icon-loading')
 
@@ -257,7 +264,9 @@
 
             },
             async uploadImg(file, item_id) {
+
                 this.message('开始上传', 'el-icon-upload')
+                this.loading = Loading.service()
 
                 this.transformFile(file, item_id)
 
@@ -336,6 +345,7 @@
                     this.$http.post(api_url + '/api/item/image/upload',
                         formData
                     ).then(res => {
+                        this.loading.close()
                         this.message('完成图片上传', 'el-icon-check')
                         this.getImgs(this.item.id)
                         console.log(res)
