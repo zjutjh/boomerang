@@ -18,5 +18,10 @@
 </script>
 
 <style scoped>
+    .release-wrap {
+        height: 41.1438rem;
+        overflow: scroll;
+    }
+
 
 </style>

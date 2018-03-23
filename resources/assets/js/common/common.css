@@ -123,3 +123,10 @@ input {
 input:hover {
     outline: none;
 }
+
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: none;
+}

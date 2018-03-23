@@ -8,6 +8,7 @@ import './config/rem'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './common/common.css'
+import './common/reset.css'
 import jhconfirm from './components/confirm'
 import message from './components/message'
 
