@@ -9,10 +9,11 @@ class MineController extends Controller
 {
     public function mine(Request $request,$uid)
     {
+        $page = $request->get('page') ? $request->get('page') : 0;
 
         $items = Item::where('uid','=',$uid)
             ->select('id','title','description','lost_place','lost_type','images','phone','qq','status','created_at','updated_at')
-            ->skip($request->get('page'))
+            ->skip($page * 10)
             ->take(10)
             ->get();
 

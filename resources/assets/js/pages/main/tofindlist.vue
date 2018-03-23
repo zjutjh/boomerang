@@ -62,7 +62,7 @@
                 await this.$http.get(api_url + "/api/lost/lists").then(res => {
                     if (res.data.code > 0) {
                         this.items = [...this.items, ...res.data.data.items];
-                        this.page += 1
+                        // this.page += 1
                         console.log(this.items)
                         return;
                     }
