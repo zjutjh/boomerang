@@ -2,21 +2,23 @@
  * 页面到达底部，加载更多
  */
 export const loadMore = (element, callback) => {
-    let windowHeight = window.screen.height;
-    let height;
-    let setTop;
+    let windowHeight = element.offsetHeight;
+    let height = element.scrollHeight;
+    // let setTop = element.scrollTop;
     let paddingBottom;
     let marginBottom;
     let requestFram;
     let oldScrollTop;
 
-    document.body.addEventListener('scroll',() => {
+    element.addEventListener('scroll',() => {
+        console.log(windowHeight)
         loadMore();
     }, false)
     //运动开始时获取元素 高度 和 offseTop, pading, margin
     element.addEventListener('touchstart',() => {
-        height = element.offsetHeight;
-        setTop = element.offsetTop;
+        height = element.scrollHeight;
+        // setTop = element.scrollTop;
+        // console.log(`${height}::${setTop}`)
         paddingBottom = getStyle(element,'paddingBottom');
         marginBottom = getStyle(element,'marginBottom');
     },{passive: true})
@@ -28,27 +30,31 @@ export const loadMore = (element, callback) => {
 
     //运动结束时判断是否有惯性运动，惯性运动结束判断是非到达底部
     element.addEventListener('touchend',() => {
-        oldScrollTop = document.body.scrollTop;
+        oldScrollTop = element.scrollTop;
         moveEnd();
     },{passive: true})
 
     const moveEnd = () => {
         requestFram = requestAnimationFrame(() => {
-            if (document.body.scrollTop != oldScrollTop) {
-                oldScrollTop = document.body.scrollTop;
+            if (element.scrollTop != oldScrollTop) {
+                oldScrollTop = element.scrollTop;
                 loadMore();
                 moveEnd();
             }else{
                 cancelAnimationFrame(requestFram);
                 //为了防止鼠标抬起时已经渲染好数据从而导致重获取数据，应该重新获取dom高度
-                height = element.offsetHeight;
+                height = element.scrollHeight;
                 loadMore();
             }
         })
     }
 
+
     const loadMore = () => {
-        if (document.body.scrollTop + windowHeight >= height + setTop + paddingBottom + marginBottom) {
+        console.log(`${element.scrollTop + windowHeight}::::${height + paddingBottom + marginBottom}`)
+
+
+        if (element.scrollTop + windowHeight >= height  + paddingBottom + marginBottom) {
             callback();
         }
     }
