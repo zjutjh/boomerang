@@ -47,7 +47,7 @@
 
     .show-list-wrap {
         width: 27.7422rem;
-        height: 41rem;
+        height: 40rem;
         margin: 0 auto;
         overflow: scroll;
 
