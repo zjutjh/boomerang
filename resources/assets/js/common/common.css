@@ -72,6 +72,10 @@
 .message {
     width: 11.096rem;
     height: 12.80rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     background: rgba(0, 0, 0, .5);
     border-radius: .6rem;
     position: absolute;
@@ -83,24 +87,29 @@
 }
 
 .message .message-icon {
+    /*width: 11.096rem;*/
+    display: flex;
     padding: .5rem 1.85rem;
-
     margin: 0 auto;
+    flex: 2;
 }
 
 .message .message-icon .icon-class {
+    /*width: 11.096rem;*/
+    display: flex;
     font-size: 8.1rem;
     color: #fff;
 
 }
 
 .message .message-title {
+    flex: 1;
     width: 100%;
     color: #fff;
     text-align: center;
     height: 2.98rem;
     line-height: 2.98rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 input {

@@ -1,5 +1,5 @@
 <template>
-    <div class="show-list-wrap">
+    <div class="show-list-wrap" ref="showList">
 
         <div class="list-item" v-for="(item, index) in itemList">
             <router-link :to="{ name: isMine ? 'mydetail' : 'detail', query: { item_id: item.id}}" tag="div">
@@ -24,15 +24,47 @@
     import {api_url} from "../config/env";
 
     export default {
-        data: () => ({}),
-        props: ['itemList', 'isMine'],
+        data: () => ({
+            preventRepeat: false
+        }),
+        props: ['itemList', 'isMine', 'page'],
         mounted() {
+            console.log(this.$refs.showList)
+            loadMore(this.$refs.showList, this.loadmore)
         },
         methods: {
             origin_to_img_api: function (img_url) {
                 return api_url + '/' + img_url;
 
+            },
+            loadmore: async function () {
+                if (this.preventRepeat) {
+                    return
+                }
+                console.log(this.page)
+                this.preventRepeat = true
+
+                let temItems = []
+                await this.$http.get(api_url + "/api/lost/lists?page=" + (this.page + 1)).then(res => {
+                    if (res.data.code > 0) {
+                        temItems = res.data.data.items;
+                        this.page += 1
+                        console.log(this.items)
+                        return;
+                    }
+
+                    this.message(res.data.error, 2000);
+                }).catch( error => {
+
+                })
+                await this.$emit('changePage', this.page, temItems)
+                if (temItems.length < 10) {
+                    return
+                }
+                this.preventRepeat = false
             }
+
+
         }
 
 
@@ -70,7 +102,7 @@
     .list-title .title-content {
         margin: 0;
         margin-left: 1.02433rem;
-        margin-top: 0.5rem;
+        margin-top: .7rem;
         font-weight: bold;
         font-size: 1.28041rem;
         /*height: 2.45rem;*/

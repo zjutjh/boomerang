@@ -1,7 +1,7 @@
 <template>
     <div class="mine-wrap">
         <v-title :title="'我的发布'" :ifBack="false"></v-title>
-        <show-list :itemList="items" isMine="true"></show-list>
+        <show-list :itemList="items" isMine="true" @changePage="changePage" :page="page"></show-list>
     </div>
 </template>
 
@@ -16,7 +16,8 @@
     export default {
         name: "mine",
         data: () => ({
-            items: []
+            items: [],
+            page: 0
         }),
         mixins: [state],
         mounted: async function () {
@@ -36,6 +37,13 @@
         },
         components: {
             vTitle, showList
+        },
+        methods: {
+            changePage(page, items) {
+                this.items = [...this.items, ...items]
+                this.page = page
+
+            }
         }
 
     }

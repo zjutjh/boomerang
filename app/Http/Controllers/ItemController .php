@@ -23,8 +23,9 @@ class ItemController extends Controller
         $items = Item::latest()
             ->where('lost_type',0)
             ->select('id', 'uid','title','description','lost_place','lost_type','images','phone','qq','status', 'created_at')
-            ->take(10)
+
             ->skip($page)
+            ->take(10)
             ->get();
 
 

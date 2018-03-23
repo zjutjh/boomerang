@@ -1,6 +1,6 @@
 <template>
     <div class="Box">
-        <show-list v-bind:itemList="items"></show-list>
+        <show-list v-bind:itemList="items" @changePage="changePage" :page="page"></show-list>
     </div>
 </template>
 
@@ -14,6 +14,7 @@
         data:() => ({
            loading: true,
            items: [],
+           page: 0
         }),
         components: {
           showList
@@ -23,18 +24,19 @@
         },
         mixins: [state],
         mounted: async function() {
-            const loading = this.$loading( { fullsreen: true})
+            // const loading = this.$loading( { fullsreen: true})
             console.log(!this.getToken())
             if (!this.getToken()) {
                 await this.login();
                 this.$http.defaults.headers['Authorization'] = 'bearer ' + this.getToken()
+
             }
 
 
-            await this.get_items();
+            await this.getItems(this.page);
 
 
-            loading.close();
+            // loading.close();
         },
         methods: {
             async login() {
@@ -45,6 +47,7 @@
                     console.log(res.data.code > 0)
                     if (res.data.code > 0) {
                         this.setState(res.data.data)
+                        this.message('自动登陆成功', 'el-icon-check')
                         return
                     }
 
@@ -53,20 +56,26 @@
                 });
             },
 
-            async get_items() {
-                const header = {
-                    'Authorization': "bearer " + this.getToken()
-                };
-                await this.$http.get(api_url + "/api/lost/lists", {headers:header}).then(res => {
+            async getItems() {
+
+                await this.$http.get(api_url + "/api/lost/lists").then(res => {
                     if (res.data.code > 0) {
-                        this.items = res.data.data.items;
+                        this.items = [...this.items, ...res.data.data.items];
+                        this.page += 1
                         console.log(this.items)
                         return;
                     }
 
                     this.message(res.data.error, 2000);
+                }).catch( error => {
+
                 })
             },
+            changePage(page, items) {
+                this.items = [...this.items, ...items]
+                this.page = page
+
+            }
 
 
         }

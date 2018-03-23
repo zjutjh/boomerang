@@ -1,6 +1,6 @@
 <template>
     <div class="Box">
-        <show-list :itemList="items"></show-list>
+        <show-list :itemList="items" @changePage="changePage" :page="page"></show-list>
     </div>
 </template>
 
@@ -11,9 +11,10 @@
 
     export default {
         name: 'index',
-        data:() => ({
+        data: () => ({
             loading: true,
             items: [],
+            page: 0
         }),
         components: {
             showList
@@ -22,8 +23,8 @@
 
         },
         mixins: [state],
-        mounted: async function() {
-            const loading = this.$loading( { fullsreen: true})
+        mounted: async function () {
+            const loading = this.$loading({fullsreen: true})
             await this.get_items();
             loading.close();
         },
@@ -36,10 +37,15 @@
                     }
 
                     this.message(res.error, 2000);
-                }).catch( error => {
+                }).catch(error => {
                     console.log(error)
                 })
             },
+            changePage(page, items) {
+                this.items = [...this.items, ...items]
+                this.page = page
+
+            }
 
 
         }
@@ -50,10 +56,10 @@
 </script>
 
 <style lang="css" scoped>
-    .Box{
+    .Box {
         width: 100%;
         height: 100%;
-        color: rgb(241,239,245);
+        color: rgb(241, 239, 245);
         margin: 0;
         padding: 0;
         padding-top: 1.53649rem;

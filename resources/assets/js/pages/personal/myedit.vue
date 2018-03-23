@@ -200,10 +200,13 @@
                                 res.data.data.item.images.map(item => {
                                     this.img.push(`${api_url}/${item}`)
                                 })
-                                this.message('移除成功', 'el-icon-check')
+                                this.message('删除成功', 'el-icon-check')
 
                             }
                         }).catch(error => {
+                            this.getImgs(this.item.id)
+                            this.message('删除失败', 'el-icon-check')
+
 
                         })
 
@@ -254,8 +257,9 @@
 
             },
             async uploadImg(file, item_id) {
+                this.message('开始上传', 'el-icon-upload')
+
                 this.transformFile(file, item_id)
-                this.message('发布完成', 'el-icon-check')
 
 
             },
@@ -337,7 +341,7 @@
                         console.log(res)
 
                     }).catch(error => {
-                        console.log(error)
+                        this.message('上传失败', 'el-icon-warning')
                     })
                 }
             }
@@ -576,6 +580,11 @@
         display: block;
         clear: both;
         overflow: hidden;
+    }
+
+    .my-edit {
+        height: 41.1438rem;
+        overflow: scroll;
     }
 
 

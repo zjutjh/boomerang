@@ -1,7 +1,7 @@
 <template>
     <div class="release-wrap">
         <v-title :title="'编辑'" :ifBack="true"></v-title>
-        <v-edit></v-edit>
+        <v-edit @onRelease="releaseResult"></v-edit>
     </div>
 </template>
 
@@ -12,7 +12,19 @@
         name: "release",
         components: {
             vTitle, vEdit
+        },
+        methods: {
+            releaseResult: function (item_id) {
+                this.$router.push({
+                    name: 'detail',
+                    query: {
+                        item_id: item_id
+                    }
+                })
+
+            }
         }
+
 
     }
 </script>

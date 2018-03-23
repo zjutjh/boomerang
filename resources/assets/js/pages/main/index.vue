@@ -2,11 +2,13 @@
     <div class="main-wrap">
         <v-search></v-search>
         <transition name="main">
-            <router-view></router-view>
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
         </transition>
         <v-tabber></v-tabber>
     </div>
-    
+
 </template>
 
 <script>
@@ -23,9 +25,7 @@
         mounted() {
 
         },
-        methods: {
-
-        }
+        methods: {}
     }
 </script>
 

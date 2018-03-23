@@ -203,8 +203,12 @@
                     params
                 ).then(res => {
                     if (res.data.code > 0) {
-
+                        if (!this.img.length) {
+                            this.$emit('onRelease', res.data.data.item.id)
+                            return
+                        }
                         this.message('正在上传图片,请稍等', 'el-icon-loading')
+
 
                         this.uploadImg(res.data.data.item.id, 'el-icon-loading')
 
@@ -264,6 +268,11 @@
                         formData
                     ).then(res => {
                         this.message('完成第' + (index + 1) + '张图片上传', 'el-icon-check')
+                        console.log(index + 1 === this.img.length)
+                        if ((index + 1) === this.img.length) {
+                            this.$emit('onRelease', item_id)
+                            return
+                        }
                         console.log(res)
 
                     }).catch(error => {
