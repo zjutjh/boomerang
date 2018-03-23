@@ -1,6 +1,6 @@
 <template>
     <div class="Box">
-        <show-list :itemList="items" @changePage="changePage" :page="page"></show-list>
+        <show-list :itemList="items" @changePage="changePage" :page="page" url="/api/find/lists"></show-list>
     </div>
 </template>
 

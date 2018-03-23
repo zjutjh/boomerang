@@ -1,6 +1,6 @@
 <template>
     <div class="Box">
-        <show-list v-bind:itemList="items" @changePage="changePage" :page="page"></show-list>
+        <show-list v-bind:itemList="items" @changePage="changePage" :page="page" url="/api/lost/lists"></show-list>
     </div>
 </template>
 

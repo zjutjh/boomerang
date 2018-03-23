@@ -27,7 +27,7 @@
         data: () => ({
             preventRepeat: false
         }),
-        props: ['itemList', 'isMine', 'page'],
+        props: ['itemList', 'isMine', 'page', 'url'],
         mounted() {
             console.log(this.$refs.showList)
             loadMore(this.$refs.showList, this.loadmore)
@@ -45,7 +45,8 @@
                 this.preventRepeat = true
 
                 let temItems = []
-                await this.$http.get(api_url + "/api/lost/lists?page=" + (this.page + 1)).then(res => {
+
+                await this.$http.get(api_url + this.url +"?page=" + (this.page + 1)).then(res => {
                     if (res.data.code > 0) {
                         temItems = res.data.data.items;
                         this.page += 1
