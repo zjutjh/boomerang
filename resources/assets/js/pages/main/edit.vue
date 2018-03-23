@@ -86,6 +86,7 @@
 
     import state from '../../components/state.mixin'
     import {api_url} from "../../config/env";
+    import { Loading } from 'element-ui'
 
     export default {
         name: "upload",
@@ -117,7 +118,8 @@
                 isReverse_2: false,
                 img: [],
                 accept: 'image/*',
-                showId: false
+                showId: false,
+                loading: ''
 
             };
         },
@@ -187,7 +189,9 @@
                     return
                 }
 
+
                 this.message('正在发布中,请稍等', 'el-icon-loading')
+                this.loading = Loading.service()
                 const params = {
                     'uid': this.getUser().id,
                     'title': this.data.name,
@@ -270,6 +274,7 @@
                         this.message('完成第' + (index + 1) + '张图片上传', 'el-icon-check')
                         console.log(index + 1 === this.img.length)
                         if ((index + 1) === this.img.length) {
+                            this.loading.close()
                             this.$emit('onRelease', item_id)
                             return
                         }
