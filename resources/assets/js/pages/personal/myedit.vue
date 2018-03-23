@@ -441,14 +441,14 @@
     }
 
     .select .select-suffix .suffix-caret.is_reverse {
-        transform: rotate(0deg);
+        transform: rotate(180deg);
     }
 
     .select .select-suffix .suffix-caret {
         color: #177441;
         font-size: 1.024rem;
         transition: transform .3s;
-        transform: rotate(180deg);
+        transform: rotate(0deg);
         cursor: pointer;
 
     }

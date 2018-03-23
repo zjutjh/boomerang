@@ -63,15 +63,17 @@
     .list-item .list-title {
         float: left;
         width: 12.8043rem;
-        height: 100%;
+        height: 9.8167rem;
 
     }
 
     .list-title .title-content {
         margin-left: 1.02433rem;
-        margin-top: 0.7rem;
+        /*margin-top: 0.7rem;*/
         font-weight: bold;
         font-size: 1.28041rem;
+        /*height: 2.45rem;*/
+        /*box-sizing: content-box;*/
         color: #177441;
         overflow: hidden;
         text-overflow:ellipsis;
