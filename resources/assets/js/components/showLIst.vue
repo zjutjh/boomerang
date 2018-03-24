@@ -10,7 +10,7 @@
                     <p class="title-content">地点：{{ item.lost_place}}</p>
                 </div>
                 <div class="list-img">
-                    <img :src="origin_to_img_api(item.images[0])" alt="" v-if="!!item.images">
+                    <img :src="origin_to_img_api(item.images[0])" alt="" v-if="!item.images.length">
                 </div>
             </router-link>
         </div>
