@@ -1,5 +1,5 @@
 <template>
-    <div class="edit-wrap">
+    <div class="edit-wrap" ref="edit">
         <div class="form clearfix select">
             <div class="form-item">
                 <label for="" class="item-label">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
@@ -43,7 +43,7 @@
 
             <div class="form-item other">
                 <label for="" class="item-label">其他详情描述:</label>
-                <textarea name="" id="" rows="6" class="item-textarea" v-model="data.description"></textarea>
+                <textarea @focus="focus" name="" id="" rows="6" class="item-textarea" v-model="data.description"></textarea>
             </div>
 
             <div class="img-list">
@@ -241,6 +241,11 @@
 
 
             },
+            focus() {
+                console.log(this.$refs.edit)
+                console.log(this.$refs.edit.scrollTop)
+
+            },
             async uploadImg(item_id) {
                 await this.img.map((item, index) => {
                     console.log(item, index)
@@ -309,6 +314,7 @@
 </script>
 
 <style>
+
     .edit-wrap {
         width: 27.73rem;
         height: auto;
@@ -358,7 +364,7 @@
         height: 1.536rem;
         line-height: 1.536rem;
         color: #177441;
-        padding-left: .597rem;
+        padding-left: .297rem;
         font-size: 1.024rem;
         cursor: pointer;
 

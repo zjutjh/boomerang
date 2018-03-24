@@ -26,5 +26,6 @@
 
     #app {
         background: #f0eff5;
+        overflow: scroll;
     }
 </style>
