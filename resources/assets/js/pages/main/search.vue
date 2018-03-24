@@ -31,7 +31,7 @@
             const search_text = this.$route.query.searchText
             await this.$http.get(`${api_url}/api/search?request=${search_text}`).then(res => {
                 if (res.data.code > 0) {
-                    this.items = res.data.data.data.items.data
+                    this.items = res.data.data.items.data
                     return
                 }
                 this.message(this.data.data.error)
