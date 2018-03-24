@@ -144,6 +144,7 @@
                 this.data.lost_type = index
                 if (index == 2) {
                     this.showId = true
+                    this.data.lost_type = 0
                 } else {
                     this.showId = false
                 }
