@@ -57,11 +57,7 @@ class User extends Authenticatable implements JWTSubject
             ->request("GET", config('api.jh.user.wejh') . "?" . http_build_query($params));//请求微精弘url
         $data = json_decode((string)$response->getBody());//对json数据进行解码，得到返回内容
         if ($data->errcode < 0) {
-            return response()->json([
-               'code' => -100,
-               'error' => '请先绑定',
-               'data' => null
-            ]);
+            return 'register';
         }
 
         $user = new User;

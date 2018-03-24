@@ -23,6 +23,9 @@ class LoginController extends Controller
         //查看数据库是否存在用户
         if (!$user = User::where('openid', $openid)->first()) {
             $user = User::openIdCreateUser($openid);
+            if ($user === 'register') {
+                return $this->apiReponse(-100, '请先绑定', null);
+            }
         }
         if (!$token = Auth::login($user)) {
             return $this->apiReponse(-401, '生成token失败', null);
