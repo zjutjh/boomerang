@@ -52,4 +52,15 @@ class Api extends Model
             return $this->setError('用户名或密码错误');
         }
     }
+
+    static public function unoGetOpenId($uno) {
+        $client = new Client();
+        $res = $client->get(config('api.jh.user.openid').$uno.'/openid');
+        $data = json_decode($res->getBody(), true);
+        if ($data['errcode'] < 0) {
+            return false;
+        }
+        return $data['data'];
+
+    }
 }

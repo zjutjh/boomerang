@@ -22,19 +22,7 @@ class LoginController extends Controller
 
         //查看数据库是否存在用户
         if (!$user = User::where('openid', $openid)->first()) {
-            $client = new Client();
-            $params = array(
-                'openid' => $openid
-            );
-            $response = $client
-                ->request("GET", config('api.jh.user.wejh') . "?" . http_build_query($params));//请求微精弘url
-            $data = json_decode((string)$response->getBody());//对json数据进行解码，得到返回内容
-
-            $user = new User;
-            $user->openid = $openid;
-            $user->uno = $data->data->uno;
-            $user->name = $data->data->name;
-            $user->save();
+            $user = User::openIdCreateUser($openid);
         }
         if (!$token = Auth::login($user)) {
             return $this->apiReponse(-401, '生成token失败', null);

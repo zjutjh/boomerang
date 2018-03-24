@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Api;
 use App\Item;
 use App\Jobs\SendMsg;
 use App\User;
@@ -75,7 +76,10 @@ class ItemController extends Controller
 
         if ($params['contact_uno'] != -1) {
             if (!$user = User::where('uno', $params['contact_uno'])->first()) {
+                $openid = Api::unoGetOpenId($params['contact_uno']);
+                $user = User::openIdCreateUser($openid);
             }
+
 
 //            dd(json_encode);
             $user_j = Auth::user();

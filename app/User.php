@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GuzzleHttp\Client;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,6 +47,26 @@ class User extends Authenticatable implements JWTSubject
         }
         return false;
     }
+
+    static public function openIdCreateUser($openid) {
+        $client = new Client();
+        $params = array(
+            'openid' => $openid
+        );
+        $response = $client
+            ->request("GET", config('api.jh.user.wejh') . "?" . http_build_query($params));//请求微精弘url
+        $data = json_decode((string)$response->getBody());//对json数据进行解码，得到返回内容
+
+        $user = new User;
+        $user->openid = $openid;
+        $user->uno = $data->data->uno;
+        $user->name = $data->data->name;
+        $user->save();
+        return $user;
+    }
+
+
+
 
 //    /**
 //     * The attributes that are mass assignable.
