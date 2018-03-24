@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Api;
+use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -15,14 +17,17 @@ class SendMsg implements ShouldQueue
 
     protected $data;
 
+    protected $user_auth;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Array $data)
+    public function __construct(Array $data, $user)
     {
         $this->data = $data;
+        $this->user_auth = $user;
     }
 
     /**
@@ -32,10 +37,24 @@ class SendMsg implements ShouldQueue
      */
     public function handle()
     {
+        if (!$user = User::where('uno', $this->data['contact_uno'])->first()) {
+            $openid = Api::unoGetOpenId($this->data['contact_uno']);
+            $user = User::openIdCreateUser($openid);
+        }
+        $data = array(
+            'openid' => $user->openid,
+            'data'   => array(
+                'first' => '亲爱的'. mb_substr($user->name, 0, 1, "utf-8") . '同学你好，你的校园卡已被捡到，请认领',
+                'keyword1' =>  mb_substr($this->user_auth->name, 0, 1, "utf-8") . '同学',
+                'keyword2' => '电话 ' . $this->data['phone'] . ' QQ ' . $this->data['qq'],
+                'remark'   => '感谢你的使用'
+            ),
+            'url'   => 'test'
+        );
 
         $client = new Client();
         $client->post(config('api.jh.send'), [
-            'json' => $this->data
+            'json' => $data
         ]);
     }
 }

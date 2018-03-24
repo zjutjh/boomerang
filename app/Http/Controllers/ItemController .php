@@ -76,27 +76,8 @@ class ItemController extends Controller
 
 
         if ($params['contact_uno'] != -1) {
-            if (!$user = User::where('uno', $params['contact_uno'])->first()) {
-                $openid = Api::unoGetOpenId($params['contact_uno']);
-                $user = User::openIdCreateUser($openid);
-            }
-
-
-//            dd(json_encode);
             $user_j = Auth::user();
-            $data = array(
-                'openid' => $user->openid,
-                'data'   => array(
-                    'first' => '亲爱的'. mb_substr($user->name, 0, 1, "utf-8") . '同学你好，你的校园卡已被捡到，请认领',
-                    'keyword1' =>  mb_substr($user_j->name, 0, 1, "utf-8") . '同学',
-                    'keyword2' => '电话 ' . $params['phone'] . ' QQ ' . $params['qq'],
-                    'remark'   => '感谢你的使用'
-                ),
-                'url'   => 'test'
-            );
-//            dd(json_encode($data));
-            SendMsg::dispatch($data);
-
+            SendMsg::dispatch($params, $user_j);
         }
 
 
