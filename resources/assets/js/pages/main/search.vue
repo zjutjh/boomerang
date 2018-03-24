@@ -2,7 +2,7 @@
     <div class="Box">
         <title-item :title="'搜索结果'" :ifBack="true"></title-item>
 
-        <show-list :itemList="items"></show-list>
+        <show-list :itemList="items" :style="{'height': '32.0102rem'}"></show-list>
     </div>
 </template>
 
