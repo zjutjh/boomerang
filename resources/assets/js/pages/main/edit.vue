@@ -197,12 +197,16 @@
                     }
                 }
                 if (this.data.type === '校园卡招领') {
-                    if (!this.data.stuid)
+                    if (!this.data.stuid) {
+
                         this.message('不能为空', 'el-icon-warning');
+                        return
+                    }
                     if (!/[0-9]{12}/.test(this.data.stuid)) {
                         this.message('学号格式不正确', 'el-icon-warning', 1000)
+                        return
                     }
-                    return
+
                 }
 
 
