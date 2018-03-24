@@ -86,7 +86,7 @@
                 this.foundHover = false
                 this.searchHover = false
                 this.mineHover = false
-                if (!this.$route.fullPath) {
+                if (this.$route.fullPath === '/') {
                     this.lostHover = true
                 }
                 if (this.$route.fullPath.indexOf('found') > -1) {

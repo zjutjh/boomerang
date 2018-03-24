@@ -88,6 +88,8 @@
     import {api_url} from "../../config/env";
     import { Loading } from 'element-ui'
 
+
+
     export default {
         name: "upload",
         mixins: [state],
