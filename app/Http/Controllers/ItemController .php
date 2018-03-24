@@ -113,7 +113,7 @@ class ItemController extends Controller
 //        $file_name = $request->input('file_name');
         $img = $_FILES['file'];
 //        dd($img);
-        $img_id = $user->uno . "-" . $item_id . "-" . md5_file($img['tmp_name']). $img['name'];
+        $img_id = $user->uno . "-" . $item_id . "-" . md5_file($img['tmp_name']);
         $img_url =  $user->uno . '/' . $img_id;
 //        dd($img);
         Storage::put('public/'.$img_url, File::get($img['tmp_name']));
