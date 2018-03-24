@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="openid" content="{{ $openid }}">
 </head>
 <body>
     <div id="app"></div>

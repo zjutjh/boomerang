@@ -26,10 +26,10 @@ Vue.use(Router)
 export default new Router({
 
     routes: [{
-        path: '/main/',
+        path: '/',
         component: main,
         children: [{
-            path: 'index',
+            path: '/',
             name: 'tofind',
             component: tofind
         }, {

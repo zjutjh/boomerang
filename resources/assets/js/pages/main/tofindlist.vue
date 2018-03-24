@@ -41,8 +41,8 @@
         methods: {
             async login() {
                 const data = {
-                    "openid": "oZ_USxJPH5fL5_Mv3oNY9MG-8Ukc"
-                    // "openid": "oIRN_t50catBXGiM6I-ZbXofVGZ8"
+                    // "openid": "oZ_USxJPH5fL5_Mv3oNY9MG-8Ukc"
+                    "openid": document.querySelector('meta[name=openid]').getAttribute('content')
                 };
                 await this.$http.post(api_url + '/api/auto_login', data).then(res => {
                     console.log(res.data.code > 0)

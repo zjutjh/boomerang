@@ -76,4 +76,30 @@ class LoginController extends Controller
         return $this->apiReponse( -401, "用户不存在", null);
 
     }
+
+    public function index(Request $request){
+        $code = $request->get('code');
+        $client = new Client();
+        $reponse = $client->request('GET', 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WECHAT_APPID').'&secret='.env('WECHAT_SECRET').'&code='.$code.'&grant_type=authorization_code', ['verify' => false]);
+        $data = json_decode($reponse->getBody(), true);
+        $openid = $data['openid'];
+//        dd($data);
+        return view('index', ['openid' => $openid]);
+
+
+    }
+
+
+    public function oauth() {
+
+        return redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid='
+                            .env('WECHAT_APPID')
+                            .'&redirect_uri='
+                            .urlencode(config('api.jh.oauth'))
+                            .urlencode(env('WECHAT_REDIRECT'))
+                            .'&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect');
+
+
+
+    }
 }

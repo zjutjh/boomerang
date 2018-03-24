@@ -180,6 +180,19 @@
                     this.message('不能为空', 'el-icon-warning')
                     return
                 }
+
+                if (this.data.contact_type) {
+                    // console.log(this.data.contact)
+                    if ( !/[1-9][0-9]{4,}/.test(this.data.contact)) {
+                        this.message('联系方式格式不正确', 'el-icon-warning')
+                        return
+                    }
+                } else {
+                    if ( !/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/.test(this.data.contact)) {
+                        this.message('联系方式格式正确', 'el-icon-warning')
+                        return
+                    }
+                }
                 if (this.data.type === '校园卡招领') {
                     if (!this.data.stuid)
                         this.message('不能为空', 'el-icon-warning');

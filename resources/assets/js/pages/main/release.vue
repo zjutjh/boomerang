@@ -31,7 +31,7 @@
 
 <style scoped>
     .release-wrap {
-        height: 41.1438rem;
+        height: 40.1438rem;
         overflow: scroll;
     }
 
