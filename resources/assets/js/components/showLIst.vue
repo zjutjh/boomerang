@@ -9,8 +9,8 @@
                     <p class="title-content">时间：{{item.created_at.substr(0, 10) }}</p>
                     <p class="title-content">地点：{{ item.lost_place}}</p>
                 </div>
-                <div class="list-img">
-                    <img :src="origin_to_img_api(item.images[0])" alt="" v-if="!item.images.length">
+                <div class="list-img" v-if="!!item.images.length">
+                    <img :src="origin_to_img_api(item.images[0])" alt="" >
                 </div>
             </router-link>
         </div>
