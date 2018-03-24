@@ -101,6 +101,7 @@ class ItemController extends Controller
 
 
 //        dd($params);
+        $params['images'] = array();
         $item = Item::create($params);
 
         return $this->apiReponse(200, null, ['item' => $item]);
