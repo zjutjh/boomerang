@@ -36,7 +36,7 @@
                         return;
                     }
 
-                    this.message(res.error, 2000);
+                    this.message(res.data.error, 2000);
                 }).catch(error => {
                     console.log(error)
                 })

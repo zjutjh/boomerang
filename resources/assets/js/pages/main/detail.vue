@@ -36,6 +36,7 @@
     import vTabber from '../../components/tabber'
     import state from "../../components/state.mixin";
     import {api_url} from "../../config/env";
+    import {Loading} from 'element-ui'
 
     export default {
         data: () => ({
@@ -45,7 +46,7 @@
         }),
         props: ['edit', 'isMine'],
         mounted() {
-            const loading = this.$loading();
+            const loading = Loading.service();
             const id = this.$route.query.item_id;
             this.get_item_data(id);
             loading.close();

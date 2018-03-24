@@ -74,6 +74,7 @@ class ItemController extends Controller
     public function createItem(Request $request) {
         $params = $request->all();
 
+
         if ($params['contact_uno'] != -1) {
             if (!$user = User::where('uno', $params['contact_uno'])->first()) {
                 $openid = Api::unoGetOpenId($params['contact_uno']);

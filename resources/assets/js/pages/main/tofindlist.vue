@@ -47,9 +47,15 @@
                 await this.$http.post(api_url + '/api/auto_login', data).then(res => {
                     console.log(res.data.code > 0)
                     if (res.data.code > 0) {
+
                         this.setState(res.data.data)
                         this.message('自动登陆成功', 'el-icon-check')
                         return
+                    }
+
+                    if (res.data.code === -100) {
+                        this.message(res.data.error)
+                        window.location.href = 'https://server.wejh.imcr.me/oauth/wechat/login'
                     }
 
                     this.message(res.data.error, 2000);
@@ -68,6 +74,9 @@
                     }
 
                     this.message(res.data.error, 2000);
+                    setTimeout(() => {
+                        window.close()
+                    }, 3000)
                 }).catch( error => {
 
                 })
