@@ -242,8 +242,8 @@
 
             },
             focus() {
-                console.log(this.$refs.edit)
-                console.log(this.$refs.edit.scrollTop)
+                const ele = document.querySelector('#app')
+                ele.scrollTo(0, ele.scrollHeight)
 
             },
             async uploadImg(item_id) {
