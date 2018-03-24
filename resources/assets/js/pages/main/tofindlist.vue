@@ -56,6 +56,8 @@
                     if (res.data.code === -100) {
                         this.message(res.data.error)
                         window.location.href = 'https://server.wejh.imcr.me/oauth/wechat/login'
+                        return
+
                     }
 
                     this.message(res.data.error, 2000);
