@@ -35,6 +35,7 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::post('api/item/update', 'ItemController@uploadItem');
     Route::post('api/item/image/upload', 'ItemController@uploadImg');
     Route::post('api/item/image/delete', 'ItemController@deleteImg');
+    Route::post('api/item/delete', 'ItemController@delete');
 
     Route::get('admin/index','SuperAdminController@Super');
 });

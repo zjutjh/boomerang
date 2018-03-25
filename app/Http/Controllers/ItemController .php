@@ -23,6 +23,7 @@ class ItemController extends Controller
         $page = $request->get('page') ? $request->get('page') : 0;
         $items = Item::
             where('lost_type', 1)
+            ->where('deleted', 0)
             ->select('id', 'uid','title','description','lost_place','lost_type','images','phone','qq','status', 'created_at')
             ->orderBy('id', 'desc')
             ->skip($page * 10)
@@ -41,6 +42,7 @@ class ItemController extends Controller
         //从items表里取数据
         $page = $request->get('page') ? $request->get('page') : 0;
         $items = Item::where('lost_type', 0)
+            ->where('deleted', 0)
             ->select('id', 'uid','title','description','lost_place','lost_type','images','phone','qq','status', 'created_at')
             ->orderBy('id', 'desc')
 
@@ -62,6 +64,15 @@ class ItemController extends Controller
 
     }
 
+    public function delete(Request $request){
+        $item_id = $request->get('id');
+        $item = Item::where('id', $item_id)->first();
+        $item->deleted = 1;
+        $item->save();
+        return $this->apiReponse(200, '删除成功', null);
+
+    }
+
     public function uploadItem(Request $request) {
         $params = $request->all();
         $item = Item::where('id', $params['id'])->update($params);
@@ -69,6 +80,7 @@ class ItemController extends Controller
 
 
     }
+
 
 
     public function createItem(Request $request) {

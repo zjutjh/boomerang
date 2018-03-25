@@ -72,9 +72,6 @@
             </div>
         </div>
 
-        <el-dialog :visible.sync="dialogVisible">
-            <img width="100%" :src="dialogImageUrl" alt="">
-        </el-dialog>
 
 
     </div>

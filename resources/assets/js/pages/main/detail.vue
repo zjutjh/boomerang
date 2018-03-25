@@ -14,12 +14,14 @@
                 </div>
             </div>
 
-            <div class="detail-change" v-if="edit">
+            <div class="detail-change" v-if="edit" style="text-align: center">
                 <!--<div class="change-left"><img src="../../images/arrow-left.png" alt=""></div>-->
                 <!--<div class="change-right"><img src="../../images/arrow-right.png" alt=""></div>-->
-                <router-link :to="{ name: 'myedit', query: { item_id: item.id}}" tag="div">
+                <router-link :to="{ name: 'myedit', query: { item_id: item.id}}" tag="div" replace>
                     <div class="edit">编辑</div>
+
                 </router-link>
+                <div class="del" @click="delItem">删除</div>
             </div>
 
         </div>
@@ -71,6 +73,27 @@
             },
             origin_to_img_api: function (img_url) {
                 return api_url + '/' + img_url;
+
+            },
+            delItem: async function () {
+                this.jhconfirm({
+                    title: '你确定删除这个事件嘛？',
+                    success: () => {
+                        const params = {
+                            id: this.item.id
+                        }
+                        this.$http.post(api_url + '/api/item/delete', params).then(res => {
+                            if (res.data.code > 0) {
+                                this.message(res.data.error, 'el-icon-check');
+                                this.$router.replace({
+                                    name: 'mine'
+                                });
+
+                            }
+                        })
+
+                    }
+                })
 
             }
         }
@@ -156,6 +179,9 @@
         height: 0;
         background: none;
     }
+    .detail-change>div {
+        display: inline-block;
+    }
 
     .edit {
         width: 3rem;
@@ -165,6 +191,18 @@
         border-radius: 8px;
         padding: .512164rem 1.23773rem;
         background: #32b16c;
+        display: inline-block;
+    }
+    .del {
+        width: 3rem;
+        margin: 0 auto;
+        font-size: 1.37943rem;
+        font-weight: bold;
+        border-radius: 8px;
+        padding: .512164rem 1.23773rem;
+        background: #32b16c;
+        display: inline-block;
+
     }
 
 </style>

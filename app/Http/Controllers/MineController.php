@@ -12,6 +12,7 @@ class MineController extends Controller
         $page = $request->get('page') ? $request->get('page') : 0;
 
         $items = Item::where('uid','=',$uid)
+            ->where('deleted', 0)
             ->select('id','title','description','lost_place','lost_type','images','phone','qq','status','created_at','updated_at')
             ->orderBy('id', 'desc')
             ->skip($page * 10)

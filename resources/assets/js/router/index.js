@@ -62,25 +62,25 @@ export default new Router({
             component: search
         }]
     },
-        {
-            path: '/adminlogin',//管理员登陆
-            component: resolve => require(['../pages/admin/adminlogin.vue'], resolve),
-        },
-        {
-            path: '/home',//超管首页
-            // compoment: resolve => require(['../pages/admin/home.vue'], resolve),
-            component: home
-        },
-        {
-            path: '/sad',//超管看管理员们
-            compoment: resolve => require(['../pages/admin/sad.vue'], resolve),
-        },
-        {
-            path: '/admin',//普通管理页面
-            compoment: resolve => require(['../pages/admin/admin.vue'], resolve),
-        }, {
-            path: '/test',
-            component: test
-        }
+        // {
+        //     path: '/adminlogin',//管理员登陆
+        //     component: resolve => require(['../pages/admin/adminlogin.vue'], resolve),
+        // },
+        // {
+        //     path: '/home',//超管首页
+        //     // compoment: resolve => require(['../pages/admin/home.vue'], resolve),
+        //     component: home
+        // },
+        // {
+        //     path: '/sad',//超管看管理员们
+        //     compoment: resolve => require(['../pages/admin/sad.vue'], resolve),
+        // },
+        // {
+        //     path: '/admin',//普通管理页面
+        //     compoment: resolve => require(['../pages/admin/admin.vue'], resolve),
+        // }, {
+        //     path: '/test',
+        //     component: test
+        // }
     ]
 })
