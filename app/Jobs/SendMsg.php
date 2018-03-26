@@ -19,15 +19,18 @@ class SendMsg implements ShouldQueue
 
     protected $user_auth;
 
+    protected $itemId;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct(Array $data, $user)
+    public function __construct(Array $data, $user, $itemId)
     {
         $this->data = $data;
         $this->user_auth = $user;
+        $this->itemId = $itemId;
     }
 
     /**
@@ -55,7 +58,7 @@ class SendMsg implements ShouldQueue
                 'keyword2' => '电话 ' . $this->data['phone'] . ' QQ ' . $this->data['qq'],
                 'remark'   => '感谢你的使用'
             ),
-            'url'   => 'test'
+            'url'   => create_itemUid($this->itemId)
         );
 
         $client = new Client();

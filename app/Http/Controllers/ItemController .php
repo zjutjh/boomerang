@@ -87,15 +87,16 @@ class ItemController extends Controller
         $params = $request->all();
 
 
-        if ($params['contact_uno'] != -1) {
-            $user_j = Auth::user();
-            SendMsg::dispatch($params, $user_j);
-        }
+
 
 
 //        dd($params);
         $params['images'] = array();
         $item = Item::create($params);
+        if ($params['contact_uno'] != -1) {
+            $user_j = Auth::user();
+            SendMsg::dispatch($params, $user_j, $item->id);
+        }
 
         return $this->apiReponse(200, null, ['item' => $item]);
     }

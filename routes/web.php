@@ -40,13 +40,7 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::get('admin/index','SuperAdminController@Super');
 });
 
-Route::any('git/pull',  function (Request $request) {
-    Artisan::call('git:pull', [
-        'ref' => $request->get('ref')
-    ]);
-});
+Route::get('send/detail/{itemUid}', 'DetailController@show');
 
-Route::get('test', function () {
-    return view('index', ['openid' => 'oIRN_t50catBXGiM6I-ZbXofVGZ8']);
-});
+
 
