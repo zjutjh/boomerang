@@ -33,7 +33,7 @@
 
 
             <li class="menu-item">
-                <router-link  tag="div" replace>
+                <router-link  :to="{}" tag="div" replace>
                     <img class="menu-item-img" :src="searchHover ? search[0] : search[1]" alt="">
                     <label for="" class="menu-title">搜索</label>
                 </router-link>
@@ -103,30 +103,7 @@
             }
         },
         methods: {
-            toColor: function () {
-                this.isColor = true;
-                this.isColor2 = false;
-                this.isColor3 = false;
-                this.isColor4 = false;
-            },
-            toColor2: function () {
-                this.isColor = false;
-                this.isColor2 = true;
-                this.isColor3 = false;
-                this.isColor4 = false;
-            },
-            toColor3: function () {
-                this.isColor = false;
-                this.isColor2 = false;
-                this.isColor3 = true;
-                this.isColor4 = false;
-            },
-            toColor4: function () {
-                this.isColor = false;
-                this.isColor2 = false;
-                this.isColor3 = false;
-                this.isColor4 = true;
-            },
+
         }
     }
 </script>

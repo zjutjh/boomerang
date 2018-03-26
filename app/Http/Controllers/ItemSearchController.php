@@ -28,6 +28,7 @@ class ItemSearchController extends Controller
 //        }
 
         $items = Item::search($request->get('request'))
+            ->where('deleted', 0)
             ->paginate(10);
 
         return $this->apiReponse(200,null,

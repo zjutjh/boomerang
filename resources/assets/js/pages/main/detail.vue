@@ -140,14 +140,15 @@
         margin: 0 auto;
         margin: 5px;
         width: 23.4742rem;
-        height: 13.8284rem;
+        height: auto;
+        /*height: 13.8284rem;*/
         border-radius: 5px;
-        background: red;
+        /*background: red;*/
 
     }
 
     img {
-        height: 100%;
+        /*height: 100%;*/
         width: 100%;
     }
 

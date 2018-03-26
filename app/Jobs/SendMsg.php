@@ -39,7 +39,13 @@ class SendMsg implements ShouldQueue
     {
         if (!$user = User::where('uno', $this->data['contact_uno'])->first()) {
             $openid = Api::unoGetOpenId($this->data['contact_uno']);
+            if (!$openid) {
+                return;
+            }
             $user = User::openIdCreateUser($openid);
+            if ($user === 'register') {
+                return;
+            }
         }
         $data = array(
             'openid' => $user->openid,

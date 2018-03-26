@@ -26,6 +26,28 @@
 
         },
         mixins: [state],
+        watch: {
+            '$route': async function () {
+                if (this.$route.fullPath.indexOf('search') < 0) {
+                    return
+                }
+                const loading = Loading.service( { fullsreen: true})
+                const search_text = this.$route.query.searchText
+                await this.$http.get(`${api_url}/api/search?request=${search_text}`).then(res => {
+                    if (res.data.code > 0) {
+                        this.items = res.data.data.items.data
+                        return
+                    }
+                    this.message(this.data.data.error)
+                }).catch(error => {
+
+                })
+
+
+                loading.close();
+
+            }
+        },
         mounted: async function() {
             const loading = Loading.service( { fullsreen: true})
             const search_text = this.$route.query.searchText

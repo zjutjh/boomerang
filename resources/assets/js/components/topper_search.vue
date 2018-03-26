@@ -12,14 +12,19 @@
         data: () => ({
             search_text: ''
         }),
+        watch: {
+
+        }
+        ,
         methods:{
             Search(){
-                this.$router.push({
+                this.$router.replace({
                     name: 'search',
                     query: {
                         searchText: this.search_text
                     }
                 })
+                this.search_text = ''
             }
         }
     }
