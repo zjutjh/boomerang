@@ -10,6 +10,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Redis;
 
 class SendMsg implements ShouldQueue
 {
@@ -50,6 +51,12 @@ class SendMsg implements ShouldQueue
                 return;
             }
         }
+        $haveSend = Redis::get("user-send-{$this->user_auth->id}");
+        if (!isset($haveSend)) {
+            return;
+        }
+        Redis::set("user-send-{$this->user_auth->id}", '1');
+        Redis::expire("$user-send-{$this->user_auth->id}", 60 * 60 * 24);
         $data = array(
             'openid' => $user->openid,
             'data'   => array(
@@ -60,6 +67,7 @@ class SendMsg implements ShouldQueue
             ),
             'url'   => create_itemUid($this->itemId)
         );
+
 
         $client = new Client();
         $client->post(config('api.jh.send'), [
