@@ -85,12 +85,6 @@ class ItemController extends Controller
 
     public function createItem(Request $request) {
         $params = $request->all();
-
-
-
-
-
-//        dd($params);
         $params['images'] = array();
         $item = Item::create($params);
         if ($params['contact_uno'] != -1) {

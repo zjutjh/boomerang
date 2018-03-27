@@ -52,9 +52,10 @@ class SendMsg implements ShouldQueue
             }
         }
         $haveSend = Redis::get("user-send-{$this->user_auth->id}");
-        if (!isset($haveSend)) {
+        if ($haveSend === null) {
             return;
         }
+
         Redis::set("user-send-{$this->user_auth->id}", '1');
         Redis::expire("user-send-{$this->user_auth->id}", 60 * 60 * 24);
         $data = array(
