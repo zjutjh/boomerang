@@ -53,6 +53,11 @@ class Api extends Model
         }
     }
 
+
+    /**
+     * @param $uno
+     * @return bool|string
+     */
     static public function unoGetOpenId($uno) {
         $client = new Client();
         $res = $client->get(config('api.jh.user.openid').$uno.'/openid');
@@ -60,7 +65,7 @@ class Api extends Model
         if ($data['errcode'] < 0) {
             return false;
         }
-        return $data['data'];
+        return $data['data']['openid'];
 
     }
 }
