@@ -63,7 +63,7 @@ class User extends Authenticatable implements JWTSubject
         $user = new User;
         $user->openid = $openid;
         $user->uno = $data->data->uno;
-        $user->name = (!$data->data->name) ? "无名氏" : $data->data->name;
+        $user->name = (!isset($data->data->name)) ? "无名氏" : $data->data->name;
         $user->save();
         return $user;
     }
