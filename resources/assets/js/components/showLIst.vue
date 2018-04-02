@@ -1,8 +1,8 @@
 <template>
     <div class="show-list-wrap" ref="showList">
+        <router-link v-for="(item, index) in itemList" :key="item.id" :to="{ name: isMine ? 'mydetail' : 'detail', query: { item_id: item.id}}" tag="div">
+            <div class="list-item" >
 
-        <div class="list-item" v-for="(item, index) in itemList">
-            <router-link :to="{ name: isMine ? 'mydetail' : 'detail', query: { item_id: item.id}}" tag="div">
                 <div class="list-title">
                     <p class="title-content">【{{ item.lost_type == 1 ? '寻物启事' : '失物招领'}}】</p>
                     <p class="title-content">物件：{{ item.title}}</p>
@@ -10,10 +10,11 @@
                     <p class="title-content">地点：{{ item.lost_place}}</p>
                 </div>
                 <div class="list-img" v-if="!!item.images.length">
-                    <img :src="origin_to_img_api(item.images[0])" alt="" >
+                    <img :src="origin_to_img_api(item.images[0])" alt="">
                 </div>
-            </router-link>
-        </div>
+            </div>
+
+        </router-link>
 
     </div>
 </template>
@@ -46,7 +47,7 @@
 
                 let temItems = []
 
-                await this.$http.get(api_url + this.url +"?page=" + (this.page + 1)).then(res => {
+                await this.$http.get(api_url + this.url + "?page=" + (this.page + 1)).then(res => {
                     if (res.data.code > 0) {
                         temItems = res.data.data.items;
                         this.page += 1
@@ -55,7 +56,7 @@
                     }
 
                     this.message(res.data.error, 2000);
-                }).catch( error => {
+                }).catch(error => {
 
                 })
                 await this.$emit('changePage', this.page, temItems)
@@ -110,7 +111,7 @@
         /*box-sizing: content-box;*/
         color: #177441;
         overflow: hidden;
-        text-overflow:ellipsis;
+        text-overflow: ellipsis;
         white-space: nowrap;
 
     }
