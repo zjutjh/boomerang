@@ -4,8 +4,8 @@
             <div class="form-item">
                 <label for="" class="item-label">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
                 <input @click="selectClick" v-model="data.type" type="text" class="item-content" readonly="readonly">
-                <span class="select-suffix" @click="selectClick"><i class="el-icon-arrow-down suffix-caret"
-                                                                    :class="{ 'is_reverse' : isReverse_1}"></i></span>
+                <span class="select-suffix" @click="selectClick"><i class="el-icon-arrow-down suffix-caret" :class="{ 'is_reverse' : isReverse_1}"></i></span>
+                <p class="select-message">捡到校园卡的同学请选择校园卡招领哦！</p>
                 <div class="select-dropdown-wrap" v-show="isReverse_1">
                     <ul class="select-dropdown">
                         <li v-for="(item, index) in select" @click="selectChange(index)">{{item}}</li>
@@ -244,7 +244,10 @@
             },
             focus() {
                 const ele = document.querySelector('#app')
-                ele.scrollTo(0, ele.scrollHeight)
+                setTimeout(() => {
+                    ele.scrollTo(0, ele.scrollHeight)
+                }, 200);
+
 
             },
             async uploadImg(item_id) {
@@ -368,6 +371,11 @@
         padding-left: .297rem;
         font-size: 1.024rem;
         cursor: pointer;
+
+    }
+    .select-message {
+        color: #177441;
+
 
     }
 
