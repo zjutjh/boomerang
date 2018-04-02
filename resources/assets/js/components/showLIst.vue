@@ -81,9 +81,10 @@
 
     .show-list-wrap {
         width: 27.7422rem;
-        height: 40rem;
+        height: calc(100vh - 4.694rem - 3.41rem - 1.53649rem);
         margin: 0 auto;
         overflow: scroll;
+        /*padding-bottom: ;*/
 
     }
 
@@ -127,11 +128,6 @@
 
     }
 
-    ::-webkit-scrollbar {
-        width: 0;
-        height: 0;
-        background: none;
-    }
 
     img {
         width: 100%;

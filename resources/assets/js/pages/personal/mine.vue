@@ -1,7 +1,7 @@
 <template>
     <div class="mine-wrap">
         <v-title :title="'我的发布'" :ifBack="false"></v-title>
-        <show-list :itemList="items" isMine="true" @changePage="changePage" :page="page" :url="`/api/mine/lists/${this.getUser().id}`" :style="{'height': '32.0102rem'}"></show-list>
+        <show-list :itemList="items" isMine="true" @changePage="changePage" :page="page" :url="`/api/mine/lists/${this.getUser().id}`" :style="{'height': 'calc(100vh - 4.694rem - 3.41rem - 1.53649rem - 6.61545rem)'}"></show-list>
     </div>
 </template>
 
