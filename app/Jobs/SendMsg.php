@@ -56,8 +56,8 @@ class SendMsg implements ShouldQueue
             return;
         }
 
-        Redis::set("user-send-{$this->user_auth->id}", '1');
-        Redis::expire("user-send-{$this->user_auth->id}", 60 * 60 * 24);
+        Redis::set("user-send-{$user->uno}", '1');
+        Redis::expire("user-send-{$user->uno}", 60 * 60 * 24);
         $data = array(
             'openid' => $user->openid,
             'data'   => array(
