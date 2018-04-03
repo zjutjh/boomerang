@@ -51,7 +51,7 @@ class SendMsg implements ShouldQueue
                 return;
             }
         }
-        $haveSend = Redis::get("user-send-{$this->user_auth->id}");
+        $haveSend = Redis::get("user-send-{$user->uno}");
         if (isset($haveSend)) {
             return;
         }
