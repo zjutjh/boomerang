@@ -17,7 +17,11 @@
         name:'index',
         data:() => ({
             loading: true,
-            items: [],
+            items: [{
+                item: "asd",
+                time: "1919",
+                place: "sadsad"
+            }],
         }),
         components:{
             vHead,showList

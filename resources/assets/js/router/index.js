@@ -63,7 +63,7 @@ export default new Router({
     },
         {
             path: '/adminlogin',//管理员登陆
-            //component: resolve => require(['../pages/admin/adminlogin.vue'], resolve),
+            component: adminlogin
         },
         {
             path: '/home',//超管首页

@@ -98,10 +98,10 @@
             filterTag(value, row) {
                 return row.tag === value;
             },
-            handleEdit(index, row) {
+            handleEdit(index, row) {//要加
                 this.$message('编辑第'+(index+1)+'行');
             },
-            handleDelete(index, row) {
+            handleDelete(index, row) {//要加
                 this.$message.error('删除第'+(index+1)+'行');
             },
             delAll(){//要改 //改成增删管理员

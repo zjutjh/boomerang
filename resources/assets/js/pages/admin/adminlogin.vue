@@ -12,8 +12,9 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
                 </div>
-                <p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名和密码随便b。</p>
+                <p style="font-size:12px;line-height:30px;color:#999;">Tips : 用户名密码随便填。</p>
             </el-form>
+            <p style="font-size:12px;line-height:50px;color:#999;">Written by Congb19.</p>
         </div>
     </div>
 </template>
@@ -42,7 +43,7 @@
                 self.$refs[formName].validate((valid) => {
                     if (valid) {
                         localStorage.setItem('ms_username',self.ruleForm.username);
-                        if(1){ //登陆认证 是超管还是普通管理
+                        if(1){ //写个登陆认证 是超管还是普通管理
                             self.$router.push('/home');
                         }
                         else {

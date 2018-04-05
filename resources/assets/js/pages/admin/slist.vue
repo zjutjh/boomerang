@@ -2,20 +2,22 @@
     <div class="wrapper">
         <v-head></v-head>
         <v-sidebar></v-sidebar>
-        <div class="content">
-            <p>123</p>
-        </div>
+        <show-list :items="items"></show-list>
     </div>
 
 </template>
 
 <script>
+    import loading from '../../components/Loading';
+    import state from '../../components/state.mixin';
+    import {api_url} from "../../config/env";
     import vHead from '../../components/Header'
     import vSidebar from '../../components/SideBar'
+    import showList from '../../components/showLIst'
     export default {
         name: "slist",
         components: {
-            vHead, vSidebar
+            vHead, vSidebar,showList
         }
     }
 </script>
