@@ -195,7 +195,6 @@
                 }
                 if (this.data.type === '校园卡招领') {
                     if (!this.data.stuid) {
-
                         this.message('不能为空', 'el-icon-warning');
                         return
                     }
@@ -229,18 +228,11 @@
                             return
                         }
                         this.message('正在上传图片,请稍等', 'el-icon-loading')
-
-
                         this.uploadImg(res.data.data.item.id, 'el-icon-loading')
-
                     }
                 }).catch(error => {
                   console.log(error)
                 })
-
-
-
-
             },
             focus() {
                 const ele = document.querySelector('#app')
@@ -255,10 +247,6 @@
                     console.log(item, index)
                     this.transformFile(item, item_id, index);
                 })
-
-                // this.message('发布完成', 'el-icon-check')
-
-
             },
             async transformFile(file, item_id, index) {
                 const imgFile = file;
@@ -297,13 +285,11 @@
                         formData
                     ).then(res => {
                         this.message('完成第' + (index + 1) + '张图片上传', 'el-icon-check')
-                        console.log(index + 1 === this.img.length)
                         if ((index + 1) === this.img.length) {
                             this.loading.close()
                             this.$emit('onRelease', item_id)
                             return
                         }
-                        console.log(res)
 
                     }).catch(error => {
                         this.loading.close()

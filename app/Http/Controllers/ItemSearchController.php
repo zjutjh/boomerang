@@ -20,17 +20,10 @@ class ItemSearchController extends Controller
      */
     public function search(Request $request)
     {
-//        if($request->has('')){
-//            $items = Item::search($request->search)
-//                ->paginate(6);
-//        }else{
-//            $items = Item::paginate(6);
-//        }
 
         $items = Item::search($request->get('request'))
             ->where('deleted', 0)
             ->paginate(10);
-
         return $this->apiReponse(200,null,
             ['items' => $items]);    }
 

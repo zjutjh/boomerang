@@ -19,7 +19,6 @@ class LoginController extends Controller
             return $this->apiReponse(-1, '用户认证失败', null);//没get到就认证失败
         }
 
-
         //查看数据库是否存在用户
         if (!$user = User::where('openid', $openid)->first()) {
             $user = User::openIdCreateUser($openid);
@@ -74,23 +73,17 @@ class LoginController extends Controller
         $reponse = $client->request('GET', 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WECHAT_APPID').'&secret='.env('WECHAT_SECRET').'&code='.$code.'&grant_type=authorization_code', ['verify' => false]);
         $data = json_decode($reponse->getBody(), true);
         $openid = $data['openid'];
-//        dd($data);
         return view('index', ['openid' => $openid]);
-
-
     }
 
 
     public function oauth() {
-
         return redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid='
                             .env('WECHAT_APPID')
                             .'&redirect_uri='
                             .urlencode(config('api.jh.oauth'))
                             .urlencode(env('WECHAT_REDIRECT'))
                             .'&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect');
-
-
-
     }
+
 }

@@ -34,6 +34,9 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
+    /** 是否为管理员
+     * @return bool
+     */
     public function isAdmin() {
         if ($this->user_type > 1) {
             return true;
@@ -41,6 +44,9 @@ class User extends Authenticatable implements JWTSubject
         return false;
     }
 
+    /** 是否为超级管理员
+     * @return bool
+     */
     public function isSuperAdmin() {
         if ($this->user_type == 3) {
             return true;
@@ -48,6 +54,11 @@ class User extends Authenticatable implements JWTSubject
         return false;
     }
 
+
+    /** 通过openid获取用户数据创建用户
+     * @param $openid
+     * @return User|string
+     */
     static public function openIdCreateUser($openid) {
         $client = new Client();
         $params = array(
@@ -69,23 +80,4 @@ class User extends Authenticatable implements JWTSubject
     }
 
 
-
-
-//    /**
-//     * The attributes that are mass assignable.
-//     *
-//     * @var array
-//     */
-//    protected $fillable = [
-//        'name', 'email', 'password',
-//    ];
-//
-//    /**
-//     * The attributes that should be hidden for arrays.
-//     *
-//     * @var array
-//     */
-//    protected $hidden = [
-//        'password', 'remember_token',
-//    ];
 }

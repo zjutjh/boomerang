@@ -2,7 +2,6 @@
     <div class="title-wrap">
         <div class="title">{{ title }}</div>
         <button v-if="ifBack" class="title-back" @click="back">返回</button>
-
     </div>
 </template>
 

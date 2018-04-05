@@ -17,16 +17,20 @@ class Api extends Model
      *  另外列表数据即使字段相同也要重新转换一遍，一般转换为中文以便理解
      */
     public $error = '';
+
     public function setError($message) {
         $this->error = $message;
         return false;
     }
+
     public function getError() {
         return $this->error;
     }
+
     public function resetError() {
         $this->error = '';
     }
+
 
     public function checkJhPassport($user_name, $password) {
         if (!$user_name OR !$password) {
@@ -54,7 +58,7 @@ class Api extends Model
     }
 
 
-    /**
+    /** 通过学号获取openid
      * @param $uno
      * @return bool|string
      */
@@ -66,6 +70,7 @@ class Api extends Model
             return false;
         }
         return $data['data']['openid'];
-
     }
+
+
 }

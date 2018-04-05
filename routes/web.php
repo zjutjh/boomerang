@@ -11,15 +11,21 @@
 |
 */
 
-use Illuminate\Http\Request;
 
+// 首页oauth路由
 Route::get('/', 'Auth\LoginController@oauth');
-Route::get('/index', 'Auth\LoginController@index');
-Route::get('items-lists', ['as'=>'items-lists','uses'=>'ItemSearchController@index']);
-Route::post('create-item', ['as'=>'create-item','uses'=>'ItemSearchController@create']);
 
+// oauth回调路由
+Route::get('/index', 'Auth\LoginController@index');
+
+// 自动登录
 Route::post('api/auto_login', 'Auth\LoginController@autoLogin');
-//Route::post('admin/login', '');
+
+
+
+/**
+ * 权限验证
+ */
 Route::group(['middleware' => ['api.auth']], function () {
     Route::get('api/detail/{id}',['uses'=>'DetailController@getDetail']);
     Route::get('api/mine/detail/{uid}/{id}',['uses'=>'MydetailController@Mydetail']);
@@ -40,6 +46,7 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::get('admin/index','SuperAdminController@Super');
 });
 
+// 推送详情
 Route::get('send/detail/{itemUid}', 'DetailController@show');
 
 

@@ -26,7 +26,6 @@ class GetUserToken extends BaseMiddleware
                 return $next($request);
             }
         } catch (TokenExpiredException $e) {
-            // return $this->apiReponse(-401, '登录已过期', null);
             try {
                 // 刷新用户的 token
                 $token = $this->auth->refresh();

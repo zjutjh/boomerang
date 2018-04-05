@@ -18,7 +18,6 @@ class MineController extends Controller
             ->skip($page * 10)
             ->take(10)
             ->get();
-
         return  $this->apiReponse(200,null,
             ['items' => $items]);
     }

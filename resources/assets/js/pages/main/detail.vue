@@ -13,20 +13,13 @@
                     <img :src="origin_to_img_api(img)" alt="">
                 </div>
             </div>
-
             <div class="detail-change" v-if="edit" style="text-align: center">
-                <!--<div class="change-left"><img src="../../images/arrow-left.png" alt=""></div>-->
-                <!--<div class="change-right"><img src="../../images/arrow-right.png" alt=""></div>-->
                 <router-link :to="{ name: 'myedit', query: { item_id: item.id}}" tag="div" replace>
                     <div class="edit">编辑</div>
-
                 </router-link>
                 <div class="del" @click="delItem">删除</div>
             </div>
-
         </div>
-
-
     </div>
 
 </template>

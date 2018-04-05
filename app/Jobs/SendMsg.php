@@ -41,6 +41,7 @@ class SendMsg implements ShouldQueue
      */
     public function handle()
     {
+        // 验证用户是否存在不存在则创建
         if (!$user = User::where('uno', $this->data['contact_uno'])->first()) {
             $openid = Api::unoGetOpenId($this->data['contact_uno']);
             if (!$openid) {
@@ -51,13 +52,18 @@ class SendMsg implements ShouldQueue
                 return;
             }
         }
+
+        // 校验是否发送过且为24小时以内
         $haveSend = Redis::get("user-send-{$user->uno}");
         if (isset($haveSend)) {
             return;
         }
 
+        // 设置24小时内已经发送
         Redis::set("user-send-{$user->uno}", '1');
         Redis::expire("user-send-{$user->uno}", 60 * 60 * 24);
+
+
         $data = array(
             'openid' => $user->openid,
             'data'   => array(

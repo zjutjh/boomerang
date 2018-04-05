@@ -11,11 +11,9 @@ class DetailController extends Controller
 
     public function getDetail($id)
     {
-        $item = Item::where('id',$id)
-            ->first();
+        $item = Item::where('id',$id)->first();
         return $this->apiReponse(200,null,['item'=>$item]);
     }
-
 
 
 
@@ -26,7 +24,5 @@ class DetailController extends Controller
         }
         $item = Item::where('id', $itemid)->first();
         return view('item.detail', ['item' => $item]);
-
-
     }
 }

@@ -33,9 +33,7 @@ class ItemController extends Controller
             ->orderBy('id', 'desc')
             ->skip($page * 10)
             ->take(10)
-
             ->get();
-
 
         return $this->apiReponse(200,null,
             ['items' => $items]);
@@ -77,10 +75,7 @@ class ItemController extends Controller
         $params = $request->all();
         $item = Item::where('id', $params['id'])->update($params);
         return $this->apiReponse(200, '更新成功', null);
-
-
     }
-
 
 
     public function createItem(Request $request) {
@@ -91,38 +86,29 @@ class ItemController extends Controller
             $user_j = Auth::user();
             SendMsg::dispatch($params, $user_j, $item->id);
         }
-
         return $this->apiReponse(200, null, ['item' => $item]);
     }
 
     public function uploadImg(Request $request) {
         $user = Auth::user();
         $item_id = $request->input('item_id');
-//        $file_name = $request->input('file_name');
         $img = $_FILES['file'];
-//        dd($img);
         $img_id = $user->uno . "-" . $item_id . "-" . md5_file($img['tmp_name']);
         $img_url =  $user->uno . '/' . $img_id;
-//        dd($img);
         Storage::put('public/'.$img_url, File::get($img['tmp_name']));
         $item = Item::where('id', $item_id)->first();
         if (is_array($item->images)) {
-//            array_push($item->images, 'storage/'.$img_url);
-           // $item->images  = 'storage/'.$img_url;
             $temp = $item->images;
             $temp [] = 'storage/'.$img_url;
             $item->images = $temp;
-//            dd($item->images);
         } else {
             $item->images = array(
                 'storage/'.$img_url
             );
         }
-
-//        array_push($item->images, 'storage/'.$img_url);
-
         $item->save();
         return $this->apiReponse(200, '上传成功', null);
+
     }
 
 
@@ -131,14 +117,10 @@ class ItemController extends Controller
         $img_id = $request->input('img_id');
         $item = Item::where('id', $item_id)->first();
         $tmp = $item->images;
-//        dd($tmp);
         $tmp = array_splice($tmp, $img_id + 1, 1);
-//        dd($tmp);
         $item->images = $tmp;
         $item->save();
-
         return $this->apiReponse( 200, '删除成功', ['item' => $item]);
-
-
     }
+
 }
