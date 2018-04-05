@@ -20,6 +20,7 @@ import BaseTable from '../pages/admin/BaseTable.vue'
 import home from '../pages/admin/Home.vue'
 import test from '../pages/main/detail'
 import sad from '../pages/admin/sad.vue'
+import slist from '../pages/admin/slist.vue'
 
 Vue.use(Router)
 
@@ -62,22 +63,29 @@ export default new Router({
     },
         {
             path: '/adminlogin',//管理员登陆
-            component: resolve => require(['../pages/admin/adminlogin.vue'], resolve),
+            //component: resolve => require(['../pages/admin/adminlogin.vue'], resolve),
         },
         {
             path: '/home',//超管首页
-            compoment: resolve => require(['../pages/admin/home.vue'], resolve),
+            //compoment: resolve => require(['../pages/admin/home.vue'], resolve),
             component: home
         },
         {
             path: '/sad',//超管看管理员们
-            compoment: resolve => require(['../pages/admin/sad.vue'], resolve),
+            //compoment: resolve => require(['../pages/admin/sad.vue'], resolve),
             component: sad
         },
         {
             path: '/admin',//普通管理页面
-            compoment: resolve => require(['../pages/admin/admin.vue'], resolve),
-        }, {
+            //compoment: resolve => require(['../pages/admin/admin.vue'], resolve),
+            component: admin
+        },
+        {
+            path: '/slist',//超管看失物招领列表
+            //compoment: resolve => require(['../pages/admin/slist.vue'], resolve),
+            compoment: slist
+        },
+        {
             path: '/test',
             component: test
         }

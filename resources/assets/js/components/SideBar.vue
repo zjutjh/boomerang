@@ -26,13 +26,13 @@
                 items: [
                     {
                         icon: 'el-icon-setting',
-                        index: 'readme',
+                        index: 'home',
                         title: '简介'
                     },
                     {
                         icon: 'el-icon-menu',
                         index: '2',
-                        title: '管理员列表',
+                        title: '管理员们干了啥',
                         subs: [
                             {
                                 index: 'sad',
@@ -71,12 +71,12 @@
                         icon: 'el-icon-star-on',
                         index: 'basecharts',
                         title: '图表'
-                    },
+                    },*/
                     {
-                        icon: 'el-icon-upload2',
-                        index: 'drag',
-                        title: '拖拽'
-                    }*/
+                        icon: 'el-icon-star-on',
+                        index: 'slist',
+                        title: '列表'
+                    }
                 ]
             }
         },

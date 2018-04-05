@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="logo">后台管理系统</div>
+        <div class="logo">Boomerang!的后台</div>
         <div class="user-info">
             <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">
@@ -18,7 +18,7 @@
     export default {
         data() {
             return {
-                name: 'linxin'
+                name: 'zxz'
             }
         },
         computed:{
@@ -31,7 +31,7 @@
             handleCommand(command) {
                 if(command == 'loginout'){
                     localStorage.removeItem('ms_username')
-                    this.$router.push('/login');
+                    this.$router.push('/adminlogin');
                 }
             }
         }

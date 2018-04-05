@@ -2,12 +2,12 @@
     <div class="table">
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-menu"></i> 表格</el-breadcrumb-item>
-                <el-breadcrumb-item>基础表格</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-menu"></i> 管理员们干了啥？</el-breadcrumb-item>
+                <el-breadcrumb-item>zxz</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div class="handle-box">
-            <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">批量删除</el-button>
+            <el-button type="primary" icon="delete" class="handle-del mr10" @click="delAll">增删管理员</el-button>
         </div>
         <el-table :data="data" border style="width: 100%" ref="multipleTable" @selection-change="handleSelectionChange">
             <el-table-column type="selection" width="55"></el-table-column>
@@ -104,7 +104,7 @@
             handleDelete(index, row) {
                 this.$message.error('删除第'+(index+1)+'行');
             },
-            delAll(){
+            delAll(){//要改 //改成增删管理员
                 const self = this,
                     length = self.multipleSelection.length;
                 let str = '';

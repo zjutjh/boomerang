@@ -1,58 +1,51 @@
 <template>
     <div class="wrapper">
         <v-head></v-head>
-        <div class="content">
-            <div class="actions">
-                <table border="1">
-                    <tr>
-                        <th>操作</th>
-                        <th>时间</th>
-                    </tr>
-                    <tr>
-                        <td class="action">shanchuadssad</td>
-                        <td class="action-time">asdda</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="losts">
-                <table border="1">
-                    <tr>
-                        <th>物件</th>
-                        <th>时间</th>
-                        <th>地点</th>
-                    </tr>
-                    <tr>
-                        <td class="item">shanchuadssad</td>
-                        <td class="time">asdda</td>
-                        <td class="place">asddaasd</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="founds">
-                <tr>
-                    <th>物件</th>
-                    <th>时间</th>
-                    <th>地点</th>
-                </tr>
-                <tr>
-                    <td class="item">shanchuadssad</td>
-                    <td class="time">asdda</td>
-                    <td class="place">asddaasd</td>
-                </tr>
-            </div>
+        <show-list :items="items"></show-list>
         </div>
-    </div>
-</template>
+        </template>
 
-<script>
+        <script>
     import loading from '../../components/Loading';
     import state from '../../components/state.mixin';
     import {api_url} from "../../config/env";
     import vHead from '../../components/Header.vue';
 
+    import showList from '../../components/showLIst'
+
     export default {
+        name:'index',
+        data:() => ({
+            loading: true,
+            items: [],
+        }),
         components:{
-            vHead
+            vHead,showList
+        },
+        beforeCreate() {
+
+        },
+        mixins: [state],
+        mounted() {
+            const loading = this.$loading( { fullsreen: true})
+            this.get_items();
+            loading.close();
+        },
+        methods: {
+
+            async get_items() {
+                const header = {
+                    'Authorization': "bearer " + this.getToken()
+                };
+                await this.$http.get(api_url + "/api/new/lists", {headers: header}).then(res => {
+                    if (res.code > 0) {
+                        this.items = res.data;
+                        return;
+                    }
+
+                    this.message(res.error, 2000);
+                })
+            },
         }
     }
 </script>
@@ -61,5 +54,13 @@
 .actions{
     width:300px;
     float: left;
+}
+.Box{
+    width: 100%;
+    height: 100%;
+    color: rgb(241,239,245);
+    margin: 0;
+    padding: 0;
+    padding-top: 1.53649rem;
 }
 </style>
