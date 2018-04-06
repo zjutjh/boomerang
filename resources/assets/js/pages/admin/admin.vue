@@ -2,10 +2,10 @@
     <div class="wrapper">
         <v-head></v-head>
         <show-list :items="items"></show-list>
-        </div>
-        </template>
+    </div>
+</template>
 
-        <script>
+<script>
     import loading from '../../components/Loading';
     import state from '../../components/state.mixin';
     import {api_url} from "../../config/env";

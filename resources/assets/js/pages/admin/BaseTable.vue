@@ -1,5 +1,6 @@
 <template>
     <div class="table">
+
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item><i class="el-icon-menu"></i> 管理员们干了啥？</el-breadcrumb-item>
@@ -22,7 +23,7 @@
                     <el-button size="small"
                                @click="handleEdit(scope.$index, scope.row)">查看详情</el-button>
                     <el-button size="small" type="danger"
-                               @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                               @click="handleDelete(scope.$index, scope.row)">撤销</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -40,7 +41,7 @@
     export default {
         data() {
             return {
-                url: '../../../static/vuetable.json',
+                url: '../../../static/vuetable.json',//要改
                 tableData: [],
                 cur_page: 1,
                 multipleSelection: [],
@@ -98,10 +99,15 @@
             filterTag(value, row) {
                 return row.tag === value;
             },
-            handleEdit(index, row) {//要加
+            handleEdit(index, row) {
                 this.$message('编辑第'+(index+1)+'行');
+                this.$router.push('/admindetail');
+                //要加
             },
-            handleDelete(index, row) {//要加
+            handleDelete(index, row) {
+                //要改
+
+                comfirm("确定？");
                 this.$message.error('删除第'+(index+1)+'行');
             },
             delAll(){//要改 //改成增删管理员

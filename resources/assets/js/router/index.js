@@ -12,7 +12,7 @@ import mydetail from '../pages/personal/mydetail.vue'
 import edit from '../pages/main/edit.vue'
 import myedit from '../pages/personal/myedit'
 import admin from '../pages/admin/admin.vue'
-//import admindetail from '../pages/admin/admindetail.vue'
+import admindetail from '../pages/admin/admindetail.vue'
 import adminedit from '../pages/admin/adminedit.vue'
 import adminlogin from '../pages/admin/adminlogin.vue'
 import Readme from '../pages/admin/Readme.vue'
@@ -88,6 +88,14 @@ export default new Router({
         {
             path: '/test',
             component: test
+        },
+        {
+            path: '/adminedit',
+            component: adminedit
+        },
+        {
+            path: '/admindetail',
+            component: admindetail
         }
     ]
 })

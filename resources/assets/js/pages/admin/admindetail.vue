@@ -1,6 +1,8 @@
 <template>
 
     <div class="detail-wrap">
+        <v-head></v-head>
+        <!--<v-sidebar></v-sidebar>-->
         <v-title :title="'物品详情'" :ifBack="true"></v-title>
         <div class="detail-main">
             <div class="detail-content">
@@ -38,6 +40,7 @@
     import state from "../../components/state.mixin";
     import {api_url} from "../../config/env";
 
+    import vSidebar from '../../components/SideBar'
     import vHead from '../../components/Header.vue';
     export default {
         data: () => ({
@@ -65,7 +68,7 @@
         },
         mixins: [state],
         components: {
-            vTitle, vSearch, vTabber,vHead
+            vTitle, vSearch, vTabber,vHead,vSidebar
         },
         methods: {
             async get_item_data(itemId) {
@@ -94,10 +97,11 @@
 <style scoped>
     .detail-main {
         width: 27.7422rem;
-        height: 35.5527rem;
+        height: auto;
         background: #fff;
         border-radius: 10px;
         margin: 0 auto;
+
     }
 
     .detail-main:before {

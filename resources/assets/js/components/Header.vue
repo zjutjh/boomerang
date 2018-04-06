@@ -17,7 +17,7 @@
 <script>
     export default {
         data() {
-            return {
+            return {//要改
                 name: 'zxz'
             }
         },

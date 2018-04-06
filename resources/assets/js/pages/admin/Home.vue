@@ -6,7 +6,6 @@
             <v-readme></v-readme>
         </div>
     </div>
-    
 </template>
 
 <script>

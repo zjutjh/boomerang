@@ -1,6 +1,8 @@
 <template>
-
     <div class="edit-wrap">
+
+        <v-head></v-head>
+        <v-sidebar></v-sidebar>
         <div class="form clearfix select">
             <div class="form-item">
                 <label for="" class="item-label">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别:</label>
@@ -88,6 +90,7 @@
     import state from '../../components/state.mixin'
     import {api_url} from "../../config/env";
 
+    import vSidebar from '../../components/SideBar'
     import vHead from '../../components/Header.vue';
     export default {
         name: "upload",
@@ -124,7 +127,7 @@
             };
         },
         components:{
-            vHead,
+            vHead,vSidebar
         },
         methods: {
             handleRemove(file, fileList) {
@@ -287,7 +290,7 @@
 
 <style>
     .edit-wrap {
-        width: 27.73rem;
+        width: 27.7422rem;
         height: auto;
         margin: 0 auto;
         background: #fff;
