@@ -16,7 +16,7 @@ class LoginController extends Controller
     {
         $code = $request->get('code');//从前端获取code
         $client = new Client();
-        $reponse = $client->request('GET', 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=https://api.weixin.qq.com/sns/userinfo?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN'.env('WECHAT_APPID').'&secret='.env('WECHAT_SECRET').'&code='.$code.'&grant_type=authorization_code', ['verify' => false]);
+        $reponse = $client->request('GET', 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.env('WECHAT_APPID').'&secret='.env('WECHAT_SECRET').'&code='.$code.'&grant_type=authorization_code', ['verify' => false]);
         $data = json_decode($reponse->getBody(), true);
         $openid = $data['openid'];
         if (!$openid) {
