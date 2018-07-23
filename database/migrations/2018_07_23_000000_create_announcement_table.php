@@ -10,7 +10,7 @@ class CreatAnnouncementTable extends Migration{
             $table->increments('id');
             $table->string('title')->comment('标题');
             $table->string('content')->comment('公告内容');
-            $table->tinyInteger('status')->default(0)->comment('状态, 是否更换为最新，0为最新，1为过期');
+            $table->tinyInteger('status')->default(0)->comment('状态, 是否显示，0为显示，1为显示');
             $table->timestamps();
         });
     }
