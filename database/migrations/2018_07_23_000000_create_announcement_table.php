@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateAnnouncementTable extends Migration{
     public function up(){
-        Schema::create('announcement', function (Blueprint $table) {
+        Schema::create('announcements', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->comment('标题');
             $table->string('content')->comment('公告内容');
@@ -16,7 +16,7 @@ class CreateAnnouncementTable extends Migration{
     }
     public function down()
     {
-        Schema::dropIfExists('announcement');
+        Schema::dropIfExists('announcements');
     }
 }
 
