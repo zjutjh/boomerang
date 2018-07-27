@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class AnnouncementController extends Controller{
     public function show(){
         $message = Announcement::where('status',0)
-            ->select('title','content')
+            ->select('title','content','summary')
             ->get();
         return $this->apiReponse(200,null,$message);
     }
@@ -17,11 +17,19 @@ class AnnouncementController extends Controller{
     public function add(Request $request){
         $title = $request->get('title');
         $content = $request->get('content');
-        $message = Announcement::where('status',0)->first();
-        $message->status = 1;
-        $message->save();
+        if (strlen($content)>=20){
+            $summary = substr($content,0,20);
+        }
+        else{
+            $summary = $content;
+        }
+        $message = Announcement::where('id',4)->first();
+        if ($message){
+            $message->status = 0;
+            $message->save();
+        }
         Announcement::insert(
-            ['title' => $title, 'content' => $content, 'status' => 0]
+            ['title' => $title, 'content' => $content, 'summary' => $summary, 'status' => 0]
         );
         return $this->apiReponse(200,'添加成功',null);
     }
