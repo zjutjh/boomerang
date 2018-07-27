@@ -10,6 +10,7 @@ class CreateAnnouncementTable extends Migration{
             $table->increments('id');
             $table->string('title')->comment('标题');
             $table->string('content')->comment('公告内容');
+            $table->string('summary')->comment('简介');
             $table->tinyInteger('status')->default(0)->comment('状态, 是否显示，0为显示，1为显示');
             $table->timestamps();
         });
