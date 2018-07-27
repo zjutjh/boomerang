@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AnnouncementController extends Controller{
     public function show(){
-        $message = Announcement::where('status',0)
+        $message = Announcement::where('status',1)
             ->select('title','content','summary')
             ->first();
         return $this->apiReponse(200,null,$message);
@@ -24,13 +24,13 @@ class AnnouncementController extends Controller{
         else{
             $summary = $summary;
         }
-        $message = Announcement::where('status',0)->first();
+        $message = Announcement::where('status',1)->first();
         if ($message){
-            $message->status = 1;
+            $message->status = 0;
             $message->save();
         }
         Announcement::insert(
-            ['title' => $title, 'content' => $content, 'summary' => $summary, 'status' => 0]
+            ['title' => $title, 'content' => $content, 'summary' => $summary, 'status' => 1]
         );
         return $this->apiReponse(200,'添加成功',null);
     }
