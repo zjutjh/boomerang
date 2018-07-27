@@ -26,7 +26,6 @@ class MineController extends Controller
     public function found(Request $request,$uid)
     {
         $page = $request->get('page') ? $request->get('page') : 0;
-
         $items = Item::where('uid','=',$uid)
             ->where('deleted', 0)
             ->where('lost_type',1)
@@ -36,9 +35,16 @@ class MineController extends Controller
             ->skip($page * 10)
             ->take(10)
             ->get();
+        $count = Item::where('uid','=',$uid)
+            ->where('deleted', 0)
+            ->where('lost_type',1)
+            ->where('status', 1)
+            ->count();
 
-        return  $this->apiReponse(200,null,
-            ['items' => $items]);
+        $data =  ['items' => $items,
+            'count' => $count];
+
+        return  $this->apiReponse(200,null,$data);
     }
 
     public function lost(Request $request,$uid)
@@ -55,8 +61,16 @@ class MineController extends Controller
             ->take(10)
             ->get();
 
-        return  $this->apiReponse(200,null,
-            ['items' => $items]);
+        $count = Item::where('uid','=',$uid)
+            ->where('deleted', 0)
+            ->where('lost_type',0)
+            ->where('status', 1)
+            ->count();
+
+        $data =  ['items' => $items,
+            'count' => $count];
+
+        return  $this->apiReponse(200,null,$data);
     }
 
     public function unfinished(Request $request,$uid)
@@ -72,7 +86,14 @@ class MineController extends Controller
             ->take(10)
             ->get();
 
-        return  $this->apiReponse(200,null,
-            ['items' => $items]);
+        $count = Item::where('uid','=',$uid)
+            ->where('deleted', 0)
+            ->where('status', 0)
+            ->count();
+
+        $data =  ['items' => $items,
+            'count' => $count];
+
+        return  $this->apiReponse(200,null,$data);
     }
 }
