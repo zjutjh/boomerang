@@ -10,22 +10,23 @@ class AnnouncementController extends Controller{
     public function show(){
         $message = Announcement::where('status',0)
             ->select('title','content','summary')
-            ->get();
+            ->first();
         return $this->apiReponse(200,null,$message);
     }
 
     public function add(Request $request){
         $title = $request->get('title');
         $content = $request->get('content');
-        if (strlen($content)>=20){
-            $summary = substr($content,0,20);
+        $summary = $request->get('summary');
+        if (strlen($summary)>=20){
+            $summary = substr($summary,0,20);
         }
         else{
-            $summary = $content;
+            $summary = $summary;
         }
-        $message = Announcement::where('id',4)->first();
+        $message = Announcement::where('status',0)->first();
         if ($message){
-            $message->status = 0;
+            $message->status = 1;
             $message->save();
         }
         Announcement::insert(
