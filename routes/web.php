@@ -31,11 +31,11 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::get('api/find/lists','ItemController@FoundList');
     Route::get('api/mine/lists/{uid}','MineController@Mine');
     Route::get('api/search', 'ItemSearchController@search');
-    Route::post('api/item/create', 'ItemController@createItem');
-    Route::post('api/item/update', 'ItemController@uploadItem');
-    Route::post('api/item/image/upload', 'ItemController@uploadImg');
-    Route::post('api/item/image/delete', 'ItemController@deleteImg');
-    Route::post('api/item/delete', 'ItemController@delete');
+    Route::get('api/item/{id}', 'ItemController@createItem');
+    Route::post('api/item/{id}', 'ItemController@uploadItem');
+    Route::post('api/item/image/{id}', 'ItemController@uploadImg');
+    Route::delete('api/item/image/{id}', 'ItemController@deleteImg');
+    Route::delete('api/item/{id}', 'ItemController@delete');
 
     Route::get('admin/index','SuperAdminController@Super');
 });
