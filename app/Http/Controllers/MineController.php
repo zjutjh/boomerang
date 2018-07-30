@@ -23,8 +23,9 @@ class MineController extends Controller
 //            ['items' => $items]);
 //    }
 
-    public function found(Request $request,$uid)
+    public function found(Request $request)
     {
+        $uid = Auth::user()->uid;
         $page = $request->get('page') ? $request->get('page') : 0;
         $items = Item::where('uid','=',$uid)
             ->where('deleted', 0)
@@ -47,10 +48,10 @@ class MineController extends Controller
         return  $this->apiReponse(200,null,$data);
     }
 
-    public function lost(Request $request,$uid)
+    public function lost(Request $request)
     {
         $page = $request->get('page') ? $request->get('page') : 0;
-
+        $uid = Auth::user()->uid;
         $items = Item::where('uid','=',$uid)
             ->where('deleted', 0)
             ->where('lost_type',0)
@@ -73,10 +74,10 @@ class MineController extends Controller
         return  $this->apiReponse(200,null,$data);
     }
 
-    public function unfinished(Request $request,$uid)
+    public function unfinished(Request $request)
     {
         $page = $request->get('page') ? $request->get('page') : 0;
-
+        $uid = Auth::user()->uid;
         $items = Item::where('uid','=',$uid)
             ->where('deleted', 0)
             ->where('status', 0)
