@@ -12,8 +12,8 @@
 */
 
 use Illuminate\Http\Request;
-//Route::get('/','MineController@found');
-Route::get('/', 'Auth\LoginController@oauth');
+Route::get('/','MineController@getUserInfo');
+//Route::get('/', 'Auth\LoginController@oauth');
 Route::get('/index', 'Auth\LoginController@index');
 Route::get('items-lists', ['as'=>'items-lists','uses'=>'ItemSearchController@index']);
 Route::post('create-item', ['as'=>'create-item','uses'=>'ItemSearchController@create']);
@@ -29,11 +29,12 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::get('api/new/lists','NewController@latest');
     Route::get('api/lost/lists','ItemController@LostList');
     Route::get('api/find/lists','ItemController@FoundList');
-//    Route::get('api/mine/lists/{uid}','MineController@Mine');
 
-    Route::get('api/mine/lists/found/{uid}','MineController@found');
-    Route::get('api/mine/lists/lost/{uid}','MineController@lost');
-    Route::get('api/mine/lists/unfinished/{uid}','MineController@unfinished');
+    Route::get('api/getUserInfo','MineController@getUserInfo');
+    Route::get('api/mine/lists/found','MineController@found');
+    Route::get('api/mine/lists/lost','MineController@lost');
+    Route::get('api/mine/lists/unfinished','MineController@unfinished');
+
     Route::get('api/search', 'ItemSearchController@search');
     Route::post('api/item/create', 'ItemController@createItem');
     Route::post('api/item/update', 'ItemController@uploadItem');
