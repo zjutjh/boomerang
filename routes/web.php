@@ -12,8 +12,7 @@
 */
 
 use Illuminate\Http\Request;
-//Route::get('/','MineController@getUserInfo');
-//Route::get('/', 'Auth\LoginController@oauth');
+Route::get('/', 'Auth\LoginController@oauth');
 Route::get('/index', 'Auth\LoginController@index');
 Route::get('items-lists', ['as'=>'items-lists','uses'=>'ItemSearchController@index']);
 Route::post('create-item', ['as'=>'create-item','uses'=>'ItemSearchController@create']);

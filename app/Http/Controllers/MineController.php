@@ -11,8 +11,8 @@ class MineController extends Controller
 {
     public function getUserInfo(Request $request)
     {
-        $uid = Auth::user()->id;
         $user = Auth::user();
+        $uid = $user->id;
         $found_num = Item::where('uid','=',$uid)
             ->where('deleted', 0)
             ->where('lost_type',1)
@@ -40,7 +40,7 @@ class MineController extends Controller
 
     public function found(Request $request)
     {
-        $uid = Auth::user()->uid;
+        $uid = Auth::user()->id;
         $page = $request->get('page') ? $request->get('page') : 0;
         $items = Item::where('uid','=',$uid)
             ->where('deleted', 0)
@@ -75,7 +75,7 @@ class MineController extends Controller
     public function unfinished(Request $request)
     {
         $page = $request->get('page') ? $request->get('page') : 0;
-        $uid = Auth::user()->uid;
+        $uid = Auth::user()->id;
         $items = Item::where('uid','=',$uid)
             ->where('deleted', 0)
             ->where('status', 0)
