@@ -36,6 +36,7 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::post('api/item/image/{id}', 'ItemController@uploadImg');
     Route::delete('api/item/image/{id}', 'ItemController@deleteImg');
     Route::delete('api/item/{id}', 'ItemController@delete');
+    Route::get('api/item/classify','ItemController@classify');
 
     Route::get('admin/index','SuperAdminController@Super');
 });

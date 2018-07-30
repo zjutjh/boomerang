@@ -6,6 +6,7 @@ use App\Api;
 use App\Item;
 use App\Jobs\SendMsg;
 use App\User;
+use App\Type;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
@@ -81,7 +82,11 @@ class ItemController extends Controller
 
     }
 
-
+    public function classify(Request $request){
+        $types = Type::select('id','name','icon')
+            ->get();
+        return $this->apiReponse(200,'null',['types' => $types]);
+    }
 
     public function createItem(Request $request) {
         $params = $request->all();
