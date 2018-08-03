@@ -51,9 +51,6 @@ export const loadMore = (element, callback) => {
 
 
     const loadMore = () => {
-        console.log(`${element.scrollTop + windowHeight}::::${height + paddingBottom + marginBottom}`)
-
-
         if (element.scrollTop + windowHeight + 1>= height  + paddingBottom + marginBottom) {
             callback();
         }

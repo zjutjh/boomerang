@@ -35,7 +35,6 @@
                         this.items = res.data.data.items;
                         return;
                     }
-
                     this.message(res.data.error, 2000);
                 }).catch(error => {
                     console.log(error)
@@ -44,7 +43,6 @@
             changePage(page, items) {
                 this.items = [...this.items, ...items]
                 this.page = page
-
             }
 
 

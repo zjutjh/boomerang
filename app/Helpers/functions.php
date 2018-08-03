@@ -6,6 +6,11 @@
  * Time: 16:00
  */
 
+
+/** 创建item唯一id
+ * @param $itemId
+ * @return string
+ */
 function create_itemUid($itemId) {
     $itemUid = md5($itemId);
     \Illuminate\Support\Facades\Redis::set($itemUid, $itemId);
