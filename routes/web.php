@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Http\Request;
 
 // 首页oauth路由
 Route::get('/', 'Auth\LoginController@oauth');
@@ -20,12 +21,14 @@ Route::get('/index', 'Auth\LoginController@index');
 
 // 自动登录
 Route::post('api/auto_login', 'Auth\LoginController@autoLogin');
+Route::post('api/adminLogin', 'Auth\LoginController@adminLogin');
 
 
 
 /**
  * 权限验证
  */
+
 Route::group(['middleware' => ['api.auth']], function () {
     Route::get('api/detail/{id}',['uses'=>'DetailController@getDetail']);
     Route::get('api/mine/detail/{uid}/{id}',['uses'=>'MydetailController@Mydetail']);
@@ -35,7 +38,12 @@ Route::group(['middleware' => ['api.auth']], function () {
     Route::get('api/new/lists','NewController@latest');
     Route::get('api/lost/lists','ItemController@LostList');
     Route::get('api/find/lists','ItemController@FoundList');
-    Route::get('api/mine/lists/{uid}','MineController@Mine');
+
+    Route::get('api/getUserInfo','MineController@getUserInfo');
+    Route::get('api/mine/lists/found','MineController@found');
+    Route::get('api/mine/lists/lost','MineController@lost');
+    Route::get('api/mine/lists/unfinished','MineController@unfinished');
+
     Route::get('api/search', 'ItemSearchController@search');
     Route::post('api/item/create', 'ItemController@createItem');
     Route::post('api/item/update', 'ItemController@uploadItem');
