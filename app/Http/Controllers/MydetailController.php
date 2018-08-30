@@ -19,14 +19,16 @@ class MydetailController extends Controller
     public function hasBeenFound(Request $request)
     {
         $id = $request->get('id');
-        $item = Item::where('id',$id)->update(['status' => 1]);
-        return $this->apiReponse(200,'已标记为已寻回',null);
+        Item::where('id',$id)->update(['status' => 1]);
+        $item = Item::where('id',$id)->first();
+        return $this->apiReponse(200,'已标记为已寻回',['item'=>$item]);
     }
 
     public function hasBeenReceived(Request $request)
     {
         $id = $request->get('id');
-        $item = Item::where('id',$id)->update(['status' => 1]);
-        return $this->apiReponse(200,'已标记为已领取',null);
+        Item::where('id',$id)->update(['status' => 1]);
+        $item = Item::where('id',$id)->first();
+        return $this->apiReponse(200,'已标记为已领取',['item'=>$item]);
     }
 }
