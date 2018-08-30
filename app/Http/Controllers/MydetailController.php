@@ -15,4 +15,18 @@ class MydetailController extends Controller
             ->first();
         return $this->apiReponse(200,null,['item'=>$item]);
     }
+
+    public function hasBeenFound(Request $request)
+    {
+        $id = $request->get('id');
+        $item = Item::where('id',$id)->update(['status' => 1]);
+        return $this->apiReponse(200,'已标记为已寻回',null);
+    }
+
+    public function hasBeenReceive(Request $request)
+    {
+        $id = $request->get('id');
+        $item = Item::where('id',$id)->update(['status' => 1]);
+        return $this->apiReponse(200,'已标记为已领取',null);
+    }
 }
