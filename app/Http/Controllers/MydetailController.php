@@ -24,7 +24,7 @@ class MydetailController extends Controller
         return $this->apiReponse(200,'已标记为已寻回',['item'=>$item]);
     }
 
-    public function hasBeenReceived(Request $request)
+    public function hasBeenLost(Request $request)
     {
         $id = $request->get('id');
         Item::where('id',$id)->update(['status' => 1]);
