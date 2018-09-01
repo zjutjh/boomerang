@@ -38,7 +38,7 @@ class MineController extends Controller
         return  $this->apiReponse(200,null,$data);
     }
 
-    public function found(Request $request)
+    public function lost(Request $request)
     {
         $uid = Auth::user()->id;
         $page = $request->get('page') ? $request->get('page') : 0;
@@ -55,7 +55,7 @@ class MineController extends Controller
         return  $this->apiReponse(200,null,$items);
     }
 
-    public function lost(Request $request)
+    public function find(Request $request)
     {
         $page = $request->get('page') ? $request->get('page') : 0;
         $uid = Auth::user()->id;
