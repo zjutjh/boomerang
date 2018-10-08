@@ -12,7 +12,6 @@
 */
 
 use Illuminate\Http\Request;
-
 Route::get('/', 'Auth\LoginController@oauth');
 Route::get('/index', 'Auth\LoginController@index');
 Route::get('items-lists', ['as'=>'items-lists','uses'=>'ItemSearchController@index']);
@@ -23,6 +22,8 @@ Route::post('api/auto_login', 'Auth\LoginController@autoLogin');
 Route::group(['middleware' => ['api.auth']], function () {
     Route::get('api/detail/{id}',['uses'=>'DetailController@getDetail']);
     Route::get('api/mine/detail/{uid}/{id}',['uses'=>'MydetailController@Mydetail']);
+    Route::post('api/mine/detail/{uid}/{id}/found',['uses'=>'MydetailController@hasBeenFound']);
+    Route::post('api/mine/detail/{uid}/{id}/lost',['uses'=>'MydetailController@hasBeenLost']);
     Route::get('admin/detail/{id}',['uses'=>'AdmindetailController@getDetail']);
     Route::get('admin/super/list',['uses'=>'SuperAdminController@add']);
     Route::get('admin/super/list',['uses'=>'SuperAdminController@delete']);
