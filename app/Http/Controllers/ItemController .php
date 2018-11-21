@@ -30,7 +30,7 @@ class ItemController extends Controller
         $page = $request->get('page') ? $request->get('page') : 0;
         $items = Item::where('lost_type', 1)
             ->where('deleted', 0)
-            ->select('id', 'uid','title','description','lost_place','lost_type','typename','images','phone','qq','status', 'created_at')
+            ->select('id', 'uid','title','description','lost_place','lost_type','images','phone','qq','status', 'created_at')
             ->orderBy('id', 'desc')
             ->skip($page * 10)
             ->take(10)
@@ -54,7 +54,7 @@ class ItemController extends Controller
         $page = $request->get('page') ? $request->get('page') : 0;
         $items = Item::where('lost_type', 0)
             ->where('deleted', 0)
-            ->select('id', 'uid','title','description','lost_place','lost_type','typename','images','phone','qq','status', 'created_at')
+            ->select('id', 'uid','title','description','lost_place','lost_type','images','phone','qq','status', 'created_at')
             ->orderBy('id', 'desc')
             ->skip($page * 10)
             ->take(10)
@@ -66,7 +66,7 @@ class ItemController extends Controller
     }
 
     public function upload_type(){
-        $type = Type::select('name')->get();
+        $type = Type::get();
         return $this->apiReponse(200,null,
             ['type' => $type]);
     }
