@@ -6,6 +6,7 @@ use App\Api;
 use App\Item;
 use App\Jobs\SendMsg;
 use App\User;
+use App\Type;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
@@ -64,6 +65,12 @@ class ItemController extends Controller
 
     }
 
+    public function upload_type(){
+        $type = Type::get();
+        return $this->apiReponse(200,null,
+            ['type' => $type]);
+    }
+
     public function delete(Request $request){
         $item_id = $request->get('id');
         $item = Item::where('id', $item_id)->first();
@@ -108,7 +115,7 @@ class ItemController extends Controller
         $item = Item::where('id', $item_id)->first();
         if (is_array($item->images)) {
 //            array_push($item->images, 'storage/'.$img_url);
-           // $item->images  = 'storage/'.$img_url;
+//            $item->images  = 'storage/'.$img_url;
             $temp = $item->images;
             $temp [] = 'storage/'.$img_url;
             $item->images = $temp;
